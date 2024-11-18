@@ -1,0 +1,218 @@
+<!-- 
+
+<div class="form-container">
+  <form
+    [formGroup]="khuyenMaiForm"
+    (ngSubmit)="id ? updateKhuyenMai() : addKhuyenMai()"
+  >
+    <mat-form-field>
+      <mat-label>Tên khuyến mãi</mat-label>
+      <input matInput formControlName="name" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Tiêu đề</mat-label>
+      <input matInput formControlName="title" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Mô tả</mat-label>
+      <input matInput formControlName="description" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Lý do tham gia</mat-label>
+      <input matInput formControlName="reasons_to_join" required />
+    </mat-form-field>
+
+    <div formArrayName="promotion_details">
+      <div *ngFor="let detail of promotionDetails.controls; let i = index">
+        <mat-form-field>
+          <mat-label>Chi tiết khuyến mãi {{ i + 1 }}</mat-label>
+          <input matInput [formControlName]="i" />
+        </mat-form-field>
+        <button mat-icon-button (click)="removePromotionDetail(i)">
+          <mat-icon>remove_circle</mat-icon>
+        </button>
+      </div>
+      <button mat-raised-button color="primary" (click)="addPromotionDetail()">
+        Thêm chi tiết
+      </button>
+    </div>
+
+    <div formArrayName="benefits">
+      <div *ngFor="let benefit of benefits.controls; let i = index">
+        <mat-form-field>
+          <mat-label>Lợi ích {{ i + 1 }}</mat-label>
+          <input matInput [formControlName]="i" />
+        </mat-form-field>
+        <button mat-icon-button (click)="removeBenefit(i)">
+          <mat-icon>remove_circle</mat-icon>
+        </button>
+      </div>
+      <button mat-raised-button color="primary" (click)="addBenefit()">
+        Thêm lợi ích
+      </button>
+    </div>
+
+    <mat-form-field>
+      <mat-label>Mã voucher</mat-label>
+      <input matInput formControlName="voucher_code" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Banner</mat-label>
+      <input matInput formControlName="banner" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Voucher</mat-label>
+      <input matInput formControlName="voucher" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Thời gian</mat-label>
+      <input matInput formControlName="time" required />
+    </mat-form-field>
+
+    <button mat-raised-button type="submit" color="primary">
+      {{ id ? "Cập nhật" : "Thêm" }}
+    </button>
+    <button mat-raised-button (click)="cancel()">Hủy</button>
+  </form>
+</div> -->
+<div class="promotion-form-container">
+  <form
+    [formGroup]="khuyenMaiForm"
+    (ngSubmit)="id ? updateKhuyenMai() : addKhuyenMai()"
+    class="promotion-form"
+  >
+    <!-- Thông tin chung -->
+    <div class="form-section">
+      <h4>Thông tin chung</h4>
+      <br />
+      <div class="row">
+        <!-- Thông tin -->
+        <div>
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Tên khuyến mãi</mat-label>
+            <input matInput formControlName="name" required />
+          </mat-form-field>
+          <br />
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Tiêu đề</mat-label>
+            <input matInput formControlName="title" required />
+          </mat-form-field>
+          <br />
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Mô tả</mat-label>
+            <textarea
+              matInput
+              formControlName="description"
+              rows="3"
+            ></textarea>
+          </mat-form-field>
+          <br />
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Lý do tham gia</mat-label>
+            <textarea
+              matInput
+              formControlName="reasons_to_join"
+              rows="3"
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chi tiết khuyến mãi -->
+    <div class="form-section">
+      <h4>Chi tiết khuyến mãi</h4>
+      <div formArrayName="promotion_details">
+        <div
+          *ngFor="let detail of promotionDetails.controls; let i = index"
+          class="array-item"
+        >
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Chi tiết khuyến mãi {{ i + 1 }}</mat-label>
+            <input matInput [formControlName]="i" />
+          </mat-form-field>
+          <button
+            mat-icon-button
+            color="warn"
+            (click)="removePromotionDetail(i)"
+          >
+            <mat-icon>remove_circle</mat-icon>
+          </button>
+        </div>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="addPromotionDetail()"
+          type="button"
+        >
+          Thêm chi tiết
+        </button>
+      </div>
+    </div>
+
+    <!-- Lợi ích -->
+    <div class="form-section">
+      <h4>Lợi ích</h4>
+      <div formArrayName="benefits">
+        <div
+          *ngFor="let benefit of benefits.controls; let i = index"
+          class="array-item"
+        >
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Lợi ích {{ i + 1 }}</mat-label>
+            <input matInput [formControlName]="i" />
+          </mat-form-field>
+          <button mat-icon-button color="warn" (click)="removeBenefit(i)">
+            <mat-icon>remove_circle</mat-icon>
+          </button>
+        </div>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="addBenefit()"
+          type="button"
+        >
+          Thêm lợi ích
+        </button>
+      </div>
+    </div>
+
+    <!-- Thông tin khác -->
+    <div class="form-section">
+      <h4>Thông tin khác</h4>
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Mã voucher</mat-label>
+        <input matInput formControlName="voucher_code" required />
+      </mat-form-field>
+      <br />
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Banner</mat-label>
+        <input matInput formControlName="banner" required />
+      </mat-form-field>
+      <br />
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Voucher</mat-label>
+        <input matInput formControlName="voucher" required />
+      </mat-form-field>
+      <br />
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Thời gian</mat-label>
+        <input matInput formControlName="time" required />
+      </mat-form-field>
+    </div>
+
+    <!-- Actions -->
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit">
+        {{ id ? "Cập nhật" : "Thêm" }}
+      </button>
+      <button mat-raised-button type="button" (click)="cancel()">Hủy</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,89 @@
+.recipe-form {
+  display: flex;
+  flex-direction: column;
+  gap: 38px;
+}
+
+.recipe-overview {
+  display: flex;
+  gap: 20px;
+}
+
+.image-upload,
+.recipe-info,
+.recipe-details {
+  background: #fff;
+  border-radius: 15px;
+  border-bottom: 3px solid var(--primary-dark-green, #32794f);
+  box-shadow: -1px -5px 6px 0 rgba(50, 121, 79, 0.5) inset, 0 2px 5px 0 #bdbdbd;
+  padding: 30px;
+}
+
+.image-upload {
+  flex: 1;
+}
+
+.recipe-info {
+  flex: 3;
+}
+
+.upload-placeholder {
+  width: 182px;
+  height: 168px;
+  border-radius: 20px;
+  margin-top: 28px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+textarea,
+input,
+select {
+  width: 100%;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.save-button {
+  align-self: flex-end;
+  background-color: #248a00;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 9px 30px;
+  font: 700 14px Quicksand, sans-serif;
+  cursor: pointer;
+}
+
+h4 {
+  color: #000;
+  font: 700 20px Open Sans, sans-serif;
+  margin-bottom: 18px;
+}
+
+.image-array {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn {
+  margin-left: 10px;
+}
+
+@media (max-width: 991px) {
+  .recipe-overview {
+    flex-direction: column;
+  }
+  .image-upload,
+  .recipe-info,
+  .recipe-details {
+    padding: 20px;
+  }
+}

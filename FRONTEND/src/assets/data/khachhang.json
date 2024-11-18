@@ -1,0 +1,123 @@
+[
+  {
+    "fullName": "Nguyễn Văn An",
+    "phone": "987654321",
+    "email": "nguyen.an01@gmail.com",
+    "address": "123 Trần Hưng Đạo, Hà Nội",
+    "bankAccount": {
+      "accountNumber": "102123456789",
+      "bankName": "Vietcombank"
+    },
+    "status": "inactive"
+  },
+  {
+    "fullName": "Trần Thị Bích",
+    "phone": "912345678",
+    "email": "bich.tran02@yahoo.com",
+    "address": "456 Nguyễn Huệ, TP. Hồ Chí Minh",
+    "bankAccount": {
+      "accountNumber": "103234567890",
+      "bankName": "VietinBank"
+    },
+    "status": "active"
+  },
+  {
+    "fullName": "Lê Hoàng Minh",
+    "phone": "909876543",
+    "email": "hoangminh.le@gmail.com",
+    "address": "789 Lý Thường Kiệt, Đà Nẵng",
+    "bankAccount": {
+      "accountNumber": "104345678901",
+      "bankName": "BIDV"
+    },
+    "status": "inactive"
+  },
+  {
+    "fullName": "Phạm Thu Hà",
+    "phone": "965123478",
+    "email": "ha.pham03@outlook.com",
+    "address": "321 Phạm Ngũ Lão, Hải Phòng",
+    "bankAccount": {
+      "accountNumber": "105456789012",
+      "bankName": "Agribank"
+    },
+    "status": "inactive"
+  },
+  {
+    "fullName": "Đỗ Thanh Tùng",
+    "phone": "945678910",
+    "email": "tung.do04@gmail.com",
+    "address": "654 Cách Mạng Tháng 8, Cần Thơ",
+    "bankAccount": {
+      "accountNumber": "106567890123",
+      "bankName": "ACB"
+    },
+    "status": "active"
+  },
+  {
+    "fullName": "Đỗ Thanh Tùng",
+    "phone": "945678910",
+    "email": "tung.do04@gmail.com",
+    "address": "654 Cách Mạng Tháng 8, Cần Thơ",
+    "bankAccount": {
+      "accountNumber": "106567890123",
+      "bankName": "ACB"
+    },
+    "status": "active"
+  },
+  {
+    "fullName": "Đỗ Thanh Tùng",
+    "phone": "945678910",
+    "email": "tung.do04@gmail.com",
+    "address": "654 Cách Mạng Tháng 8, Cần Thơ",
+    "bankAccount": {
+      "accountNumber": "106567890123",
+      "bankName": "ACB"
+    },
+    "status": "active"
+  },
+  {
+    "fullName": "Đỗ Thanh Tùng",
+    "phone": "945678910",
+    "email": "tung.do04@gmail.com",
+    "address": "654 Cách Mạng Tháng 8, Cần Thơ",
+    "bankAccount": {
+      "accountNumber": "106567890123",
+      "bankName": "ACB"
+    },
+    "status": "active"
+  },
+  {
+    "fullName": "Bùi Ngọc Mai",
+    "phone": "934567891",
+    "email": "mai.bui05@hotmail.com",
+    "address": "987 Võ Văn Kiệt, Huế",
+    "bankAccount": {
+      "accountNumber": "107678901234",
+      "bankName": "Sacombank"
+    },
+    "status": "inactive"
+  },
+  {
+    "fullName": "Hoàng Gia Huy",
+    "phone": "923456789",
+    "email": "gia.huy06@gmail.com",
+    "address": "222 Hùng Vương, Quảng Ninh",
+    "bankAccount": {
+      "accountNumber": "108789012345",
+      "bankName": "Techcombank"
+    },
+    "status": "active"
+  },
+  {
+    "fullName": "Nguyễn Thị Lan",
+    "phone": "919876543",
+    "email": "lan.nguyen07@gmail.com",
+    "address": "555 Trường Chinh, Hà Nội",
+    "bankAccount": {
+      "accountNumber": "109890123456",
+      "bankName": "MB Bank"
+    },
+    "status": "active"
+  }
+]

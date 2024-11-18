@@ -1,0 +1,14 @@
+<!-- meal-plan.component.html -->
+<div class="meal-plan-container">
+    <h3>Thực đơn đề xuất cho bạn</h3>
+  
+    <div *ngFor="let day of mealPlan">
+      <h4>Ngày {{ day.day }}</h4>
+      <div>
+        <p><strong>Bữa sáng:</strong> {{ day.breakfast.mealName }} - {{ day.breakfast.mealCalories }} calo</p>
+        <p><strong>Bữa trưa:</strong> {{ day.lunch.mealName }} - {{ day.lunch.mealCalories }} calo</p>
+        <p><strong>Bữa tối:</strong> {{ day.dinner.mealName }} - {{ day.dinner.mealCalories }} calo</p>
+      </div>
+    </div>
+  </div>
+  

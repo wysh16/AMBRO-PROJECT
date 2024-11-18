@@ -1,0 +1,176 @@
+<!-- <div class="px-40 mt-10">
+  <div class="flex justify-between">
+    <h1 class="text-2xl font-bold">Quản lý công thức</h1>
+    <button
+      mat-raised-button
+      color="primary"
+      class="mr-4"
+      routerLink="/admin/congthucs/add"
+    >
+      Thêm công thức
+    </button>
+  </div>
+  <div class="shadow">
+    <mat-form-field class="w-full">
+      <mat-label class="w-full">Filter</mat-label>
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Search"
+        #input
+      />
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" matSort>
+    
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let row">{{ row._id }}</td>
+      </ng-container>
+
+     
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="datePosted">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ngày đăng</th>
+        <td mat-cell *matCellDef="let row">{{ row.datePosted }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="estimatedTime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Thời gian đọc bài viết
+        </th>
+        <td mat-cell *matCellDef="let row">{{ row.estimatedTime }}</td>
+      </ng-container>
+
+      
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+        <td mat-cell *matCellDef="let row">
+          <button
+            mat-raised-button
+            color="accent"
+            class="mr-4"
+            [routerLink]="'/admin/congthucs/' + row._id"
+          >
+            Edit
+          </button>
+          <button mat-raised-button color="warn" (click)="delete(row._id)">
+            Delete
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+     
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">
+          No data matching the filter "{{ input.value }}"
+        </td>
+      </tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      aria-label="Select"
+    ></mat-paginator>
+  </div>
+</div> -->
+
+<div class="container mt-10">
+  <div class="header flex justify-between items-center">
+    <h1 class="text-2xl font-bold">Quản lý công thức</h1>
+    <button
+      mat-raised-button
+      color="primary"
+      class="add-btn"
+      routerLink="/admin/congthucs/add"
+    >
+      Thêm công thức
+    </button>
+  </div>
+
+  <div class="content shadow-lg p-6 rounded bg-white">
+    <!-- Bộ lọc -->
+    <mat-form-field class="filter">
+      <mat-label>Tìm kiếm công thức</mat-label>
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Nhập từ khóa..."
+        #input
+      />
+    </mat-form-field>
+
+    <!-- Bảng dữ liệu -->
+    <table mat-table [dataSource]="dataSource" matSort class="table">
+      <!-- Cột ID -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let row">{{ row._id }}</td>
+      </ng-container>
+
+      <!-- Cột Tên -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên công thức</th>
+        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+      </ng-container>
+
+      <!-- Cột Ngày Đăng -->
+      <ng-container matColumnDef="datePosted">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ngày đăng</th>
+        <td mat-cell *matCellDef="let row">{{ row.datePosted }}</td>
+      </ng-container>
+
+      <!-- Cột Thời Gian -->
+      <ng-container matColumnDef="estimatedTime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Thời gian đọc</th>
+        <td mat-cell *matCellDef="let row">{{ row.estimatedTime }}</td>
+      </ng-container>
+
+      <!-- Cột Hành động -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Hành động</th>
+        <td mat-cell *matCellDef="let row">
+          <button
+            mat-raised-button
+            color="accent"
+            class="action-btn"
+            [routerLink]="'/admin/congthucs/' + row._id"
+          >
+            Sửa
+          </button>
+          <button
+            mat-raised-button
+            color="warn"
+            class="action-btn"
+            (click)="delete(row._id)"
+          >
+            Xóa
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+      <!-- Hàng khi không có dữ liệu -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">
+          Không có dữ liệu phù hợp với từ khóa "{{ input.value }}"
+        </td>
+      </tr>
+    </table>
+
+    <!-- Phân trang -->
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      aria-label="Chọn kích thước trang"
+    ></mat-paginator>
+  </div>
+</div>

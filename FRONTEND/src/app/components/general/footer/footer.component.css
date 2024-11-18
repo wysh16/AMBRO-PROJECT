@@ -1,0 +1,96 @@
+/* .footer {
+  background-color: #f2f2f2;
+  color: white;
+}
+.container-footer {
+  display: flex;
+  justify-content: space-around;
+  background-color: #117554;
+  padding: 40px;
+}
+.footer-left {
+  padding-right: 80px;
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.footer a {
+  color: white;
+  text-decoration: none;
+  margin-bottom: 5px;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.copyright {
+  text-align: center;
+  padding-top: 10px;
+  color: black;
+} */
+.footer {
+  background-color: #f2f2f2;
+  color: white;
+  padding: 20px 0;
+}
+
+.container-footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Cho phép các phần tử tự động xuống dòng */
+  background-color: #117554;
+  padding: 40px 20px;
+  gap: 20px; /* Khoảng cách giữa các cột */
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 200px; /* Đảm bảo cột không quá nhỏ */
+}
+
+.footer a {
+  color: white;
+  text-decoration: none;
+  margin-bottom: 5px;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.copyright {
+  text-align: center;
+  padding-top: 10px;
+  color: black;
+}
+
+@media (max-width: 768px) {
+  .container-footer {
+    flex-direction: column; /* Sắp xếp theo cột khi màn hình nhỏ */
+    align-items: center;
+  }
+
+  .footer-section {
+    text-align: center; /* Căn giữa nội dung */
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-section {
+    min-width: 100%; /* Chiếm toàn bộ chiều rộng màn hình */
+    margin-bottom: 20px; /* Thêm khoảng cách giữa các cột */
+  }
+
+  .copyright {
+    font-size: 14px; /* Giảm kích thước chữ */
+  }
+}
