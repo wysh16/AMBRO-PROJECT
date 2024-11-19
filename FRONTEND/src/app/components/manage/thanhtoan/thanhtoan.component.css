@@ -1,0 +1,60 @@
+.container {
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.filter {
+  width: 100%;
+  margin-bottom: 10px;
+}
+/* thanh-toan.component.css */
+
+/* Lớp CSS cho giao dịch thành công */
+.success-status {
+  background-color: lightgreen; /* Xanh lá */
+  color: white;
+  padding: 5px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+/* Lớp CSS cho trạng thái chưa thanh toán */
+.pending-status {
+  background-color: #ee7269; /* Đỏ */
+  color: white;
+  padding: 5px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+nav {
+  background-color: #d2f5cd; /* Màu nền */
+  padding: 10px;
+}
+
+nav ul {
+  list-style: none;
+  margin-right: 3rem;
+  padding: 0;
+  display: flex;
+}
+
+nav li {
+  margin: 0 10px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  padding: 5px 10px;
+  border-bottom: 2px solid transparent; /* Đường viền dưới khi hover */
+}
+
+nav a:hover {
+  border-bottom: 2px solid #008000; /* Màu xanh lá khi hover */
+}

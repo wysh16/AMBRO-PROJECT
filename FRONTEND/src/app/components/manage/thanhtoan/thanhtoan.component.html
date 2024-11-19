@@ -1,0 +1,72 @@
+<!-- thanh-toan.component.html -->
+
+<nav>
+  <ul>
+    <li><a href="/admin/thanhtoans">Quản lý thanh toán</a></li>
+    <li><a href="/admin/vanchuyens">Quản lý vận chuyển</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+  <div class="header">
+    <h2>Quản lý Thanh Toán</h2>
+  </div>
+
+  <mat-form-field class="filter">
+    <mat-label>Tìm kiếm</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Nhập từ khóa..."
+    />
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="ID_Donhang">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID Đơn Hàng</th>
+      <td mat-cell *matCellDef="let element">{{ element.ID_Donhang }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="TenKhachHang">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên Khách Hàng</th>
+      <td mat-cell *matCellDef="let element">{{ element.TenKhachHang }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="TinhTrangThanhToan">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Tình Trạng Thanh Toán
+      </th>
+      <td
+        mat-cell
+        *matCellDef="let element"
+        [ngClass]="getStatusClass(element.TinhTrangThanhToan)"
+      >
+        {{ element.TinhTrangThanhToan }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Hành động</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          mat-button
+          color="primary"
+          [routerLink]="'/admin/thanh-toan/' + element._id"
+        >
+          Sửa
+        </button>
+        <button mat-button color="warn" (click)="deleteThanhToan(element._id)">
+          Xóa
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>
