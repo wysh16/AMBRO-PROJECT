@@ -33,6 +33,7 @@ import { MealComponent } from './components/meal/meal.component';
 import { DonhangsComponent } from './components/manage/donhangs/donhangs.component';
 import { ProductFormComponent } from './components/manage/product-form/product-form.component';
 import { ProductsComponent } from './components/manage/products/products.component';
+import { VerifycodeComponent } from './components/verifycode/verifycode.component';
 
 export const routes: Routes = [
   {
@@ -145,4 +146,6 @@ export const routes: Routes = [
   { path: 'tdee', component: TdeeComponent },
   { path: 'result', component: TdeeResultComponent },
   { path: 'meal-plan', component: MealComponent },
+  { path: 'verify', component: VerifycodeComponent },
+
 ];

@@ -11,15 +11,15 @@ import { CommonModule } from '@angular/common';
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.css'],
 })
-export class ForgotPasswordComponent implements OnInit {
-  forgotPasswordForm: any; // Khai báo ở đây
+export class ForgotPasswordComponent  {
+  forgotPasswordForm: any; 
   errorMessage: string = '';
   successMessage: string = '';
 
-  // Constructor không thay đổi
+ 
   constructor(private fb: FormBuilder, private authService: AuthService) {}
 
-  // Khởi tạo form trong ngOnInit
+  
   ngOnInit(): void {
     this.forgotPasswordForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
