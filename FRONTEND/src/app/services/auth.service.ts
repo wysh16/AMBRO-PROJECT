@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,9 +11,11 @@ import { Router } from '@angular/router';
 export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
+  private currentUser = new BehaviorSubject<string | null>(this.getUserName());
+  private loggedIn = new BehaviorSubject<boolean>(this.isLoggedIn());
+  currentUser$ = this.currentUser.asObservable();
+  loggedIn$ = this.loggedIn.asObservable();
   // http = inject(HttpClient);
-
-  
 
   register(name: string, email: string, password: string) {
     return this.http.post(environment.apiUrl + '/auth/register', {
@@ -22,18 +25,12 @@ export class AuthService {
     });
   }
 
-
   forgotPassword(email: string) {
-    return this.http.post(environment.apiUrl + '/auth/forgot-password', { email });
+    return this.http.post(environment.apiUrl + '/auth/forgot-password', {
+      email,
+    });
   }
-  
 
-  
-  
-  
-
-  
-  
   // login(email: string, password: string) {
   //   return this.http.post(environment.apiUrl + '/auth/login', {
   //     email,
@@ -52,66 +49,41 @@ export class AuthService {
   //     );
   // }
 
-
   login(email: string, password: string) {
-    return this.http.post(environment.apiUrl + '/auth/login', { email, password })
+    return this.http
+      .post(environment.apiUrl + '/auth/login', { email, password })
       .pipe(
         tap((response: any) => {
-      
-          localStorage.setItem('user', JSON.stringify(response.user));  
+          localStorage.setItem('user', JSON.stringify(response.user));
           localStorage.setItem('token', response.token);
           this.router.navigate(['/']);
+
+          // Cập nhật trạng thái đăng nhập
+          this.loggedIn.next(true);
+          this.currentUser.next(response.user.name);
         }),
         catchError((error) => {
           return throwError(() => error.error.message || 'Đăng nhập thất bại');
         })
       );
   }
-  
-
-  
-
-  // get userName() {
-  //   let userData = localStorage.getItem('user');
-  //   if (userData) {
-  //     return JSON.parse(userData).name;
-  //   }
-  //   return null;
-  // }
-
-  // get userName() {
-  //   return localStorage.getItem('userName'); // Giả sử bạn đã lưu tên người dùng trong localStorage
-
-  // }
-
-  // Lưu thông tin người dùng khi đăng nhập thành công
-  
 
   getUserName(): string | null {
     const user = localStorage.getItem('user');
     return user ? JSON.parse(user).name : null;
   }
 
-  // getUserName(): string | null {
-  //   return localStorage.getItem('userName');  // Lấy tên người dùng từ localStorage
-  // }
-
-  // get isLoggedIn() {
-  //   return localStorage.getItem('token') ? true : false;  // Kiểm tra token để xác định đã đăng nhập
-  // }
-  
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
   }
 
-  
   //thuhun comment
   // get isLoggedIn() {
   //   if (typeof window !== 'undefined') {
   //     let token = localStorage.getItem('token');
   //     return token ? true : false;
   //   }
-  //   return false; 
+  //   return false;
   // }
 
   // logout() {
@@ -122,7 +94,11 @@ export class AuthService {
   logout() {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
-    this.router.navigate(['/']); 
+    this.router.navigate(['/']);
+
+    // Cập nhật trạng thái đăng xuất
+    this.loggedIn.next(false);
+    this.currentUser.next(null);
   }
 
   // Lưu thông tin người dùng và token khi đăng nhập thành công
@@ -130,8 +106,6 @@ export class AuthService {
     localStorage.setItem('user', JSON.stringify(user));
     localStorage.setItem('token', token);
   }
-
-
 
   isAdmin(): boolean {
     const user = JSON.parse(localStorage.getItem('user') || '{}');

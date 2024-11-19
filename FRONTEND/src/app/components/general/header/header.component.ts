@@ -5,11 +5,12 @@ import { DanhMucCongThuc } from '../../../types/danhMucCongThuc';
 import { Router, RouterModule } from '@angular/router';
 import { ProductService } from '../../../services/product.service';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
@@ -40,28 +41,34 @@ export class HeaderComponent implements OnInit {
     private router: Router
   ) {}
   ngOnInit(): void {
-    
     this.loadCategories(); // Tải danh mục sản phẩm
     this.loadProducts(); // Tải sản phẩm
-    this.isLoggedIn = this.authService.isLoggedIn();  
-    this.userName = this.authService.getUserName();
+    // this.isLoggedIn = this.authService.isLoggedIn();
+    // this.userName = this.authService.getUserName();
+
+    // Lắng nghe trạng thái đăng nhập và tên người dùng
+    this.authService.loggedIn$.subscribe((status) => {
+      this.isLoggedIn = status;
+    });
+
+    this.authService.currentUser$.subscribe((name) => {
+      this.userName = name;
+    });
   }
 
-    logout() {
-      this.authService.logout();
-      this.isLoggedIn = false;
-      this.userName = null;
-      this.router.navigate(['/']);  // Chuyển hướng về trang chủ
-    }
-  
-    // logout() {
-    //   localStorage.removeItem('token');
-    //   localStorage.removeItem('user');
-    //   this.userName = null;  // Cập nhật lại userName để giao diện phản ánh trạng thái đăng xuất
-    //   this.router.navigate(['/']);  // Điều hướng về trang chủ
-    // }
-    
+  logout() {
+    this.authService.logout();
+    this.isLoggedIn = false;
+    this.userName = null;
+    this.router.navigate(['/']); // Chuyển hướng về trang chủ
+  }
 
+  // logout() {
+  //   localStorage.removeItem('token');
+  //   localStorage.removeItem('user');
+  //   this.userName = null;  // Cập nhật lại userName để giao diện phản ánh trạng thái đăng xuất
+  //   this.router.navigate(['/']);  // Điều hướng về trang chủ
+  // }
 
   loadProducts() {
     this.productService.getAllProducts().subscribe({

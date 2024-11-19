@@ -146,7 +146,9 @@
               >Tính chỉ số dinh dưỡng</a
             >
           </li>
-          <li><a routerLink="/tdee" href="/tdee">Xây dựng thực đơn qua TDEE</a></li>
+          <li>
+            <a routerLink="/tdee" href="/tdee">Xây dựng thực đơn qua TDEE</a>
+          </li>
         </ul>
       </li>
       <li>
@@ -168,7 +170,6 @@
     </ul>
   </nav>
 
-
   <!-- <div class="icon">
     <a href="#"><img src="assets/home/search.png" class="icons" /></a>
     <a routerLink="/cart" href="/cart"><img src="assets/home/cart.png" class="icons" /></a>
@@ -186,22 +187,25 @@
 
   <div class="icon">
     <a href="#"><img src="assets/home/search.png" class="icons" /></a>
-    <a routerLink="/cart" href="/cart"><img src="assets/home/cart.png" class="icons" /></a>
-  
+    <a routerLink="/cart" href="/cart"
+      ><img src="assets/home/cart.png" class="icons"
+    /></a>
+
     <div *ngIf="isLoggedIn; else loginButton" class="user-info">
-      <span class="user-name">{{ userName }}</span>
+      <span class="user-name">Xin chào, {{ userName }}</span>
       <button class="custom-button" (click)="logout()">Đăng xuất</button>
     </div>
-  
+
     <ng-template #loginButton>
-      <button class="custom-button">
-        <a routerLink="/register" href="/register">Tài khoản</a>
+      <button
+        class="custom-button"
+        [routerLink]="'/register'"
+        routerLinkActive="active"
+      >
+        Tài khoản
       </button>
     </ng-template>
   </div>
-  
-  
-
 
   <div class="hamburger" (click)="toggleMenu()">&#9776;</div>
 </header>

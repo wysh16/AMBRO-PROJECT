@@ -376,3 +376,48 @@ p {
 p {
   padding-top: 9px;
 }
+/* Kiểu dáng cho container */
+.icon {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Khoảng cách giữa các biểu tượng */
+}
+
+/* Kiểu dáng chung cho nút */
+.custom-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Nút Tài khoản (xanh lá) */
+.custom-button[routerLink] {
+  background-color: #28a745; /* Xanh lá */
+}
+
+.custom-button[routerLink]:hover {
+  background-color: #218838; /* Xanh lá đậm hơn */
+  transform: scale(1.05); /* Hiệu ứng phóng to nhẹ khi hover */
+}
+
+/* Tên người dùng */
+.user-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 10px;
+  color: #333; /* Màu chữ đen xám */
+}
+
+/* Nút Đăng xuất (đỏ) */
+.custom-button.logout {
+  background-color: #dc3545; /* Đỏ */
+}
+
+.custom-button.logout:hover {
+  background-color: #c82333; /* Đỏ đậm hơn */
+  transform: scale(1.05); /* Hiệu ứng phóng to nhẹ khi hover */
+}
