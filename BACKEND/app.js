@@ -13,6 +13,9 @@ const orderRoutes = require("./routes/donhang");
 const DinhDuongRoutes = require("./routes/dinhduong");
 const ProductRoutes = require("./routes/product");
 
+const HotProductRoutes = require("./routes/hotProduct");
+const NewProductRoutes = require("./routes/newProduct");
+
 const cors = require("cors");
 app.use(
   cors({
@@ -72,12 +75,12 @@ app.use("/admin/order", orderRoutes);
 app.use("/products", cors(), ProductRoutes);
 // Routes
 app.use("/khachhangs", khachHangRoutes);
+app.use("/hot-products", cors(), HotProductRoutes);
+app.use("/new-products", cors(), NewProductRoutes);
 
-app.use("/by-label", cors(), ProductRoutes);
-
-const mealRoutes = require('./routes/meal');
-app.use('/meal', mealRoutes);
-app.use('/meal-plan', mealRoutes);
+const mealRoutes = require("./routes/meal");
+app.use("/meal", mealRoutes);
+app.use("/meal-plan", mealRoutes);
 
 async function connectDb() {
   await mongoose.connect("mongodb://localhost:27017/?directConnection=true", {

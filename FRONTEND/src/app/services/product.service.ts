@@ -56,6 +56,33 @@ export class ProductService {
   // getProductsByLabel(label: string): Observable<any> {
   //   return this._http
   //     .get<any>(`${this.myAPI}/products/by-label`, { params: { label } })
-  //     .pipe(retry(2), catchError(this.handleError));
+  //     .pipe(
+  //       retry(2), // Thử lại nếu request thất bại
+  //       catchError((error) => {
+  //         console.error('Error fetching products by label:', error);
+  //         return throwError(() => new Error('Failed to load products'));
+  //       })
+  //     );
   // }
+
+  // getHotProducts(): Observable<any> {
+  //   return this._http.get('http://localhost:3000/products/hot-products').pipe(
+  //     catchError((error) => {
+  //       console.error('Error fetching hot products:', error);
+  //       return throwError(error);
+  //     })
+  //   );
+  // }
+
+  private hotProductApiUrl = 'http://localhost:3000/hot-products';
+
+  // Lấy danh sách sản phẩm hot
+  getHotProducts(): Observable<any[]> {
+    return this._http.get<any[]>(this.hotProductApiUrl);
+  }
+  private newProductApiUrl = 'http://localhost:3000/new-products';
+  // Lấy danh sách sản phẩm mới
+  getNewProducts(): Observable<any[]> {
+    return this._http.get<any[]>(this.newProductApiUrl);
+  }
 }
