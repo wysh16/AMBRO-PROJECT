@@ -13,7 +13,12 @@ import { CartService } from '../../services/cart.service';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-  cartItems: { product: any; quantity: number; selected: boolean }[] = [];
+//   cartItems: {
+//     isSelected: unknown; product: any; quantity: number; selected: boolean 
+// }[] = [];
+cartItems: any[] = []; // Danh sách sản phẩm trong giỏ hàng
+
+  selectedItems: any[] = [];
 
   constructor(
     private cartService: CartService,
@@ -25,31 +30,70 @@ export class CartComponent implements OnInit {
     this.loadCartItems();
   }
 
-  loadCartItems() {
-    this.cartService.getCartItems().subscribe(
-      (data) => {
-        if (data && data.items) {
-          this.cartItems = data.items.map((item: any) => {
-            return {
-              product: item.productId,
-              quantity: item.quantity,
-              selected: false,
-            };
-          });
-        } else {
-          console.error('Dữ liệu giỏ hàng không hợp lệ');
-        }
-      },
-      (error) => {
-        console.error('Lỗi khi lấy giỏ hàng:', error);
-      }
-    );
+
+  getSelectedItems() {
+    this.selectedItems = this.cartItems.filter(item => item.isSelected);
   }
 
-  toggleSelectAll(event: any) {
-    const isChecked = event.target.checked;
-    this.cartItems.forEach((item) => (item.selected = isChecked));
+  // loadCartItems() {
+  //   this.cartService.getCartItems().subscribe(
+  //     (data) => {
+  //       if (data && data.items) {
+  //         this.cartItems = data.items.map((item: any) => {
+  //           return {
+  //             product: item.productId,
+  //             quantity: item.quantity,
+  //             selected: false,
+  //           };
+  //         });
+  //       } else {
+  //         console.error('Dữ liệu giỏ hàng không hợp lệ');
+  //       }
+  //     },
+  //     (error) => {
+  //       console.error('Lỗi khi lấy giỏ hàng:', error);
+  //     }
+  //   );
+  // }
+
+  loadCartItems(): void {
+    this.cartService.getCartItems().subscribe({
+      next: (data) => {
+        this.cartItems = data.items.map((item: any) => ({
+          ...item,
+          selected: false, // Mặc định chưa được chọn
+        }));
+      },
+      error: (err) => console.error(err),
+    });
   }
+
+  // toggleSelectAll(event: any) {
+  //   const isChecked = event.target.checked;
+  //   this.cartItems.forEach((item) => (item.selected = isChecked));
+  // }
+
+
+  // Hàm toggle chọn tất cả checkbox
+  toggleSelectAll(event: any): void {
+    this.isAllSelected = event.target.checked; // Lấy trạng thái checkbox "Chọn tất cả"
+    this.cartItems.forEach((item) => {
+      item.selected = this.isAllSelected;
+      this.cartService.updateSelectedStatus(item.productId, item.selected).subscribe({
+        next: () => console.log('Trạng thái selected cập nhật cho sản phẩm:', item.productId),
+        error: (err) => console.error('Lỗi khi cập nhật trạng thái:', err),
+      });
+    });
+  }
+
+  toggleSelected(item: any): void {
+    item.selected = !item.selected; // Thay đổi trạng thái
+    this.cartService.updateSelectedStatus(item.productId, item.selected).subscribe({
+      next: () => console.log('Cập nhật trạng thái selected thành công'),
+      error: (err) => console.error('Lỗi khi cập nhật trạng thái:', err),
+    });
+  }
+  
 
   isAllSelected(): boolean {
     return (
@@ -120,8 +164,8 @@ export class CartComponent implements OnInit {
 
   getTotalSelectedAmount(): number {
     return this.cartItems
-      .filter((item) => item.selected) // Lọc các sản phẩm được chọn
-      .reduce((total, item) => total + item.product.price * item.quantity, 0); // Tính tổng tiền
+      .filter((item) => item.selected) 
+      .reduce((total, item) => total + item.product.price * item.quantity, 0); 
   }
 
   continueShopping() {
@@ -130,22 +174,70 @@ export class CartComponent implements OnInit {
   }
 
 
-  proceedToPayment() {
-    const selectedItems = this.cartItems.filter((item) => item.selected);
+  proceedToPayment(): void {
+    this.cartService.getSelectedItems().subscribe((data: any) => {
+      if (data.items.length > 0) {
+        this.router.navigate(['/thanhtoan'], { state: { selectedItems: data.items } });
+      } else {
+        alert('Bạn chưa chọn sản phẩm nào để thanh toán.');
+      }
+    });
+  }
+  
 
-    if (selectedItems.length === 0) {
-      alert('Vui lòng chọn sản phẩm muốn thanh toán');
-      return;
-    }
+  // proceedToPayment(): void {
+  //   const selectedItems = this.cartItems.filter(item => item.selected);
+  //   if (selectedItems.length > 0) {
+  //     this.router.navigate(['/thanhtoan'], { state: { selectedItems } });
+  //   } else {
+  //     alert('Vui lòng chọn ít nhất một sản phẩm để thanh toán!');
+  //   }
+  // }
+
+
+  // proceedToPayment() {
+  //   this.getSelectedItems();
+
+  //   if (this.selectedItems.length === 0) {
+  //     alert('Bạn chưa chọn sản phẩm nào để thanh toán.');
+  //     return;
+  //   }
+
+  //   this.router.navigate(['/thanhtoan'], {
+  //     state: { selectedItems: this.selectedItems },
+  //   });
+  // }
+
+
+  // proceedToPayment(): void {
+  //   const selectedItems = this.cartItems.filter(item => item.selected); // Lọc sản phẩm được chọn
+  
+  //   if (selectedItems.length === 0) {
+  //     alert('Bạn chưa chọn sản phẩm nào để thanh toán.');
+  //     return;
+  //   }
+  
+  //   this.router.navigate(['/thanhtoan'], { state: { selectedItems } }); 
+  // }
+
+  // proceedToPayment(): void {
+  //   this.router.navigate(['/thanhtoan'], { state: { selectedItems: this.cartItems } });
+  // }
 
     // Lưu sản phẩm đã chọn vào `state` khi điều hướng
     // this.router.navigate(['/thanhtoan'], {
     //   state: { selectedItems: selectedItems },
     // });
 
-    sessionStorage.setItem('selectedItems', JSON.stringify(selectedItems));
+  //   sessionStorage.setItem('selectedItems', JSON.stringify(selectedItems));
 
-    // Điều hướng đến trang thanh toán
-    this.router.navigate(['/thanhtoan']);
+  //   this.router.navigate(['/thanhtoan']);
+  // }
+
+
+  onItemSelectionChange(): void {
+    // Cập nhật danh sách sản phẩm được chọn khi checkbox thay đổi
+    this.selectedItems = this.cartItems.filter(item => item.isSelected);
   }
+  
 }

@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment.development'; // Đ�
   providedIn: 'root',
 })
 export class PaymentService {
-  private apiUrl = `${environment.apiUrl}/payments`; // Đường dẫn API cho thanh toán
+  private apiUrl = 'http://localhost:3000/payments';
 
   constructor(private http: HttpClient) {}
 

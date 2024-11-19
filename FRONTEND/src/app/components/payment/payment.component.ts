@@ -13,9 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class PaymentComponent implements OnInit {
   // cartItems: any[] = []; // Khai báo mảng để lưu trữ sản phẩm trong giỏ hàng
-  // totalAmount: number = 0;
-
-  // constructor(private cartService: CartService) {}
+ 
 
   // ngOnInit() {
   //   this.loadCartItems(); // Gọi phương thức để tải sản phẩm giỏ hàng khi khởi tạo
@@ -143,59 +141,116 @@ export class PaymentComponent implements OnInit {
   //     },
   //   });
   // }
-  selectedItems: any[] = []; // Các sản phẩm được chọn
-  totalAmount: number = 0; // Tổng tiền cần thanh toán
+
+
+
+//BẢN NÀY CHÍNH
+  // selectedItems: any[] = []; 
+  // totalAmount: number = 0; 
+
+  // constructor(private router: Router, private paymentService: PaymentService) {}
+
+  // ngOnInit(): void {
+  //   this.loadSelectedItems();
+  // }
+
+
+  // loadSelectedItems(): void {
+  //   const navigation = this.router.getCurrentNavigation();
+  //   const state = navigation?.extras.state as { selectedItems: any[] };
+
+  //   if (state?.selectedItems) {
+  //     this.selectedItems = state.selectedItems;
+  //     this.calculateTotalAmount();
+  //   } else {
+  //     alert('Không có sản phẩm nào được chọn để thanh toán.');
+  //     this.router.navigate(['/cart']);
+  //   }
+  // }
+
+  
+  // calculateTotalAmount(): void {
+  //   this.totalAmount = this.selectedItems.reduce(
+  //     (sum, item) => sum + item.product.price * item.quantity,
+  //     0
+  //   );
+  // }
+
+
+  // confirmPayment(): void {
+  //   const orderDetails = {
+  //     items: this.selectedItems.map((item) => ({
+  //       productId: item.product._id,
+  //       quantity: item.quantity,
+  //       price: item.product.price,
+  //     })),
+  //     totalAmount: this.totalAmount,
+  //   };
+
+  //   this.paymentService.confirmPayment(orderDetails).subscribe({
+  //     next: (response) => {
+  //       alert('Thanh toán thành công! Mã đơn hàng: ' + response.orderId);
+  //       this.router.navigate(['/success']);
+  //     },
+  //     error: (err) => {
+  //       console.error('Lỗi khi thanh toán:', err);
+  //       alert('Thanh toán thất bại.');
+  //     },
+  //   });
+  // }
+
+
+  // payment.component.ts
+
+  selectedItems: any[] = []; 
+  totalAmount: number = 0; 
 
   constructor(private router: Router, private paymentService: PaymentService) {}
 
   ngOnInit(): void {
-    this.loadSelectedItems();
-  }
-
-  // Lấy dữ liệu sản phẩm từ state khi điều hướng từ CartComponent
-  loadSelectedItems(): void {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation?.extras.state as { selectedItems: any[] };
-
-    if (state?.selectedItems) {
+  
+    if (state?.selectedItems?.length > 0) {
       this.selectedItems = state.selectedItems;
       this.calculateTotalAmount();
     } else {
-      // Quay về trang giỏ hàng nếu không có sản phẩm nào được chọn
       alert('Không có sản phẩm nào được chọn để thanh toán.');
       this.router.navigate(['/cart']);
     }
   }
+  
 
-  // Tính tổng tiền của các sản phẩm được chọn
-  calculateTotalAmount(): void {
-    this.totalAmount = this.selectedItems.reduce(
-      (sum, item) => sum + item.product.price * item.quantity,
-      0
-    );
-  }
 
-  // Xử lý xác nhận thanh toán
-  confirmPayment(): void {
-    const orderDetails = {
-      items: this.selectedItems.map((item) => ({
-        productId: item.product._id,
-        quantity: item.quantity,
-        price: item.product.price,
-      })),
-      totalAmount: this.totalAmount,
-    };
 
-    this.paymentService.confirmPayment(orderDetails).subscribe({
-      next: (response) => {
-        alert('Thanh toán thành công! Mã đơn hàng: ' + response.orderId);
-        this.router.navigate(['/success']); // Điều hướng đến trang thành công
-      },
-      error: (err) => {
-        console.error('Lỗi khi thanh toán:', err);
-        alert('Thanh toán thất bại.');
-      },
-    });
-  }
+calculateTotalAmount(): void {
+  this.totalAmount = this.selectedItems.reduce(
+    (sum, item) => sum + item.product.price * item.quantity,
+    0
+  );
+}
+
+confirmPayment(): void {
+  const orderDetails = {
+    items: this.selectedItems.map(item => ({
+      productId: item.product._id,
+      quantity: item.quantity,
+      price: item.product.price
+    })),
+    totalAmount: this.totalAmount
+  };
+
+  this.paymentService.confirmPayment(orderDetails).subscribe({
+    next: (response) => {
+      alert('Thanh toán thành công! Mã đơn hàng: ' + response.orderId);
+      this.router.navigate(['/success']);
+    },
+    error: (err) => {
+      console.error('Lỗi khi thanh toán:', err);
+      alert('Thanh toán thất bại.');
+    }
+  });
+}
+
 
 }

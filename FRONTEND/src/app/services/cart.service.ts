@@ -19,6 +19,18 @@ export class CartService {
     return this.http.get<any>(`${this.cartDetailsUrl}?userId=${userId}`);
   }
 
+
+  // Cập nhật trạng thái selected của một sản phẩm
+  updateSelectedStatus(productId: string, selected: boolean): Observable<any> {
+    const body = { selected }; // Truyền selected trong body request
+    return this.http.patch<any>(`${this.apiUrl}/${productId}`, body);
+  }
+
+  // Lấy danh sách sản phẩm đã chọn (selected: true)
+  getSelectedItems(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/selected`);
+  }
+
   addToCart(product: any): Observable<any> {
     return this.http.post<any>(this.apiUrl, {
       productId: product._id,

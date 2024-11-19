@@ -84,6 +84,18 @@ const mealRoutes = require("./routes/meal");
 app.use("/meal", mealRoutes);
 app.use("/meal-plan", mealRoutes);
 
+const paymentRoutes = require('./routes/payment');
+
+// Thêm route payment
+app.use('/payments', paymentRoutes);
+
+
+
+
+
+
+
+
 async function connectDb() {
   await mongoose.connect("mongodb://localhost:27017/?directConnection=true", {
     dbName: "ambro_db",
