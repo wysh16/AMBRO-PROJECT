@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { ProductService } from '../../../services/product.service';
 import { Product } from '../../../types/product';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -22,18 +23,18 @@ import { Product } from '../../../types/product';
     RouterLink,
   ],
   templateUrl: './products.component.html',
-  styleUrl: './products.component.scss',
+  styleUrl: './products.component.css',
 })
 export class ProductsComponent {
   displayedColumns: string[] = [
     'id',
     'name',
-    'description',
+
     'category',
     'originalPrice',
     'price',
-
     'reviewCount',
+    'rating',
     'action',
   ];
   dataSource: MatTableDataSource<Product>;
@@ -42,6 +43,7 @@ export class ProductsComponent {
   @ViewChild(MatSort) sort!: MatSort;
 
   productService = inject(ProductService);
+  router = inject(Router); // Thêm router để điều hướng
 
   constructor() {
     this.dataSource = new MatTableDataSource([] as any);
@@ -76,5 +78,10 @@ export class ProductsComponent {
       alert('Product Deleted');
       this.getServerData();
     });
+  }
+
+  // Hàm điều hướng đến trang chỉnh sửa
+  editProduct(id: string) {
+    this.router.navigateByUrl(`/admin/sanphams/${id}`);
   }
 }

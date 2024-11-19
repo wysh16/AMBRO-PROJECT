@@ -1,0 +1,131 @@
+/* Đặt padding và căn chỉnh chung */
+.px-40 {
+  padding: 0 2.5rem; /* Giảm padding ngang để bố cục gọn hơn */
+}
+
+.mt-10 {
+  margin-top: 2rem; /* Khoảng cách trên */
+}
+
+/* Phần tiêu đề và nút Add New Product */
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem; /* Khoảng cách giữa tiêu đề và bộ lọc */
+}
+
+.text-2xl {
+  font-size: 1.5rem; /* Tiêu đề lớn hơn */
+  color: #333333; /* Màu chữ trầm hơn */
+}
+
+button.mat-raised-button {
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px; /* Bo góc cho nút */
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button.mat-raised-button:hover {
+  transform: scale(1.05); /* Hiệu ứng hover */
+  transition: all 0.2s ease-in-out;
+}
+
+/* Phần form filter */
+.mat-form-field {
+  margin-bottom: 1.5rem; /* Khoảng cách giữa form filter và bảng */
+}
+
+.mat-form-field .mat-label {
+  font-size: 0.9rem;
+  color: #555555;
+}
+
+input[matInput] {
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #cccccc;
+}
+
+input[matInput]:focus {
+  border-color: #1976d2; /* Màu xanh khi focus */
+  outline: none;
+  box-shadow: 0 0 4px #1976d2;
+}
+
+/* Phần bảng */
+table.mat-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white; /* Nền trắng */
+  border-radius: 8px; /* Bo góc bảng */
+  overflow: hidden; /* Đảm bảo bảng không bị vỡ bo góc */
+}
+
+th.mat-header-cell,
+td.mat-cell {
+  padding: 0.8rem 1rem;
+  font-size: 0.9rem;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0; /* Viền nhẹ giữa các hàng */
+}
+
+th.mat-header-cell {
+  background-color: #f7f7f7; /* Nền xám nhạt cho tiêu đề */
+  font-weight: bold;
+  color: #333333;
+}
+
+td.mat-cell {
+  color: #555555;
+}
+
+tr.mat-row:hover {
+  background-color: #f5f5f5; /* Hiệu ứng hover cho hàng */
+}
+
+/* Phần nút hành động */
+button.mat-raised-button.color-accent {
+  background-color: #ff9800; /* Màu cam */
+  color: white;
+}
+
+button.mat-raised-button.color-accent:hover {
+  background-color: #fb8c00;
+}
+
+button.mat-raised-button.color-warn {
+  background-color: #f44336; /* Màu đỏ */
+  color: white;
+}
+
+button.mat-raised-button.color-warn:hover {
+  background-color: #e53935;
+}
+
+/* Phần paginator */
+.mat-paginator {
+  margin-top: 1rem;
+  background-color: #ffffff;
+  border-top: 1px solid #f0f0f0;
+  padding: 0.5rem 0;
+}
+
+.mat-paginator button {
+  color: #1976d2;
+}
+
+.mat-paginator .mat-paginator-range-label {
+  font-size: 0.85rem;
+  color: #555555;
+}
+.shadow,
+.w-full {
+  width: 100%;
+}
+h1 {
+  font-size: 3rem;
+}
