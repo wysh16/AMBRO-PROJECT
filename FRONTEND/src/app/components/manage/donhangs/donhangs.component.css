@@ -1,0 +1,62 @@
+.container {
+  padding: 0 40px;
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
+.content {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.filter {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.table {
+  width: 100%;
+}
+
+.table th,
+.table td {
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.action-btn {
+  margin-right: 8px;
+}
+.status-shipped {
+  background-color: #d1ecf1; /* Xanh nhạt */
+  color: #0c5460; /* Xanh đậm */
+  font-weight: bold;
+}
+
+.status-delivered {
+  background-color: #d4edda; /* Xanh lá nhạt */
+  color: #155724; /* Xanh lá đậm */
+  font-weight: bold;
+}
+
+.status-canceled {
+  background-color: #f8d7da; /* Đỏ nhạt */
+  color: #721c24; /* Đỏ đậm */
+  font-weight: bold;
+}
+
+.status-returned {
+  background-color: #fff3cd; /* Vàng nhạt */
+  color: #856404; /* Vàng đậm */
+  font-weight: bold;
+}
+
+.status-default {
+  background-color: #f8f9fa; /* Xám nhạt */
+  color: #6c757d; /* Xám đậm */
+  font-weight: bold;
+}

@@ -23,13 +23,16 @@ import { CartComponent } from './components/cart/cart.component';
 // import { authGaurd } from './core/auth-guard';
 import { KhuyenmaisComponent } from './components/manage/khuyenmais/khuyenmais.component';
 import { KhuyenmaisFormComponent } from './components/manage/khuyenmais-form/khuyenmais-form.component';
-import { DonhangComponent } from './components/manage/donhang/donhang.component';
+
 import { KhachhangComponent } from './components/manage/khachhang/khachhang.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { TdeeComponent } from './components/tdee/tdee.component';
 import { TdeeResultComponent } from './components/tdee-result/tdee-result.component';
 import { MealComponent } from './components/meal/meal.component';
+import { DonhangsComponent } from './components/manage/donhangs/donhangs.component';
+import { ProductFormComponent } from './components/manage/product-form/product-form.component';
+import { ProductsComponent } from './components/manage/products/products.component';
 
 export const routes: Routes = [
   {
@@ -128,7 +131,11 @@ export const routes: Routes = [
   { path: 'admin/khuyenmais/add', component: KhuyenmaisFormComponent },
   { path: 'admin/khuyenmais/:id', component: KhuyenmaisFormComponent },
 
-  { path: 'admin/donhangs', component: DonhangComponent },
+  { path: 'admin/sanphams', component: ProductsComponent },
+  { path: 'admin/sanphams/add', component: ProductFormComponent },
+  { path: 'admin/sanphams/:id', component: ProductFormComponent },
+
+  { path: 'admin/donhangs', component: DonhangsComponent },
   // { path: 'admin/khuyenmais/add', component: KhuyenmaisFormComponent },
   // { path: 'admin/khuyenmais/:id', component: KhuyenmaisFormComponent },
 
@@ -137,6 +144,5 @@ export const routes: Routes = [
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'tdee', component: TdeeComponent },
   { path: 'result', component: TdeeResultComponent },
-  { path: 'meal-plan', component: MealComponent},
-
+  { path: 'meal-plan', component: MealComponent },
 ];

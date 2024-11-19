@@ -53,27 +53,6 @@ export class ProductService {
     return products.filter((p: any) => p.label === 'New');
   }
 
-  // getProductsByLabel(label: string): Observable<any> {
-  //   return this._http
-  //     .get<any>(`${this.myAPI}/products/by-label`, { params: { label } })
-  //     .pipe(
-  //       retry(2), // Thử lại nếu request thất bại
-  //       catchError((error) => {
-  //         console.error('Error fetching products by label:', error);
-  //         return throwError(() => new Error('Failed to load products'));
-  //       })
-  //     );
-  // }
-
-  // getHotProducts(): Observable<any> {
-  //   return this._http.get('http://localhost:3000/products/hot-products').pipe(
-  //     catchError((error) => {
-  //       console.error('Error fetching hot products:', error);
-  //       return throwError(error);
-  //     })
-  //   );
-  // }
-
   private hotProductApiUrl = 'http://localhost:3000/hot-products';
 
   // Lấy danh sách sản phẩm hot
@@ -84,5 +63,34 @@ export class ProductService {
   // Lấy danh sách sản phẩm mới
   getNewProducts(): Observable<any[]> {
     return this._http.get<any[]>(this.newProductApiUrl);
+  }
+
+  deleteProduct(id: string): Observable<any> {
+    return this._http
+      .delete<any>(`${this.myAPI}/products/${id}`) // Gửi yêu cầu DELETE với URL và ID sản phẩm
+      .pipe(
+        retry(2), // Thử lại 2 lần nếu yêu cầu thất bại
+        catchError(this.handleError) // Xử lý lỗi nếu có
+      );
+  }
+
+  // Hàm thêm sản phẩm
+  addProduct(product: any): Observable<any> {
+    return this._http
+      .post<any>(`${this.myAPI}/products`, product) // Gửi yêu cầu POST với dữ liệu sản phẩm
+      .pipe(
+        retry(2), // Thử lại 2 lần nếu lỗi
+        catchError(this.handleError) // Xử lý lỗi
+      );
+  }
+
+  // Hàm cập nhật sản phẩm
+  updateProduct(id: string, product: any): Observable<any> {
+    return this._http
+      .put<any>(`${this.myAPI}/products/${id}`, product) // Gửi yêu cầu PUT với ID và dữ liệu cập nhật
+      .pipe(
+        retry(2), // Thử lại 2 lần nếu lỗi
+        catchError(this.handleError) // Xử lý lỗi
+      );
   }
 }

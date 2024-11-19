@@ -7,9 +7,10 @@ const authRoutes = require("./routes/auth");
 const Congthuc = require("./routes/congthuc");
 const khachHangRoutes = require("./routes/khachhang");
 // const KhuyenMai = require("./routes/khuyenmai");
+const orderRoutes = require("./routes/order");
 
 const khuyenmaiRoutes = require("./routes/khuyenmai");
-const orderRoutes = require("./routes/donhang");
+
 const DinhDuongRoutes = require("./routes/dinhduong");
 const ProductRoutes = require("./routes/product");
 
@@ -71,12 +72,13 @@ app.use("/congthuc", cors(), Congthuc);
 // Routes
 app.use("/khuyenmai", cors(), khuyenmaiRoutes);
 app.use("/dinhduong", cors(), DinhDuongRoutes);
-app.use("/admin/order", orderRoutes);
+
 app.use("/products", cors(), ProductRoutes);
 // Routes
 app.use("/khachhangs", khachHangRoutes);
 app.use("/hot-products", cors(), HotProductRoutes);
 app.use("/new-products", cors(), NewProductRoutes);
+app.use("/orders", orderRoutes);
 
 const mealRoutes = require("./routes/meal");
 app.use("/meal", mealRoutes);

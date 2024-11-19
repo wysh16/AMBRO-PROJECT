@@ -1,4 +1,5 @@
 const express = require("express");
+const productController = require("../controllers/product.controller");
 
 // getProducts
 
@@ -20,4 +21,12 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Thêm sản phẩm mới
+router.post("/", productController.addProduct);
+
+// Cập nhật sản phẩm
+router.put("/:id", productController.updateProduct);
+
+// Xóa sản phẩm
+router.delete("/:id", productController.deleteProduct);
 module.exports = router;

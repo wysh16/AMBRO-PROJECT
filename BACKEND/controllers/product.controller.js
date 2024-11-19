@@ -56,3 +56,59 @@ exports.getProductsByLabel = async (req, res) => {
     res.status(500).json({ message: "Lỗi lấy sản phẩm", error: err.message });
   }
 };
+
+// Thêm sản phẩm mới
+exports.addProduct = async (req, res) => {
+  try {
+    const product = new Product(req.body);
+    await product.save();
+    res.status(201).json({ message: "Thêm sản phẩm thành công!", product });
+  } catch (err) {
+    res.status(500).json({ message: "Lỗi khi thêm sản phẩm!", error: err });
+  }
+};
+
+// Cập nhật sản phẩm
+exports.updateProduct = async (req, res) => {
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedProduct) {
+      return res
+        .status(404)
+        .json({ message: "Không tìm thấy sản phẩm để cập nhật!" });
+    }
+
+    res
+      .status(200)
+      .json({
+        message: "Cập nhật sản phẩm thành công!",
+        product: updatedProduct,
+      });
+  } catch (err) {
+    res.status(500).json({ message: "Lỗi khi cập nhật sản phẩm!", error: err });
+  }
+};
+
+// Xóa sản phẩm
+exports.deleteProduct = async (req, res) => {
+  try {
+    const deletedProduct = await Product.findByIdAndDelete(req.params.id);
+
+    if (!deletedProduct) {
+      return res
+        .status(404)
+        .json({ message: "Không tìm thấy sản phẩm để xóa!" });
+    }
+
+    res
+      .status(200)
+      .json({ message: "Xóa sản phẩm thành công!", product: deletedProduct });
+  } catch (err) {
+    res.status(500).json({ message: "Lỗi khi xóa sản phẩm!", error: err });
+  }
+};
