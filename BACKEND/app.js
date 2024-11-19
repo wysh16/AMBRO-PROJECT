@@ -16,6 +16,12 @@ const ProductRoutes = require("./routes/product");
 
 const HotProductRoutes = require("./routes/hotProduct");
 const NewProductRoutes = require("./routes/newProduct");
+const shippingRoutes = require("./routes/shipping");
+const thanhToanRoutes = require("./routes/thanhtoan");
+
+// Import và sử dụng routes
+const hoatDongRoutes = require("./routes/congdong-baiviet");
+const userRoutes = require("./routes/congdong-nguoidung");
 
 const cors = require("cors");
 app.use(
@@ -72,17 +78,21 @@ app.use("/congthuc", cors(), Congthuc);
 // Routes
 app.use("/khuyenmai", cors(), khuyenmaiRoutes);
 app.use("/dinhduong", cors(), DinhDuongRoutes);
+app.use("/thanhtoan", cors(), thanhToanRoutes);
 
 app.use("/products", cors(), ProductRoutes);
 // Routes
 app.use("/khachhangs", khachHangRoutes);
 app.use("/hot-products", cors(), HotProductRoutes);
 app.use("/new-products", cors(), NewProductRoutes);
-app.use("/orders", orderRoutes);
-
+app.use("/orders", cors(), orderRoutes);
+app.use("/shippings", cors(), shippingRoutes);
 const mealRoutes = require("./routes/meal");
 app.use("/meal", mealRoutes);
 app.use("/meal-plan", mealRoutes);
+
+app.use("/baiviets", cors(), hoatDongRoutes);
+app.use("/nguoidungs", cors(), userRoutes);
 
 async function connectDb() {
   await mongoose.connect("mongodb://localhost:27017/?directConnection=true", {

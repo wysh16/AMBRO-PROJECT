@@ -93,7 +93,11 @@
 
 <nav class="sidebar">
   <ul class="menu-list">
-    <li class="menu-item" [routerLink]="'/dashboard'" routerLinkActive="active">
+    <li
+      class="menu-item"
+      [routerLink]="'/admin/dashboard'"
+      routerLinkActive="active"
+    >
       <img
         src="https://cdn.builder.io/api/v1/image/assets/TEMP/3e8659c439d5e00ea12db927ae72d3c4e0c8a54cfc7fdbdc254f23802c394fdb?placeholderIfAbsent=true&apiKey=882b161bdead40ce8ef8e302fe1a982f"
         alt="Menu icon"
@@ -136,7 +140,7 @@
     </li>
     <li
       class="menu-item"
-      [routerLink]="'/admin-info'"
+      [routerLink]="'/admin/thanhtoans'"
       routerLinkActive="active"
     >
       <img
@@ -144,7 +148,7 @@
         alt="Menu icon"
         class="menu-icon"
       />
-      <span class="menu-text">Thông tin admin</span>
+      <span class="menu-text">Quản lý vận chuyển và thanh toán</span>
     </li>
     <li
       class="menu-item"
@@ -180,7 +184,7 @@
         alt="Menu icon"
         class="menu-icon"
       />
-      <span class="menu-text">Quản lý công thức</span>
+      <span class="menu-text">Quản lý công thức và thực đơn</span>
     </li>
   </ul>
 </nav>

@@ -33,6 +33,12 @@ import { MealComponent } from './components/meal/meal.component';
 import { DonhangsComponent } from './components/manage/donhangs/donhangs.component';
 import { ProductFormComponent } from './components/manage/product-form/product-form.component';
 import { ProductsComponent } from './components/manage/products/products.component';
+import { ThucdonComponent } from './components/manage/thucdon/thucdon.component';
+import { ThucdonFormComponent } from './components/manage/thucdon-form/thucdon-form.component';
+import { ShippingComponent } from './components/manage/shipping/shipping.component';
+import { ThanhtoanComponent } from './components/manage/thanhtoan/thanhtoan.component';
+import { DashboardComponent } from './components/manage/dashboard/dashboard.component';
+import { CongdongComponent } from './components/manage/congdong/congdong.component';
 
 export const routes: Routes = [
   {
@@ -145,4 +151,14 @@ export const routes: Routes = [
   { path: 'tdee', component: TdeeComponent },
   { path: 'result', component: TdeeResultComponent },
   { path: 'meal-plan', component: MealComponent },
+
+  { path: 'admin/thucdons', component: ThucdonComponent },
+
+  { path: 'admin/thucdons/add', component: ThucdonFormComponent },
+  { path: 'admin/thucdons/:id', component: ThucdonFormComponent },
+  { path: 'admin/vanchuyens', component: ShippingComponent },
+  { path: 'admin/thanhtoans', component: ThanhtoanComponent },
+
+  { path: 'admin/dashboard', component: DashboardComponent },
+  { path: 'admin/congdong', component: CongdongComponent },
 ];

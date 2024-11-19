@@ -1,0 +1,72 @@
+<div class="thucdon-form-container">
+  <form
+    [formGroup]="thucDonForm"
+    (ngSubmit)="id ? updateThucDon() : addThucDon()"
+    class="thucdon-form"
+  >
+    <!-- Thông tin món ăn -->
+    <div class="form-section">
+      <h4>Thông tin món ăn</h4>
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Loại bữa</mat-label>
+        <input matInput formControlName="mealType" />
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Tên món ăn</mat-label>
+        <input matInput formControlName="mealName" />
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Lượng calo</mat-label>
+        <input matInput formControlName="mealCalories" type="number" />
+      </mat-form-field>
+    </div>
+
+    <!-- Thành phần món ăn -->
+    <div class="form-section">
+      <h4>Thành phần món ăn</h4>
+      <div formArrayName="mealIngredients">
+        <div
+          *ngFor="let ingredient of mealIngredients.controls; let i = index"
+          class="array-item"
+        >
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Thành phần {{ i + 1 }}</mat-label>
+            <input matInput [formControlName]="i" />
+          </mat-form-field>
+          <button mat-icon-button color="warn" (click)="removeIngredient(i)">
+            <mat-icon>remove_circle</mat-icon>
+          </button>
+        </div>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="addIngredient()"
+          type="button"
+        >
+          Thêm thành phần
+        </button>
+      </div>
+    </div>
+
+    <!-- Hình ảnh và công thức -->
+    <div class="form-section">
+      <h4>Hình ảnh và công thức</h4>
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Ảnh món ăn</mat-label>
+        <input matInput formControlName="mealImage" />
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Công thức</mat-label>
+        <textarea matInput formControlName="mealRecipe" rows="3"></textarea>
+      </mat-form-field>
+    </div>
+
+    <!-- Actions -->
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit">
+        {{ id ? "Cập nhật" : "Thêm" }}
+      </button>
+      <button mat-raised-button type="button" (click)="cancel()">Hủy</button>
+    </div>
+  </form>
+</div>
