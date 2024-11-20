@@ -1,4 +1,4 @@
-.container {
+/* .container {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
@@ -75,4 +75,59 @@ button:disabled {
 
 textarea {
   resize: none;
+} */
+.container {
+  margin: 20px auto;
+  max-width: 800px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-section {
+  margin-bottom: 30px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.half-width {
+  width: 48%;
+  margin-right: 2%;
+}
+
+.half-width:last-child {
+  margin-right: 0;
+}
+
+.form-actions {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.image-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }

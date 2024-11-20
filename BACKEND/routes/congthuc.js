@@ -14,11 +14,31 @@ router.post("/", async (req, res) => {
   res.send(congthuc);
 });
 
+// PUT: Cập nhật công thức
 router.put("/:id", async (req, res) => {
-  let model = req.body;
-  let id = req.params["id"];
-  await updateCongThuc(id, model);
-  res.send({ message: "Updated" });
+  const { id } = req.params;
+  const model = req.body;
+
+  try {
+    // Tìm và cập nhật công thức
+    const updatedCongThuc = await CongThuc.findByIdAndUpdate(
+      id,
+      model,
+      { new: true, runValidators: true } // Trả về tài liệu đã cập nhật
+    );
+
+    // Nếu không tìm thấy ID
+    if (!updatedCongThuc) {
+      return res.status(404).send({ message: "Công thức không tồn tại!" });
+    }
+
+    res.send({ message: "Cập nhật thành công!", data: updatedCongThuc });
+  } catch (error) {
+    console.error("Lỗi cập nhật:", error.message);
+    res
+      .status(400)
+      .send({ message: "Cập nhật thất bại!", error: error.message });
+  }
 });
 
 router.delete("/:id", async (req, res) => {
