@@ -211,3 +211,56 @@ exports.deleteMeal = async (req, res) => {
     res.status(500).json({ message: "Lỗi khi xóa món ăn", error });
   }
 };
+
+// Lấy thông tin món ăn theo ID
+exports.getMealById = async (req, res) => {
+  try {
+    const meal = await Meal.findById(req.params.id);
+    if (!meal) {
+      return res.status(404).json({ message: "Không tìm thấy món ăn" });
+    }
+    res.status(200).json(meal);
+  } catch (error) {
+    res.status(500).json({ message: "Lỗi khi lấy thông tin món ăn", error });
+  }
+};
+
+// Thêm một món ăn mới
+exports.createMeal = async (req, res) => {
+  try {
+    const newMeal = new Meal(req.body);
+    const savedMeal = await newMeal.save();
+    res.status(201).json(savedMeal);
+  } catch (error) {
+    res.status(500).json({ message: "Lỗi khi thêm món ăn", error });
+  }
+};
+
+// Cập nhật món ăn
+exports.updateMeal = async (req, res) => {
+  try {
+    const updatedMeal = await Meal.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!updatedMeal) {
+      return res
+        .status(404)
+        .json({ message: "Không tìm thấy món ăn để cập nhật" });
+    }
+    res.status(200).json(updatedMeal);
+  } catch (error) {
+    res.status(500).json({ message: "Lỗi khi cập nhật món ăn", error });
+  }
+};
+// Xóa món ăn
+exports.deleteMeal = async (req, res) => {
+  try {
+    const deletedMeal = await Meal.findByIdAndDelete(req.params.id);
+    if (!deletedMeal) {
+      return res.status(404).json({ message: "Không tìm thấy món ăn để xóa" });
+    }
+    res.status(200).json({ message: "Xóa món ăn thành công" });
+  } catch (error) {
+    res.status(500).json({ message: "Lỗi khi xóa món ăn", error });
+  }
+};
