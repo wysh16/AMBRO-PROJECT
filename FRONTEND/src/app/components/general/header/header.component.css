@@ -1,174 +1,4 @@
-/* .topbar {
-  display: flex;
-  background-color: #117554;
-  color: #f9f9f7;
-  justify-content: space-between;
-  padding-top: 15px;
-}
-.logo,
-.icon {
-  display: flex;
-}
 
-img {
-  margin-left: 10px;
-  margin-right: 6px;
-  margin-top: 2px;
-}
-
-.left-top {
-  display: flex;
-  padding-left: 50px;
-}
-.right-top {
-  display: flex;
-  padding-right: 30px;
-}
-.sdt {
-  margin-right: 20px;
-}
-
-.header {
-  display: flex;
-
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 10px;
-}
-
-.nav-link {
-  color: black;
-  text-decoration: none;
-  padding: 10px;
-}
-
-ul {
-  list-style: none;
-  display: flex;
-}
-
-.custom-button {
-  background-color: #117554; 
-  color: white;
-  border: none;
-  border-radius: 20px;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
-
-.custom-button:hover {
-  background-color: #117554;
-}
-.icon {
-  display: flex;
-}
-.icons {
-  margin-right: 20px;
-  margin-top: 10px;
-}
-
-.submenu {
-  display: none;
-  position: absolute;
-  background-color: #117554; 
-  padding: 10px;
-  border-radius: 5px;
-  list-style: none;
-
-  width: max-content; 
-  z-index: 1000;
-}
-
-
-ul {
-  list-style: none;
-  display: flex;
-  gap: 20px; 
-}
-
-.submenu li {
-  margin: 5px 0;
-}
-
-.submenu a {
-  color: white; 
-  text-decoration: none;
-}
-
-.dropdown:hover .submenu {
-  display: block; 
-}
-
-.dropdown {
-  position: relative;
-}
-
-.nav-link {
-  color: black;
-  text-decoration: none; 
-  padding: 10px;
-}
-
-.nav-link:hover {
-  background-color: #117554; 
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
-  text-decoration: none; 
-}
-
-
-.dropdown:hover .submenu,
-.dropdown .submenu:hover {
-  display: block;
-}
-
-
-.dropdown:hover > .nav-link {
-  background-color: #117554; 
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
-  text-decoration: none; 
-}
-
-.category-box li {
-  cursor: pointer; 
-  color: white;
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.user-name {
-  font-weight: bold;
-  margin-right: 10px;
-}
-
-.custom-button {
-  background-color: #ff6b6b;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.custom-button:hover {
-  background-color: #ff4c4c;
-} */
-
-/* Global styles */
 body {
   margin: 0;
   padding: 0px;
@@ -183,7 +13,7 @@ body {
   padding-top: 10px;
   padding-bottom: 10px;
   padding-right: 30px;
-  /* padding: 10px 20px; */
+  
 }
 
 .left-top,
@@ -192,11 +22,7 @@ body {
   align-items: center;
   gap: 10px;
 }
-/* img {
-  margin-left: 10px;
-  margin-right: 6px;
-  margin-top: 2px;
-} */
+
 
 .header {
   display: flex;
@@ -217,11 +43,11 @@ body {
 
 .nav-links {
   display: flex;
-  justify-content: center; /* Căn giữa ngang */
-  align-items: center; /* Căn giữa dọc */
+  justify-content: center; 
+  align-items: center; 
   list-style: none;
-  gap: 20px; /* Khoảng cách giữa các link */
-  flex: 1; /* Để chiếm toàn bộ không gian ngang */
+  gap: 20px; 
+  flex: 1; 
 }
 .nav-link {
   text-decoration: none;
@@ -238,13 +64,9 @@ body {
 .icon {
   display: flex;
   gap: 10px;
-  margin: auto; /* Căn giữa icon */
+  margin: auto;
 }
 
-/* .icons {
-  width: 20px;
-  height: 20px;
-} */
 
 .icons {
   margin-right: 20px;
@@ -257,7 +79,6 @@ body {
   cursor: pointer;
 }
 
-/* Submenu */
 .submenu {
   display: none;
   position: absolute;
@@ -277,43 +98,40 @@ body {
   text-decoration: none;
 }
 p {
-  text-align: center; /* Căn giữa ngang chữ */
-  display: flex; /* Dùng flexbox để căn giữa */
-  align-items: center; /* Căn giữa dọc */
-  height: 100%; /* Đảm bảo nội dung luôn căn giữa trong chiều cao của container */
+  text-align: center; 
+  display: flex; 
+  align-items: center; 
+  height: 100%;
 }
 .submenu a {
-  color: white; /* Chữ trắng */
+  color: white; 
   text-decoration: none;
   padding: 5px 10px;
-  display: block; /* Đảm bảo toàn bộ khu vực có thể click */
+  display: block; 
 }
 
 .submenu li {
-  color: white; /* Chữ trắng */
+  color: white;
   text-decoration: none;
   padding: 5px 5px;
-  display: block; /* Đảm bảo toàn bộ khu vực có thể click */
+  display: block; 
 }
 
 .submenu a:hover {
-  background-color: #0e613e; /* Màu xanh đậm hơn khi hover */
+  background-color: #0e613e; 
   border-radius: 3px;
 }
 .dropdown:hover .submenu {
   display: block;
 }
 
-/* .category-box li {
-  cursor: pointer;
-  color: white;
-} */
+
 .left-top {
   display: flex;
   padding-left: 50px;
   margin-right: 0px;
 }
-/* Responsive Styles */
+
 @media screen and (max-width: 768px) {
   .nav-links {
     display: none;
@@ -384,14 +202,14 @@ p {
 p {
   padding-top: 9px;
 }
-/* Kiểu dáng cho container */
+
 .icon {
   display: flex;
   align-items: center;
-  gap: 10px; /* Khoảng cách giữa các biểu tượng */
+  gap: 10px; 
 }
 
-/* Kiểu dáng chung cho nút */
+
 .custom-button {
   padding: 8px 16px;
   font-size: 14px;
@@ -402,40 +220,40 @@ p {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-/* Nút Tài khoản (xanh lá) */
+
 .custom-button[routerLink] {
-  background-color: #28a745; /* Xanh lá */
+  background-color: #28a745; 
 }
 
 .custom-button[routerLink]:hover {
-  background-color: #218838; /* Xanh lá đậm hơn */
-  transform: scale(1.05); /* Hiệu ứng phóng to nhẹ khi hover */
+  background-color: #218838; 
+  transform: scale(1.05); 
 }
 
-/* Tên người dùng */
+
 .user-name {
   font-size: 16px;
   font-weight: bold;
   margin-right: 10px;
-  color: #333; /* Màu chữ đen xám */
+  color: #333; 
 }
 
-/* Nút Đăng xuất (đỏ) */
+
 .custom-button.logout {
-  background-color: #dc3545; /* Đỏ */
+  background-color: #dc3545; 
 }
 
 .custom-button.logout:hover {
-  background-color: #c82333; /* Đỏ đậm hơn */
-  transform: scale(1.05); /* Hiệu ứng phóng to nhẹ khi hover */
+  background-color: #c82333; 
+  transform: scale(1.05); 
 }
-/* Icon section (giỏ hàng, tìm kiếm, đăng nhập) */
+
 .header .icon {
   display: flex;
   align-items: center;
   gap: 15px;
 }
-/* Tổng thể header */
+
 .header {
   display: flex;
   align-items: center;
@@ -443,7 +261,6 @@ p {
   padding: 10px 20px;
 }
 
-/* Logo */
 .header .logo {
   display: flex;
   align-items: center;
@@ -454,7 +271,6 @@ p {
   margin-right: 10px;
 }
 
-/* Navigation (nav-links) */
 .header nav {
   flex-grow: 1;
   display: flex;
@@ -467,4 +283,9 @@ p {
   gap: 20px;
   margin: 0;
   padding: 0;
+}
+
+.category-box li {
+  cursor: pointer;
+  color: white;
 }

@@ -25,15 +25,18 @@
       <li>
         <a routerLink="/about" href="/about" class="nav-link">Giới thiệu</a>
       </li>
+
       <li class="dropdown">
-        <a routerLink="/products" href="/products" class="nav-link">Sản phẩm</a>
+        <a href="#" class="nav-link">Sản phẩm</a>
+        <!-- Dropdown menu -->
         <ul class="submenu">
-          <li
-            *ngFor="let category of productCategories"
-            (click)="navigateToProducts(category)"
-          >
-            {{ category }}
-          </li>
+          <div class="category-box">
+            <li *ngFor="let category of productCategories"
+                [class.selected]="category === selectedCategory"
+                (click)="navigateToProducts(category)">
+              {{ category }}
+            </li>
+          </div>
         </ul>
       </li>
 
@@ -105,5 +108,5 @@
     </ng-template>
   </div>
 
-  <div class="hamburger" (click)="toggleMenu()">&#9776;</div>
+  <!-- <div class="hamburger" (click)="toggleMenu()">&#9776;</div> -->
 </header>
