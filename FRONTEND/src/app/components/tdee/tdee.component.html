@@ -1,4 +1,19 @@
-<h3>Công cụ tính chỉ số BMR và TDEE</h3>
+<main class="tdee-tools">
+    <aside class="sidebar">
+        <h2 class="sidebar-title">Công cụ</h2>
+        <nav>
+          <ul class="tool-list">
+            <li >
+              <a href="/dinhduong" class="tool-link">Tính chỉ số dinh dưỡng</a>
+            </li>
+            <li>
+              <a href="/tdee" class="tool-link active">Tính TDEE và xây dựng thực đơn</a>
+            </li>
+          </ul>
+        </nav>
+    </aside>
+    <section class="main-content">
+        <h3>Công cụ tính chỉ số BMR và TDEE</h3>
 <div>
     <p>Tuổi <br>
         <input type="number" [(ngModel)]="age" placeholder="Nhập tuổi của bạn">
@@ -42,3 +57,7 @@
     
     <button (click)="calculate()">KẾT QUẢ</button>
 </div>
+
+    </section>
+</main>
+
