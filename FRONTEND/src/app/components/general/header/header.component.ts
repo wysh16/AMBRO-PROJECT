@@ -37,13 +37,13 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.loadCategories(); 
     this.loadProducts();
-    // this.authService.loggedIn$.subscribe((status) => {
-    //   this.isLoggedIn = status;
-    // });
+    this.authService.loggedIn$.subscribe((status) => {
+      this.isLoggedIn = status;
+    });
 
-    // this.authService.currentUser$.subscribe((name) => {
-    //   this.userName = name;
-    // });
+    this.authService.currentUser$.subscribe((name) => {
+      this.userName = name;
+    });
   }
 
   logout() {
