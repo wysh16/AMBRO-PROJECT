@@ -316,3 +316,21 @@
   max-width: 100%; /* Đảm bảo ảnh không vượt quá chiều rộng của container */
   height: auto;
 }
+/* Đảm bảo khung hình ảnh tỷ lệ 2:3 */
+.image-wrapper {
+  width: 80%;
+  aspect-ratio: 2/ 1; /* Tỷ lệ 2:3 */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa; /* Màu nền nhạt nếu hình không tải được */
+  border: 1px solid #dee2e6; /* Viền nhẹ */
+  border-radius: 10px;
+}
+
+.image-wrapper img {
+  width: 100%; /* Đảm bảo hình ảnh phủ khung */
+  height: 100%;
+  object-fit: cover; /* Đảm bảo tỷ lệ và không bị méo */
+}

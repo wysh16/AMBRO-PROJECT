@@ -91,11 +91,10 @@ const mealRoutes = require("./routes/meal");
 app.use("/meal", mealRoutes);
 app.use("/meal-plan", mealRoutes);
 
-const paymentRoutes = require('./routes/payment');
+const paymentRoutes = require("./routes/payment");
 
 // Thêm route payment
-app.use('/payments', paymentRoutes);
-
+app.use("/payments", paymentRoutes);
 
 app.use("/baiviets", cors(), hoatDongRoutes);
 app.use("/nguoidungs", cors(), userRoutes);

@@ -57,16 +57,18 @@
       </form>
 
       <div
-        class="nutritional-info row"
+        class="nutritional-info row align-items-center"
         *ngIf="nutritionData"
         style="margin-bottom: 2rem"
       >
         <div class="col-md-6">
-          <img
-            [src]="nutritionData.Anh"
-            class="img-fluid"
-            alt="{{ nutritionData.Name }}"
-          />
+          <div class="image-wrapper">
+            <img
+              [src]="nutritionData.Anh"
+              class="img-fluid"
+              alt="{{ nutritionData.Name }}"
+            />
+          </div>
         </div>
         <div class="col-md-6">
           <h2>Thông tin dinh dưỡng cho: {{ nutritionData.Name }}</h2>
@@ -79,6 +81,7 @@
           </ul>
         </div>
       </div>
+
       <!-- Nút Xem chi tiết -->
       <button
         *ngIf="nutritionData"
