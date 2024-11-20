@@ -42,6 +42,8 @@ import { CongdongComponent } from './components/manage/congdong/congdong.compone
 import { VerifycodeComponent } from './components/verifycode/verifycode.component';
 import { SearchComponent } from './components/search/search.component';
 import { HosoComponent } from './components/hoso/hoso.component';
+import { SuccessNotiComponent } from './components/success-noti/success-noti.component';
+
 
 export const routes: Routes = [
   {
@@ -164,4 +166,6 @@ export const routes: Routes = [
   { path: 'admin/congdong', component: CongdongComponent },
   { path: 'search-result', component: SearchComponent },
   { path: 'hoso', component: HosoComponent },
+  { path: 'success-noti', component: SuccessNotiComponent },
+ 
 ];
