@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { CommonModule } from '@angular/common';
-import { PaymentService } from '../../services/payment.service';
-import { ProductService } from '../../services/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 @Component({
@@ -18,9 +16,12 @@ export class PaymentComponent implements OnInit {
   voucherValue: number = 0; // Giá trị của voucher
   totalAmountAfterVoucher: number = 0; // Tổng tiền sau khi áp dụng voucher
   totalAmount: number = 0;
+  isCodeVerification: boolean = false; // Trạng thái để theo dõi giao diện
+  codeInput: string[] = ['', '', '', ''];
+  
 
   constructor(private cartService: CartService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute, private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -30,6 +31,21 @@ export class PaymentComponent implements OnInit {
     });
   }
   
+
+  goToCodeVerification() {
+    this.isCodeVerification = true;
+  }
+
+  verifyCode() {
+    const code = this.codeInput.join(''); // Ghép các ký tự lại thành mã code
+    if (code.length === 4) {
+      // Thực hiện logic xác minh mã code
+      alert('Xác nhận thanh toán thành công!');
+      // Điều hướng hoặc thực hiện hành động tiếp theo
+    } else {
+      alert('Vui lòng nhập đủ 4 ký tự!');
+    }
+  }
 
   updateSelectedTotal() {
     this.cartService.getCartItems().subscribe(cartItems => {

@@ -123,6 +123,7 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin-top: 30px;
 }
 .privacy-notice {
   color: #acacac;
@@ -230,6 +231,7 @@
   font-size: 16px;
   color: #0a0d13;
   margin-bottom: 16px;
+  margin-top: 20px;
 }
 .total-price {
   display: flex;
@@ -261,3 +263,21 @@
   display: flex;
   flex-direction: column;
 }
+
+.code-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.code-input {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 18px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+  
+
