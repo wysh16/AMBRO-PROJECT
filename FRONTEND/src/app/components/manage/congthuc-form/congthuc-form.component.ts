@@ -12,6 +12,7 @@ import { DanhMucCongThuc } from '../../../types/danhMucCongThuc';
 import { DanhMucCongThucService } from '../../../services/danhmucongthuc.service';
 import { CongthucService } from '../../../services/congthuc.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-congthuc-form',
@@ -22,75 +23,94 @@ import { CommonModule } from '@angular/common';
     MatButtonModule,
     MatSelectModule,
     CommonModule,
+    MatIconModule,
   ],
   templateUrl: './congthuc-form.component.html',
   styleUrl: './congthuc-form.component.css',
 })
 export class CongthucFormComponent {
-  formBuilder = inject(FormBuilder);
+  private formBuilder = inject(FormBuilder);
+  private danhmucService = inject(DanhMucCongThucService);
+  private congThucService = inject(CongthucService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
+  // Form definition
   CongThucForm = this.formBuilder.group({
     name: [null, [Validators.required, Validators.minLength(6)]],
-    datePosted: [null, [Validators.required, Validators.minLength(5)]],
-    estimatedTime: [null, [Validators.required, Validators.minLength(1)]],
-    images: this.formBuilder.array([]),
+    datePosted: [null, [Validators.required]],
+    estimatedTime: [null, [Validators.required, Validators.min(1)]],
+    imageUrl: [null, [Validators.required]], // Single image URL
     DanhMucId: [null, [Validators.required]],
   });
-
-  danhmucService = inject(DanhMucCongThucService);
   categories: DanhMucCongThuc[] = [];
-  CongThucService = inject(CongthucService);
   id!: string;
-  route = inject(ActivatedRoute);
 
   ngOnInit() {
-    this.danhmucService.getDanhMuc().subscribe((result) => {
-      this.categories = result;
-    });
-
+    // Load recipe data if editing
     this.id = this.route.snapshot.params['id'];
-    console.log(this.id);
     if (this.id) {
-      this.CongThucService.getCongThuc(this.id).subscribe((result) => {
-        for (let index = 0; index < result.images.length; index++) {
-          this.addImage();
-        }
+      this.congThucService.getCongThuc(this.id).subscribe((result) => {
         this.CongThucForm.patchValue(result as any);
       });
-    } else {
-      this.addImage();
     }
   }
 
-  router = inject(Router);
+  // Add a new recipe
   addCongThuc() {
-    let value = this.CongThucForm.value;
-    console.log(value);
-    this.CongThucService.addCongThuc(value as any).subscribe((result) => {
-      alert('Cong thuc Added');
-      this.router.navigateByUrl('/admin/congthucs');
-    });
+    if (this.CongThucForm.valid) {
+      const value = this.CongThucForm.value;
+      this.congThucService.addCongThuc(value as any).subscribe(() => {
+        alert('Công thức đã được thêm thành công!');
+        this.router.navigateByUrl('/admin/congthucs');
+      });
+    } else {
+      alert('Vui lòng kiểm tra lại thông tin.');
+    }
   }
 
   updateCongThuc() {
-    let value = this.CongThucForm.value;
-    console.log(value);
-    this.CongThucService.updateCongThuc(this.id, value as any).subscribe(
-      (result) => {
-        alert('Cong Thuc Updated');
-        this.router.navigateByUrl('/admin/congthucs');
-      }
-    );
+    if (this.CongThucForm.valid) {
+      const value = this.CongThucForm.value;
+      this.congThucService
+        .updateCongThuc(this.id, value as any)
+        .subscribe(() => {
+          alert('Công thức đã được cập nhật!');
+          this.router.navigateByUrl('/admin/congthucs');
+        });
+    } else {
+      alert('Vui lòng kiểm tra lại thông tin.');
+    }
   }
 
-  addImage() {
-    this.images.push(this.formBuilder.control(null));
-  }
+  // updateCongThuc() {
+  //   if (this.CongThucForm.valid) {
+  //     const value = this.CongThucForm.value;
 
-  removeImage() {
-    this.images.removeAt(this.images.controls.length - 1);
-  }
+  //     // Loại bỏ các giá trị không cần thiết hoặc null
+  //     const sanitizedValue = {
+  //       ...value,
+  //       name: value.name?.trim(),
+  //       imageUrl: value.imageUrl?.trim(),
+  //     };
 
-  get images() {
-    return this.CongThucForm.get('images') as FormArray;
+  //     this.congThucService.updateCongThuc(this.id, sanitizedValue).subscribe(
+  //       (response) => {
+  //         alert('Công thức đã được cập nhật!');
+  //         this.router.navigateByUrl('/admin/congthucs');
+  //       },
+  //       (error) => {
+  //         console.error('Lỗi:', error);
+  //         alert('Cập nhật thất bại, vui lòng thử lại.');
+  //       }
+  //     );
+  //   } else {
+  //     alert('Vui lòng kiểm tra lại thông tin.');
+  //   }
+  // }
+
+  // Hủy và quay lại danh sách
+  cancel() {
+    this.router.navigateByUrl('/admin/congthucs');
   }
 }

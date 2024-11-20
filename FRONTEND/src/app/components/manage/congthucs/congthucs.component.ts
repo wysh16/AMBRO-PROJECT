@@ -8,6 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { CongthucService } from '../../../services/congthuc.service';
 import { CongThuc } from '../../../types/congthuc';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-congthucs',
@@ -26,31 +28,26 @@ import { CongThuc } from '../../../types/congthuc';
 })
 export class CongthucsComponent {
   displayedColumns: string[] = [
-    'id',
     'name',
     'datePosted',
     'estimatedTime',
     'action',
   ];
-  dataSource: MatTableDataSource<CongThuc>;
+  dataSource = new MatTableDataSource<CongThuc>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  CongThucService = inject(CongthucService);
-
-  constructor() {
-    this.dataSource = new MatTableDataSource([] as any);
-  }
+  constructor(
+    private congthucService: CongthucService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.getServerData();
-  }
-
-  private getServerData() {
-    this.CongThucService.getAllCongThuc().subscribe((result) => {
-      // console.log(result);
-      this.dataSource.data = result;
+    this.fetchCongThucs();
+    this.route.params.subscribe(() => {
+      this.fetchCongThucs();
     });
   }
 
@@ -59,19 +56,34 @@ export class CongthucsComponent {
     this.dataSource.sort = this.sort;
   }
 
+  fetchCongThucs() {
+    this.congthucService.getAllCongThuc().subscribe((data) => {
+      this.dataSource.data = data;
+    });
+  }
+
+  deleteCongThuc(id: string) {
+    if (confirm('Bạn có chắc muốn xóa công thức này?')) {
+      this.congthucService.deleteCongThuc(id).subscribe(() => {
+        alert('Công thức đã được xóa!');
+        this.fetchCongThucs();
+      });
+    }
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
   }
 
-  delete(id: string) {
-    this.CongThucService.deleteCongThuc(id).subscribe((result) => {
-      alert('Cong thuc Deleted');
-      this.getServerData();
-    });
+  editCongThuc(id: string): void {
+    this.router.navigate([`/admin/congthucs/${id}`]);
+  }
+
+  addCongThuc(): void {
+    this.router.navigate(['/admin/congthucs/add']);
   }
 }

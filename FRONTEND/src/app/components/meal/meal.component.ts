@@ -20,5 +20,12 @@ export class MealComponent implements OnInit{
     // Nhận kết quả thực đơn từ MealService (đã lưu trước đó)
     this.mealPlan = this.mealService.getMealPlan();
   }
+  calculateTotalCalories(day: any): number {
+    return (
+      day.breakfast.mealCalories +
+      day.lunch.mealCalories +
+      day.dinner.mealCalories
+    );
+  }
 }
 

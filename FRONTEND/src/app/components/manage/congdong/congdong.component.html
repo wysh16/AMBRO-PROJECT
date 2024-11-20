@@ -90,13 +90,6 @@
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef>Hành động</th>
         <td mat-cell *matCellDef="let element">
-          <button
-            mat-button
-            color="primary"
-            [routerLink]="'/admin/hoatdong/edit/' + element.ID"
-          >
-            Sửa
-          </button>
           <button mat-button color="warn" (click)="deleteHoatDong(element.ID)">
             Xóa
           </button>

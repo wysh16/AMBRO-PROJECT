@@ -48,55 +48,56 @@ export class KhuyenmaisFormComponent {
 
   router = inject(Router);
   khuyenMaiService = inject(KhuyenmaiService);
-  id!: string; // ID from the route
   route = inject(ActivatedRoute);
+  id!: string; // ID từ route
 
   ngOnInit() {
-    this.id = this.route.snapshot.params['id']; // Get ID from route
+    this.id = this.route.snapshot.params['id']; // Lấy ID từ route
     if (this.id) {
-      // Load existing promotion
+      // Nạp khuyến mãi hiện có
       this.khuyenMaiService
         .getPromotionById(this.id)
         .subscribe((result: KhuyenMai) => {
           this.khuyenMaiForm.patchValue(result);
-          // Populate arrays
           result.promotion_details.forEach(() => this.addPromotionDetail());
           result.benefits.forEach(() => this.addBenefit());
         });
     } else {
-      // Initialize empty arrays for new form
+      // Khởi tạo mảng trống cho form mới
       this.addPromotionDetail();
       this.addBenefit();
     }
   }
 
-  // Promotion details (array handling)
+  // Lấy danh sách promotion_details
   get promotionDetails() {
     return this.khuyenMaiForm.get('promotion_details') as FormArray;
   }
 
   addPromotionDetail() {
-    this.promotionDetails.push(this.formBuilder.control(''));
+    this.promotionDetails.push(
+      this.formBuilder.control('', Validators.required)
+    );
   }
 
   removePromotionDetail(index: number) {
     this.promotionDetails.removeAt(index);
   }
 
-  // Benefits (array handling)
+  // Lấy danh sách benefits
   get benefits() {
     return this.khuyenMaiForm.get('benefits') as FormArray;
   }
 
   addBenefit() {
-    this.benefits.push(this.formBuilder.control(''));
+    this.benefits.push(this.formBuilder.control('', Validators.required));
   }
 
   removeBenefit(index: number) {
     this.benefits.removeAt(index);
   }
 
-  // Add new promotion
+  // Thêm khuyến mãi
   addKhuyenMai() {
     if (this.khuyenMaiForm.valid) {
       const newPromotion = this.khuyenMaiForm.value as KhuyenMai;
@@ -107,7 +108,7 @@ export class KhuyenmaisFormComponent {
     }
   }
 
-  // Update existing promotion
+  // Cập nhật khuyến mãi
   updateKhuyenMai() {
     if (this.khuyenMaiForm.valid && this.id) {
       const updatedPromotion = this.khuyenMaiForm.value as KhuyenMai;
@@ -120,7 +121,7 @@ export class KhuyenmaisFormComponent {
     }
   }
 
-  // Cancel form action
+  // Hủy và quay lại danh sách
   cancel() {
     this.router.navigateByUrl('/admin/khuyenmais');
   }

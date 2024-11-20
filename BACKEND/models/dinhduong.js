@@ -11,6 +11,7 @@ const dinhduongSchema = new mongoose.Schema({
   Glucid: { type: Number, required: true },
   Group: { type: String, required: true },
   Anh: { type: String, required: true },
+  Chitiet: { type: String, required: true },
 });
 
 // Tạo model từ schema

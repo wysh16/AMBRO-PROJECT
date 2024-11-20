@@ -29,119 +29,86 @@ import { CommonModule } from '@angular/common';
   styleUrl: './product-form.component.css',
 })
 export class ProductFormComponent {
-  // formBuilder = inject(FormBuilder);
-  // productForm = this.formBuilder.group({
-  //   name: [null, [Validators.required, Validators.minLength(5)]],
-  //   shortDescription: [null, [Validators.required, Validators.minLength(10)]],
-  //   description: [null, [Validators.required, Validators.minLength(50)]],
-  //   price: [null, [Validators.required]],
-  //   discount: [],
-  //   images: this.formBuilder.array([]),
-  //   categoryId: [null, [Validators.required]],
-  // });
+  // Inject các dịch vụ
+  private formBuilder = inject(FormBuilder);
+  private categoryService = inject(CategoryService);
+  private productService = inject(ProductService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
-  // categoryService = inject(CategoryService);
-  // categories: Category[] = [];
-  // productService = inject(ProductService);
-  // id!: string;
-  // route = inject(ActivatedRoute);
-
-  // ngOnInit() {
-  //   this.categoryService.getCategories().subscribe((result) => {
-  //     this.categories = result;
-  //   });
-
-  //   this.id = this.route.snapshot.params['id'];
-  //   console.log(this.id);
-  //   if (this.id) {
-  //     this.productService.getAllProducts(this.id).subscribe((result) => {
-  //       for (let index = 0; index < result.images.length; index++) {
-  //         this.addImage();
-  //       }
-  //       this.productForm.patchValue(result as any);
-  //     });
-  //   } else {
-  //     this.addImage();
-  //   }
-  // }
-
-  // router = inject(Router);
-  // addProduct() {
-  //   let value = this.productForm.value;
-  //   console.log(value);
-  //   this.productService.addProduct(value as any).subscribe((result) => {
-  //     alert('Product Added');
-  //     this.router.navigateByUrl('/admin/products');
-  //   });
-  // }
-
-  // updateProduct() {
-  //   let value = this.productForm.value;
-  //   console.log(value);
-  //   this.productService
-  //     .updateProduct(this.id, value as any)
-  //     .subscribe((result) => {
-  //       alert('Product Updated');
-  //       this.router.navigateByUrl('/admin/products');
-  //     });
-  // }
-
-  // addImage() {
-  //   this.images.push(this.formBuilder.control(null));
-  // }
-
-  // removeImage() {
-  //   this.images.removeAt(this.images.controls.length - 1);
-  // }
-
-  // get images() {
-  //   return this.productForm.get('images') as FormArray;
-  // }
-
-  // Inject các service cần thiết
-  formBuilder = inject(FormBuilder);
-  categoryService = inject(CategoryService);
-  productService = inject(ProductService);
-  route = inject(ActivatedRoute);
-  router = inject(Router);
-
-  // Khai báo form
+  // Form
   productForm: FormGroup = this.formBuilder.group({
+    // Các thuộc tính đã có
     name: [null, [Validators.required, Validators.minLength(5)]],
     shortDescription: [null, [Validators.required, Validators.minLength(10)]],
     description: [null, [Validators.required, Validators.minLength(50)]],
     price: [null, [Validators.required, Validators.min(0)]],
-    discount: [null, [Validators.min(0), Validators.max(100)]], // Thêm validation cho discount
+    discount: [null, [Validators.min(0), Validators.max(100)]],
     images: this.formBuilder.array([]),
     categoryId: [null, [Validators.required]],
+
+    // Các thuộc tính bổ sung dựa trên dữ liệu mẫu
+    originalPrice: [null, [Validators.min(0)]],
+    weight: [null, [Validators.min(0)]],
+    rating: [null, [Validators.min(0), Validators.max(5)]], // Giả sử đánh giá từ 0 đến 5
+    reviewCount: [0], // Mặc định là 0
+    label: ['Normal'], // Mặc định là "Normal"
+    techStandard: [''],
+    nutriComposition: [''],
+    nutriIndex: [''],
+    usage: [''],
+    usageInstruction: [''],
+    storageInstruction: [''],
+    note: [''],
+    category: ['Các loại hạt dinh dưỡng, granola'], // Nếu category là một danh sách các tùy chọn, bạn có thể sử dụng FormControlName và cung cấp một danh sách các lựa chọn
   });
-
+  // Dữ liệu
   categories: Category[] = [];
-  id!: string;
+  id: string | null = null;
 
+  // ngOnInit() {
+  //   // Lấy danh sách danh mục
+  //   this.categoryService.getCategories().subscribe((result) => {
+  //     this.categories = result;
+  //   });
+
+  //   // Kiểm tra ID và tải chi tiết sản phẩm nếu cần
+  //   this.id = this.route.snapshot.paramMap.get('id');
+  //   if (this.id) {
+  //     this.loadProductDetails(this.id);
+  //   } else {
+  //     this.addImage(); // Thêm ít nhất một ảnh nếu là sản phẩm mới
+  //   }
+  // }
   ngOnInit() {
-    // Lấy danh sách categories
-    this.categoryService.getCategories().subscribe((result) => {
-      this.categories = result;
-    });
+    // Lấy ID từ route
+    this.id = this.route.snapshot.paramMap.get('id');
 
-    // Kiểm tra nếu là update
-    this.id = this.route.snapshot.params['id'];
     if (this.id) {
+      // Load sản phẩm hiện có
       this.productService.getProductById(this.id).subscribe((result) => {
-        // Tạo đủ số lượng control trong mảng images
-        result.images.forEach(() => this.addImage());
+        // Cập nhật giá trị vào form
+        this.productForm.patchValue(result);
 
-        // Gán dữ liệu vào form
-        this.productForm.patchValue(result as any);
+        // Tạo các controls cho hình ảnh nếu có
+        result.images.forEach(() => this.addImage());
       });
     } else {
-      // Thêm sẵn một control ảnh nếu là thêm mới
+      // Thêm ít nhất một ảnh nếu là sản phẩm mới
       this.addImage();
     }
   }
+  // Hàm tải chi tiết sản phẩm
+  loadProductDetails(id: string) {
+    this.productService.getProductById(id).subscribe((result) => {
+      // Tạo controls cho hình ảnh dựa trên dữ liệu
+      result.images.forEach(() => this.addImage());
+      // Gán giá trị vào form
+      this.productForm.patchValue(result as any);
+    });
+  }
 
-  // Hàm thêm mới sản phẩm
+  // Hàm thêm sản phẩm
   addProduct() {
     const productData = this.productForm.value;
     this.productService.addProduct(productData as any).subscribe(() => {
@@ -153,6 +120,8 @@ export class ProductFormComponent {
   // Hàm cập nhật sản phẩm
   updateProduct() {
     const productData = this.productForm.value;
+    if (!this.id) return;
+
     this.productService
       .updateProduct(this.id, productData as any)
       .subscribe(() => {
@@ -161,12 +130,12 @@ export class ProductFormComponent {
       });
   }
 
-  // Hàm thêm ảnh vào FormArray
+  // Thêm ảnh vào FormArray
   addImage() {
     this.images.push(this.formBuilder.control(null, [Validators.required]));
   }
 
-  // Hàm xóa ảnh khỏi FormArray
+  // Xóa ảnh khỏi FormArray
   removeImage() {
     if (this.images.length > 1) {
       this.images.removeAt(this.images.length - 1);
@@ -175,12 +144,12 @@ export class ProductFormComponent {
     }
   }
 
-  // Getter cho FormArray images
+  // Getter cho mảng images
   get images() {
     return this.productForm.get('images') as FormArray;
   }
 
-  // Hàm trackBy để cải thiện hiệu năng khi lặp qua danh mục
+  // Hàm trackBy để tăng hiệu suất
   trackByFn(index: number, item: any) {
     return item._id;
   }
