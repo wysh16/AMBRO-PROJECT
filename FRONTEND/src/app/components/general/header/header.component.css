@@ -288,4 +288,9 @@ p {
 .category-box li {
   cursor: pointer;
   color: white;
+
+}
+.category-box li:hover {
+  background-color: #0e613e; 
+  border-radius: 3px;
 }

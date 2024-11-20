@@ -25,17 +25,16 @@ export class HeaderComponent implements OnInit {
   isDropdownOpen: boolean = false; // Biến để điều khiển dropdown
   userName: string | null = null;
   isLoggedIn: boolean = false;
-  searchTerm: string='';
+  searchTerm: string = '';
   searchResults: any[] = [];
 
-  
   constructor(
     private productService: ProductService,
     private authService: AuthService,
     private router: Router
   ) {}
   ngOnInit(): void {
-    this.loadCategories(); 
+    this.loadCategories();
     this.loadProducts();
     this.authService.loggedIn$.subscribe((status) => {
       this.isLoggedIn = status;
@@ -50,9 +49,8 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
     this.isLoggedIn = false;
     this.userName = null;
-    this.router.navigate(['/']); 
+    this.router.navigate(['/']);
   }
-
 
   searchProducts(): void {
     if (this.searchTerm.trim() === '') {
@@ -63,14 +61,13 @@ export class HeaderComponent implements OnInit {
 
     this.productService.searchProducts(this.searchTerm).subscribe({
       next: (data) => {
-        this.searchResults = data; 
-        this.isDropdownOpen = true; 
+        this.searchResults = data;
+        this.isDropdownOpen = true;
       },
       error: (err) => console.error('Lỗi khi tìm kiếm sản phẩm', err),
     });
   }
 
- 
   onSearchEnter(): void {
     if (this.searchTerm.trim() !== '') {
       this.router.navigate(['/search-result'], {
@@ -79,15 +76,12 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  
- 
-
   loadProducts() {
     this.productService.getAllProducts().subscribe({
       next: (data) => {
         this.products = data;
         this.filteredProducts = data;
-        this.filterProductsByCategory(this.selectedCategory); 
+        this.filterProductsByCategory(this.selectedCategory);
       },
       error: (err) => (this.errMsg = err),
     });
@@ -128,6 +122,4 @@ export class HeaderComponent implements OnInit {
     this.filterProductsByCategory(category); // Lọc sản phẩm theo danh mục đã chọn
     this.router.navigate(['/products', { category: category }]);
   }
-
-
 }

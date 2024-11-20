@@ -1,0 +1,317 @@
+<div class="container-fluid mt-4">
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-md-3 bg-light p-4">
+      <h4 class="text-center">Quản lý tài khoản</h4>
+      <ul class="nav flex-column nav-pills">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [class.active]="activeTab === 'profile'"
+            (click)="setActiveTab('profile')"
+          >
+            Hồ sơ
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [class.active]="activeTab === 'bank'"
+            (click)="setActiveTab('bank')"
+          >
+            Ngân hàng
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [class.active]="activeTab === 'address'"
+            (click)="setActiveTab('address')"
+          >
+            Địa chỉ
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [class.active]="activeTab === 'changePassword'"
+            (click)="setActiveTab('changePassword')"
+          >
+            Đổi mật khẩu
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [class.active]="activeTab === 'don-mua'"
+            (click)="setActiveTab('don-mua')"
+          >
+            Đơn mua
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [class.active]="activeTab === 'wishlist'"
+            (click)="setActiveTab('wishlist')"
+          >
+            Sản phẩm yêu thích
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [class.active]="activeTab === 'logout'"
+            (click)="setActiveTab('logout')"
+          >
+            Đăng xuất
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-9">
+      <!-- Hồ sơ -->
+      <div *ngIf="activeTab === 'profile'">
+        <h3>Hồ sơ của tôi</h3>
+        <div class="row">
+          <div class="col-md-8">
+            <form>
+              <div class="mb-3">
+                <label for="username" class="form-label">Tên đăng nhập</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="username"
+                  placeholder="Nhập tên đăng nhập"
+                  [(ngModel)]="user.name"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="fullname" class="form-label">Họ và tên</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="fullname"
+                  placeholder="Nhập họ và tên"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="Nhập email"
+                  [(ngModel)]="user.email"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="phone" class="form-label">Số điện thoại</label>
+                <input
+                  type="tel"
+                  class="form-control"
+                  id="phone"
+                  placeholder="Nhập số điện thoại"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="gender" class="form-label">Giới tính</label>
+                <select class="form-select" id="gender">
+                  <option value="male">Nam</option>
+                  <option value="female">Nữ</option>
+                  <option value="other">Khác</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="birthdate" class="form-label">Ngày sinh</label>
+                <input type="date" class="form-control" id="birthdate" />
+              </div>
+              <button
+                type="submit"
+                class="btn btn-success"
+                (click)="saveProfile()"
+              >
+                Lưu thay đổi
+              </button>
+            </form>
+          </div>
+          <div class="col-md-4 text-center">
+            <img
+              src="https://via.placeholder.com/150"
+              class="rounded-circle img-thumbnail"
+              alt="Profile Picture"
+            />
+            <button class="btn btn-outline-primary mt-3">Chọn ảnh</button>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="activeTab === 'address'">
+        <h3>Địa chỉ</h3>
+        <p>Danh sách địa chỉ giao hàng của bạn.</p>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let address of user.addresses">
+            {{ address }}
+          </li>
+        </ul>
+        <button class="btn btn-success mt-3" (click)="addAddress()">
+          Thêm địa chỉ mới
+        </button>
+      </div>
+
+      <div *ngIf="activeTab === 'bank'">
+        <h3>Ngân hàng</h3>
+        <p>Thông tin tài khoản ngân hàng của bạn.</p>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let bank of user.banks">
+            {{ bank }}
+          </li>
+        </ul>
+        <button class="btn btn-success mt-3" (click)="addBank()">
+          Thêm tài khoản ngân hàng
+        </button>
+      </div>
+
+      <div *ngIf="activeTab === 'changePassword'">
+        <h3>Đổi mật khẩu</h3>
+        <form>
+          <div class="mb-3">
+            <label for="oldPassword" class="form-label">Mật khẩu cũ</label>
+            <input type="password" id="oldPassword" class="form-control" />
+          </div>
+          <div class="mb-3">
+            <label for="newPassword" class="form-label">Mật khẩu mới</label>
+            <input type="password" id="newPassword" class="form-control" />
+          </div>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="changePassword()"
+          >
+            Đổi mật khẩu
+          </button>
+        </form>
+      </div>
+
+      <div *ngIf="activeTab === 'don-mua'">
+        <h3>Đơn mua</h3>
+        <!-- Thanh điều hướng trạng thái đơn hàng -->
+        <ul class="nav nav-tabs mb-3" id="order-status-tabs">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="orderStatus === 'ordered'"
+              (click)="setOrderStatus('ordered')"
+            >
+              Đã đặt
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="orderStatus === 'shipping'"
+              (click)="setOrderStatus('shipping')"
+            >
+              Đang giao
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="orderStatus === 'delivered'"
+              (click)="setOrderStatus('delivered')"
+            >
+              Đã giao
+            </a>
+          </li>
+        </ul>
+
+        <!-- Nội dung các đơn hàng -->
+        <div *ngIf="orderStatus === 'ordered'">
+          <h5>Các đơn hàng đã đặt</h5>
+          <div *ngFor="let order of orders.ordered" class="card mb-3">
+            <div class="card-body">
+              <h6 class="card-title">Mã đơn: {{ order.id }}</h6>
+              <p class="card-text">Sản phẩm: {{ order.productName }}</p>
+              <p class="card-text">Giá: {{ order.price }} VNĐ</p>
+              <p class="card-text">Ngày đặt: {{ order.date }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="orderStatus === 'shipping'">
+          <h5>Các đơn hàng đang giao</h5>
+          <div *ngFor="let order of orders.shipping" class="card mb-3">
+            <div class="card-body">
+              <h6 class="card-title">Mã đơn: {{ order.id }}</h6>
+              <p class="card-text">Sản phẩm: {{ order.productName }}</p>
+              <p class="card-text">Giá: {{ order.price }} VNĐ</p>
+              <p class="card-text">
+                Ngày giao dự kiến: {{ order.estimatedDelivery }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="orderStatus === 'delivered'">
+          <h5>Các đơn hàng đã giao</h5>
+          <div *ngFor="let order of orders.delivered" class="card mb-3">
+            <div class="card-body">
+              <h6 class="card-title">Mã đơn: {{ order.id }}</h6>
+              <p class="card-text">Sản phẩm: {{ order.productName }}</p>
+              <p class="card-text">Giá: {{ order.price }} VNĐ</p>
+              <p class="card-text">Ngày giao: {{ order.deliveryDate }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Sản phẩm yêu thích -->
+      <div *ngIf="activeTab === 'wishlist'">
+        <h3>Sản phẩm yêu thích</h3>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card">
+              <img
+                src="https://via.placeholder.com/150"
+                class="card-img-top"
+                alt="Product Image"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Sản phẩm 1</h5>
+                <p class="card-text">Mô tả sản phẩm.</p>
+                <button class="btn btn-primary">Xem chi tiết</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card">
+              <img
+                src="https://via.placeholder.com/150"
+                class="card-img-top"
+                alt="Product Image"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Sản phẩm 2</h5>
+                <p class="card-text">Mô tả sản phẩm.</p>
+                <button class="btn btn-primary">Xem chi tiết</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Đăng xuất -->
+      <div *ngIf="activeTab === 'logout'">
+        <h3>Đăng xuất</h3>
+        <p>Bạn có chắc chắn muốn đăng xuất không?</p>
+        <button class="btn btn-danger">Đăng xuất</button>
+        <button class="btn btn-secondary">Hủy</button>
+      </div>
+    </div>
+  </div>
+</div>

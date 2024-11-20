@@ -33,3 +33,64 @@ button {
 button:hover {
     background-color: #218838; /* Thay đổi màu nền khi di chuột qua nút bấm */
 }
+.tdee-tools {
+    background-color: #fff;
+    display: flex;
+    padding: 20px;
+  }
+  .main-content img {
+    width: 40%;
+  }
+  
+.content-wrapper {
+    display: flex;
+  }
+  
+  @media (max-width: 991px) {
+    .content-wrapper {
+      flex-direction: column;
+      margin-top: 40px;
+    }
+  }
+  
+  .sidebar {
+    width: 25%;
+    margin-right: 20px;
+  }
+  
+  .sidebar-title {
+    font-size: 24px;
+    color: #253d4e;
+    font-weight: 700;
+    margin-bottom: 8px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid #ececec;
+  }
+  
+  .sidebar-title::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 2px;
+    background-color: #bce3c9;
+    margin-top: 8px;
+  }
+  .tool-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .tool-link {
+    display: block;
+    padding: 9px 20px;
+    color: #000000;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  
+  .tool-link.active {
+    background-color: #edf2ee;
+    box-shadow: inset 3px 0 0 0 #3bb77e;
+  }
+  
