@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core'; 
 import { Router } from '@angular/router';
 import { TdeeService } from '../../services/tdee.service';
 import { MealService } from '../../services/meal.service';
@@ -17,17 +17,17 @@ export class TdeeResultComponent {
   BMR: number | null = null;
   TDEE: number | null = null;
   dailyCalories: number | null = null;
-  goal: string='';
-  ingredients: string[]=[];
+  goal: string = '';
+  ingredients: string[] = [];
   filteredIngredients: string[] = [];
-  searchTerm: string='';
-  selectedTags: string[]=[];
+  searchTerm: string = '';
+  selectedTags: string[] = [];
   showDropdown: boolean = false;
   days: number = 1; // Mặc định là 1 ngày
-  mealPlan: any[]=[];
+  mealPlan: any[] = [];
 
   constructor(
-    private tdeeService:TdeeService,
+    private tdeeService: TdeeService,
     private mealService: MealService,
     private router: Router
   ) {}
@@ -39,12 +39,10 @@ export class TdeeResultComponent {
       this.TDEE = result.TDEE;
       this.dailyCalories = result.dailyCalories;
       this.goal = result.goal;
-      
-    };
+    }
     
     this.loadIngredients();
   }
-
 
   loadIngredients() {
     this.mealService.getMealIngredients().subscribe(
@@ -58,7 +56,7 @@ export class TdeeResultComponent {
       }
     );
   }
-  
+
   filterIngredients() {
     const term = this.searchTerm.toLowerCase();
     this.filteredIngredients = this.ingredients.filter(ingredient => 
@@ -74,12 +72,10 @@ export class TdeeResultComponent {
     this.showDropdown = false;
     this.filterIngredients();
   }
-  
 
   removeTag(tag: string) {
     this.selectedTags = this.selectedTags.filter((t) => t !== tag); // Xóa tag khỏi mảng
   }
-  
 
   buildMealPlan() {
     if (!this.dailyCalories) {
@@ -94,23 +90,28 @@ export class TdeeResultComponent {
       days: this.days,
     };
 
+    this.mealService.createMealPlan(mealPlanRequest).subscribe(
+      (response) => {
+        // Lưu kết quả vào local storage hoặc service
+        this.mealService.setMealPlan(response.mealPlan);
+        // Điều hướng đến trang mới hiển thị thực đơn
+        this.router.navigate(['/meal-plan']);
+      },
+      (error) => {
+        console.error('Error creating meal plan:', error);
+      }
+    );
+  }
 
-  this.mealService.createMealPlan(mealPlanRequest).subscribe(
-    (response) => {
-      // Lưu kết quả vào local storage hoặc service
-      this.mealService.setMealPlan(response.mealPlan);
-      // Điều hướng đến trang mới hiển thị thực đơn
-      this.router.navigate(['/meal-plan']);
-    },
-    (error) => {
-      console.error('Error creating meal plan:', error);
+  // Lắng nghe sự kiện click bên ngoài form
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const clickedElement = event.target as HTMLElement;
+
+    // Nếu không nhấn vào ô input hoặc dropdown thì ẩn dropdown
+    const isClickedInside = clickedElement.closest('.tags-input-container');
+    if (!isClickedInside) {
+      this.showDropdown = false;
     }
-  );
-
-
+  }
 }
-}
-
-
-
-
