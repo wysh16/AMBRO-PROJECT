@@ -31,9 +31,11 @@
         <!-- Dropdown menu -->
         <ul class="submenu">
           <div class="category-box">
-            <li *ngFor="let category of productCategories"
-                [class.selected]="category === selectedCategory"
-                (click)="navigateToProducts(category)">
+            <li
+              *ngFor="let category of productCategories"
+              [class.selected]="category === selectedCategory"
+              (click)="navigateToProducts(category)"
+            >
               {{ category }}
             </li>
           </div>
@@ -75,25 +77,23 @@
   <div class="icon">
     <div class="header">
       <div class="search-container">
-    <input 
-      type="text" 
-      placeholder="Tìm kiếm sản phẩm..." 
-      [(ngModel)]="searchTerm" 
-      (input)="searchProducts()" 
-      (keydown.enter)="onSearchEnter()" 
-      class="search-input"
-    />
-    <button class="search-button"></button>
-  </div>
-
-  
+        <input
+          type="text"
+          placeholder="Tìm kiếm sản phẩm..."
+          [(ngModel)]="searchTerm"
+          (input)="searchProducts()"
+          (keydown.enter)="onSearchEnter()"
+          class="search-input"
+        />
+        <button class="search-button"></button>
+      </div>
     </div>
     <a routerLink="/cart" href="/cart"
       ><img src="assets/home/cart.png" class="icons"
     /></a>
 
     <div *ngIf="isLoggedIn; else loginButton" class="user-info">
-      <span class="user-name">Xin chào, {{ userName }}</span>
+      <span class="user-name" routerLink="/hoso">Xin chào, {{ userName }}</span>
       <button class="custom-button" (click)="logout()">Đăng xuất</button>
     </div>
 

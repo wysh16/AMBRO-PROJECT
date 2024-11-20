@@ -316,6 +316,27 @@
   max-width: 100%; /* Đảm bảo ảnh không vượt quá chiều rộng của container */
   height: auto;
 }
+
+.detail-image-wrapper {
+  width: 100%; /* Chiếm toàn bộ chiều rộng của container */
+  display: flex; /* Đảm bảo căn giữa */
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa; /* Màu nền nhạt nếu không có ảnh */
+  padding: 1rem; /* Thêm khoảng cách xung quanh ảnh */
+  border: 1px solid #dee2e6; /* Viền nhẹ */
+  border-radius: 10px; /* Góc bo tròn */
+}
+
+.detail-image-wrapper img {
+  width: 100%; /* Đảm bảo ảnh chiếm toàn bộ chiều rộng khung */
+  max-width: 800px; /* Giới hạn chiều rộng tối đa cho ảnh */
+  height: auto; /* Duy trì tỷ lệ gốc của ảnh */
+  object-fit: contain; /* Hiển thị ảnh trong khung mà không bị cắt */
+  border-radius: 5px; /* Bo góc ảnh nhẹ */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng nhẹ */
+}
+
 /* Đảm bảo khung hình ảnh tỷ lệ 2:3 */
 .image-wrapper {
   width: 80%;

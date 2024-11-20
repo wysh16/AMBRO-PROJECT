@@ -41,6 +41,7 @@ import { DashboardComponent } from './components/manage/dashboard/dashboard.comp
 import { CongdongComponent } from './components/manage/congdong/congdong.component';
 import { VerifycodeComponent } from './components/verifycode/verifycode.component';
 import { SearchComponent } from './components/search/search.component';
+import { HosoComponent } from './components/hoso/hoso.component';
 
 export const routes: Routes = [
   {
@@ -162,4 +163,5 @@ export const routes: Routes = [
   { path: 'admin/dashboard', component: DashboardComponent },
   { path: 'admin/congdong', component: CongdongComponent },
   { path: 'search-result', component: SearchComponent },
+  { path: 'hoso', component: HosoComponent },
 ];
