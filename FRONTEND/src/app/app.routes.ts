@@ -40,6 +40,7 @@ import { ThanhtoanComponent } from './components/manage/thanhtoan/thanhtoan.comp
 import { DashboardComponent } from './components/manage/dashboard/dashboard.component';
 import { CongdongComponent } from './components/manage/congdong/congdong.component';
 import { VerifycodeComponent } from './components/verifycode/verifycode.component';
+import { SearchComponent } from './components/search/search.component';
 
 export const routes: Routes = [
   {
@@ -160,4 +161,5 @@ export const routes: Routes = [
   { path: 'admin/thanhtoans', component: ThanhtoanComponent },
   { path: 'admin/dashboard', component: DashboardComponent },
   { path: 'admin/congdong', component: CongdongComponent },
+  { path: 'search-result', component: SearchComponent },
 ];

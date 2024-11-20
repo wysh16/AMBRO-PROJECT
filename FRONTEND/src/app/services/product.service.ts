@@ -94,7 +94,12 @@ export class ProductService {
       );
   }
 
-
+  searchProducts(searchTerm: string): Observable<any[]> {
+    const params = new HttpParams().set('search', searchTerm);
+    return this._http
+      .get<any[]>(`${this.myAPI}/products`, { params })
+      .pipe(retry(2), catchError(this.handleError));
+  }
 
   
 }

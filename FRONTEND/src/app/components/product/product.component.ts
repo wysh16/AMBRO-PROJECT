@@ -142,4 +142,8 @@ export class ProductComponent implements OnInit {
     this.isPopupVisible = false; // Ẩn popup
     this.selectedProduct = null; // Đặt lại sản phẩm được chọn
   }
+
+
+
+  
 }

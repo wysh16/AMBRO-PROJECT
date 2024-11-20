@@ -13,7 +13,7 @@ exports.getCategories = async (req, res) => {
 // Hàm lấy tất cả sản phẩm theo điều kiện (có thể lọc theo danh mục và giá)
 exports.getProducts = async (req, res) => {
   try {
-    const { category, minPrice, maxPrice } = req.query;
+    const { category, minPrice, maxPrice, search } = req.query;
 
     // Tạo query điều kiện lọc
     const query = {};
@@ -23,6 +23,13 @@ exports.getProducts = async (req, res) => {
       query.price = {};
       if (minPrice) query.price.$gte = Number(minPrice);
       if (maxPrice) query.price.$lte = Number(maxPrice);
+    }
+
+
+
+    if (search) {
+      // Tìm kiếm theo tên sản phẩm (không phân biệt chữ hoa/thường)
+      query.name = { $regex: search, $options: 'i' }; 
     }
 
     const products = await Product.find(query);
@@ -110,5 +117,20 @@ exports.deleteProduct = async (req, res) => {
       .json({ message: "Xóa sản phẩm thành công!", product: deletedProduct });
   } catch (err) {
     res.status(500).json({ message: "Lỗi khi xóa sản phẩm!", error: err });
+  }
+};
+
+
+// Hàm tìm kiếm sản phẩm theo từ khóa
+exports.searchProducts = async (req, res) => {
+  try {
+    const searchTerm = req.query.search || '';
+    const products = await Product.find({
+      name: { $regex: searchTerm, $options: 'i' }, // Tìm kiếm không phân biệt chữ hoa thường
+    }).limit(10); // Giới hạn kết quả tìm kiếm (ví dụ: 10 sản phẩm)
+
+    res.json(products); // Trả về danh sách sản phẩm tìm được
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 };

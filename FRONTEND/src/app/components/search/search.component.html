@@ -1,0 +1,70 @@
+<!-- <div class="products">
+    <h2>Kết quả tìm kiếm cho: "{{ searchTerm }}"</h2>
+    <div *ngIf="products.length > 0; else noResults">
+      <div *ngFor="let product of products">
+        <p (click)="viewProductDetail(product._id)">{{ product.name }}</p>
+      </div>
+    </div> -->
+
+<div class="products">
+  <h2>Kết quả tìm kiếm cho: "{{ searchTerm }}"</h2>
+  <div *ngIf="products.length > 0; else noResults">
+
+    <div class="product-grid">
+        <div *ngFor="let product of products" class="product-card">
+          <img
+            [src]="product.image"
+            alt="{{ product.name }}"
+            class="product-image"
+            (click)="viewProductDetail(product._id)"
+            style="cursor: pointer"
+          />
+          <p
+            class="product-name"
+            (click)="viewProductDetail(product._id)"
+            style="cursor: pointer"
+          >
+            {{ product.name }}
+          </p>
+  
+          <div
+            *ngIf="product.label && product.label !== 'Normal'"
+            class="product-label"
+          >
+            {{ product.label }}
+          </div>
+  
+          <p class="product-price">
+            <ng-container *ngIf="product.label === 'Sale'; else normalPrice">
+              <span class="discounted-price">{{
+                product.price | currency : "VND"
+              }}</span>
+              <span class="weight">/{{ product.weight }}g</span>
+              <span class="original-price">{{
+                product.originalPrice | currency : "VND"
+              }}</span>
+            </ng-container>
+            <ng-template #normalPrice>
+              <span class="price">{{ product.price | currency : "VND" }}</span>
+              <span class="weight">/{{ product.weight }}g</span>
+            </ng-template>
+          </p>
+  
+          <p class="product-rating">
+            Đánh giá: {{ product.rating }} ({{ product.reviewCount }} lượt)
+          </p>
+  
+          <div class="product-actions">
+            <button (click)="addToCart(product)">Thêm vào giỏ hàng</button>
+            <span class="favorite-icon" >
+              <img src="assets/heart.png" alt="" class="heart_img" />
+            </span>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <ng-template #noResults>
+    <p>Không có sản phẩm nào khớp với từ khóa "{{ searchTerm }}".</p>
+  </ng-template>
+</div>

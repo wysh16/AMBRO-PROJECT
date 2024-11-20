@@ -30,3 +30,7 @@ router.put("/:id", productController.updateProduct);
 // Xóa sản phẩm
 router.delete("/:id", productController.deleteProduct);
 module.exports = router;
+
+
+// API tìm kiếm sản phẩm
+router.get("/", productController.searchProducts);
