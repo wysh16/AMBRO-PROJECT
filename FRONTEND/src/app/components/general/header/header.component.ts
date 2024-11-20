@@ -6,11 +6,12 @@ import { Router, RouterModule } from '@angular/router';
 import { ProductService } from '../../../services/product.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FormsModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
@@ -24,6 +25,7 @@ export class HeaderComponent implements OnInit {
   isDropdownOpen: boolean = false; // Biến để điều khiển dropdown
   userName: string | null = null;
   isLoggedIn: boolean = false;
+  searchTerm: string='';
 
   // constructor(
   //   private productService: ProductService,
@@ -62,6 +64,7 @@ export class HeaderComponent implements OnInit {
     this.userName = null;
     this.router.navigate(['/']); // Chuyển hướng về trang chủ
   }
+
 
   // logout() {
   //   localStorage.removeItem('token');

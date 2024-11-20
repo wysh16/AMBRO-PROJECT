@@ -39,6 +39,7 @@ import { ShippingComponent } from './components/manage/shipping/shipping.compone
 import { ThanhtoanComponent } from './components/manage/thanhtoan/thanhtoan.component';
 import { DashboardComponent } from './components/manage/dashboard/dashboard.component';
 import { CongdongComponent } from './components/manage/congdong/congdong.component';
+import { VerifycodeComponent } from './components/verifycode/verifycode.component';
 
 export const routes: Routes = [
   {
@@ -148,6 +149,7 @@ export const routes: Routes = [
   { path: 'admin/khachhangs', component: KhachhangComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'verify', component: VerifycodeComponent },
   { path: 'tdee', component: TdeeComponent },
   { path: 'result', component: TdeeResultComponent },
   { path: 'meal-plan', component: MealComponent },
