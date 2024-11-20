@@ -1,14 +1,81 @@
-<!-- meal-plan.component.html -->
-<div class="meal-plan-container">
-    <h3>Thực đơn đề xuất cho bạn</h3>
-  
-    <div *ngFor="let day of mealPlan">
-      <h4>Ngày {{ day.day }}</h4>
-      <div>
-        <p><strong>Bữa sáng:</strong> {{ day.breakfast.mealName }} - {{ day.breakfast.mealCalories }} calo</p>
-        <p><strong>Bữa trưa:</strong> {{ day.lunch.mealName }} - {{ day.lunch.mealCalories }} calo</p>
-        <p><strong>Bữa tối:</strong> {{ day.dinner.mealName }} - {{ day.dinner.mealCalories }} calo</p>
+<div class="container meal-plan-container mt-4">
+  <h3 class="text-center mb-4 text-success">Thực đơn đề xuất cho bạn</h3>
+
+  <!-- Lặp qua từng ngày -->
+  <div *ngFor="let day of mealPlan" class="mb-5">
+    <div class="row mb-3">
+      <h4 class="col-12 text-center text-day">
+        Ngày {{ day.day }} - {{ calculateTotalCalories(day) }} calo
+      </h4>
+    </div>
+
+    <!-- Hiển thị 3 món theo hàng ngang -->
+    <div class="row text-center">
+      <!-- Bữa sáng -->
+      <div class="col-md-4 mb-3">
+        <div class="card h-100 shadow-sm">
+          <div class="card-header bg-light">
+            <h5 class="meal-type">Bữa sáng</h5>
+          </div>
+          <img
+            [src]="day.breakfast.mealImage"
+            [alt]="day.breakfast.mealName"
+            class="img-fluid rounded mb-2"
+          />
+          <div class="card-body">
+            <p class="meal-name">{{ day.breakfast.mealName }}</p>
+            <p class="meal-calories">Calo: {{ day.breakfast.mealCalories }}</p>
+            <p><strong>Thành phần:</strong></p>
+            <p class="meal-ingredients">
+              {{ day.breakfast.mealRecipe.split('\n').join(' - ') }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bữa trưa -->
+      <div class="col-md-4 mb-3">
+        <div class="card h-100 shadow-sm">
+          <div class="card-header bg-light">
+            <h5 class="meal-type">Bữa trưa</h5>
+          </div>
+          <img
+            [src]="day.lunch.mealImage"
+            [alt]="day.lunch.mealName"
+            class="img-fluid rounded mb-2"
+          />
+          <div class="card-body">
+            <p class="meal-name">{{ day.lunch.mealName }}</p>
+            <p class="meal-calories">Calo: {{ day.lunch.mealCalories }}</p>
+            <p><strong>Thành phần:</strong></p>
+            <p class="meal-ingredients">
+              {{ day.lunch.mealRecipe.split('\n').join(' - ') }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bữa tối -->
+      <div class="col-md-4 mb-3">
+        <div class="card h-100 shadow-sm">
+          <div class="card-header bg-light">
+            <h5 class="meal-type">Bữa tối</h5>
+          </div>
+          <img
+            [src]="day.dinner.mealImage"
+            [alt]="day.dinner.mealName"
+            class="img-fluid rounded mb-2"
+          />
+          <div class="card-body">
+            <p class="meal-name">{{ day.dinner.mealName }}</p>
+            <p class="meal-calories">Calo: {{ day.dinner.mealCalories }}</p>
+            <p><strong>Thành phần:</strong></p>
+            <p class="meal-ingredients">
+              {{ day.dinner.mealRecipe.split('\n').join(' - ') }}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  
+</div>

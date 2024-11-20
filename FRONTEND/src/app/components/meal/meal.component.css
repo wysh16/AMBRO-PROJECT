@@ -1,0 +1,63 @@
+.meal-plan-container {
+    font-family: Arial, sans-serif;
+  }
+  
+  .card {
+    border-radius: 12px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .card-header {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  .img-fluid {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Màu cho tiêu đề ngày */
+  .text-day {
+    font-size: 1.5rem;
+    color: #3BB77E;
+    margin-bottom: 1rem;
+  }
+  
+  /* Màu cho các loại bữa (Bữa sáng, trưa, tối) */
+  .meal-type {
+    color: #3BB77E;
+    font-weight: bold;
+  }
+  
+  /* Màu tên món ăn */
+  .meal-name {
+    color: #F1C644;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+  }
+  
+  /* Màu số calo */
+  .meal-calories {
+    color: #F14444;
+    font-weight: bold;
+    margin: 0.5rem 0;
+  }
+  
+  .row {
+    margin-bottom: 1.5rem;
+  }
+  
+  h3 {
+    color: #3BB77E;
+    font-weight: bold;
+  }
+  
