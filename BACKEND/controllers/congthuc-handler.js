@@ -20,8 +20,16 @@ async function getAllCongThuc() {
   return congthucs.map((x) => x.toObject());
 }
 
+// async function getCongThuc(id) {
+//   let congthuc = await CongThuc.findById(id);
+//   return congthuc.toObject();
+// }
+
 async function getCongThuc(id) {
   let congthuc = await CongThuc.findById(id);
+  if (!congthuc) {
+    throw new Error(`Không tìm thấy công thức với ID: ${id}`);
+  }
   return congthuc.toObject();
 }
 
