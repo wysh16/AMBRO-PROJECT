@@ -9,7 +9,7 @@ import { ThanhToan } from '../types/thanhtoan';
   providedIn: 'root',
 })
 export class PaymentService {
-  private apiUrl = `${environment.apiUrl}/payments`; // Đường dẫn API cho thanh toán
+  private apiUrl = 'http://localhost:3000/payments';
 
   // Phương thức xác nhận thanh toán
   confirmPayment(orderDetails: any): Observable<any> {

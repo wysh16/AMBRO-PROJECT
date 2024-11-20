@@ -111,4 +111,18 @@ export class AuthService {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     return user && user.role === 'admin';
   }
+
+
+  resetPassword(token: string, newPassword: string): Observable<any> {
+    return this.http.post(environment.apiUrl + '/auth/reset-password', {
+      token,
+      newPassword,
+    });
+  }
+
+  verifyCode(code: string): Observable<any> {
+    return this.http.post(environment.apiUrl + '/auth/verify-code', { code });
+  }
+  
+  
 }

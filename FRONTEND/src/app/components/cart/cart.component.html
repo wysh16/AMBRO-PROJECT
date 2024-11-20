@@ -1,4 +1,4 @@
-<!-- <h2 class="cart-title">Giỏ hàng của tôi</h2>
+<h2 class="cart-title">Giỏ hàng của tôi</h2>
 <div class="container">
   <div class="container-table">
     <div class="table">
@@ -23,11 +23,13 @@
         </thead>
         <tbody>
           <tr
-            *ngFor="let item of selectedItems; let i = index"
+            *ngFor="let item of cartItems; let i = index"
             [ngClass]="{ 'selected-row': item.selected }"
           >
             <td>
-              <input type="checkbox" [(ngModel)]="item.selected" />
+              <input type="checkbox" [(ngModel)]="item.selected" 
+              (change)="toggleSelected(item)"
+              />
             </td>
             <td>
               <img [src]="item.product.image" alt="{{ item.product.name }}" />
@@ -78,4 +80,4 @@
     <button class="button-payment" (click)="proceedToPayment()">Tiến hành thanh toán</button>
     
   </div>
-</div> -->
+</div>

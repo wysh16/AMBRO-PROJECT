@@ -87,3 +87,42 @@ exports.removeSelectedItems = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
+exports.updateSelectedStatus = async (req, res) => {
+  const { productId } = req.params;
+  const { selected } = req.body;
+
+  try {
+    const cart = await Cart.findOne();
+    if (cart) {
+      const item = cart.items.find((item) => item.productId.toString() === productId);
+      if (item) {
+        item.selected = selected; // Cập nhật trạng thái selected
+        await cart.save();
+        res.status(200).json(cart);
+      } else {
+        res.status(404).json({ message: 'Product not found in cart' });
+      }
+    } else {
+      res.status(404).json({ message: 'Cart not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+exports.getSelectedItems = async (req, res) => {
+  try {
+    const cart = await Cart.findOne().populate('items.productId');
+    if (cart) {
+      const selectedItems = cart.items.filter((item) => item.selected);
+      res.status(200).json({ items: selectedItems });
+    } else {
+      res.status(404).json({ message: 'Cart not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
