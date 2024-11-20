@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../services/product.service';
 import { CartService } from '../../services/cart.service';
@@ -29,20 +29,27 @@ export class ProductComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private router: Router,
-    private cartService: CartService
+    private cartService: CartService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.loadCategories();
     this.loadProducts();
+    this.route.paramMap.subscribe(params => {
+      const category = params.get('category');
+      if (category) {
+        this.filterProductsByCategory(category); // Lọc sản phẩm theo danh mục đã chọn
+      }
+    });
   }
+  
 
   loadProducts() {
     this.productService.getAllProducts().subscribe({
       next: (data) => {
         this.products = data;
-        this.filteredProducts = data; // Ban đầu, filteredProducts chứa tất cả sản phẩm
-        // this.newProducts = data.filter((p: any) => p.label === 'New');
+        this.filteredProducts = data;
         this.newProducts = this.productService.filterNewProducts(data);
         this.products = this.products.map((product: any) => {
           if (product.label === 'Sale') {
