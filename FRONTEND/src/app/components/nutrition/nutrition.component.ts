@@ -23,6 +23,7 @@ export class NutritionComponent {
   nutritionData?: DinhDuong;
   errorMessage: string = '';
   suggestions: DinhDuong[] = [];
+  showDetail: boolean = false; // Biến điều khiển hiển thị hình ảnh chi tiết
 
   constructor(private nutritionalInfoService: DinhduongService) {}
 
@@ -81,5 +82,10 @@ export class NutritionComponent {
     } else {
       this.errorMessage = 'Vui lòng nhập tên thực phẩm!';
     }
+  }
+
+  // Hàm toggleDetail để bật/tắt việc hiển thị hình ảnh chi tiết
+  toggleDetail() {
+    this.showDetail = !this.showDetail;
   }
 }

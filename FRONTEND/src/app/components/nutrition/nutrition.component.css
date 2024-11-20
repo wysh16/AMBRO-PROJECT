@@ -67,7 +67,7 @@
 .tool-link {
   display: block;
   padding: 9px 20px;
-  color: #666;
+  color: #000000;
   text-decoration: none;
   font-size: 16px;
 }
@@ -161,7 +161,7 @@
 }
 
 .form-input {
-  border: 1px solid #5e6366;
+  border: 1px solid #000000;
   border-radius: 8px;
   padding: 8px 16px;
   font-size: 16px;
@@ -186,7 +186,7 @@
 
 .nutritional-info li {
   font-size: 18px;
-  color: #5e6366;
+  color: #000000;
 }
 
 /* 
@@ -287,4 +287,32 @@
 .img-fluid {
   max-width: 100%;
   height: auto; /* Đảm bảo ảnh co giãn theo kích thước */
+}
+/* Nút Xem chi tiết với màu xanh lá */
+.detail-button {
+  background-color: #28a745; /* Màu xanh lá */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  margin-left: 40%;
+}
+
+.detail-button:hover {
+  background-color: #218838; /* Màu xanh lá đậm khi hover */
+}
+
+/* Căn giữa ảnh chi tiết */
+.detail-image-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.detail-image-wrapper img {
+  max-width: 100%; /* Đảm bảo ảnh không vượt quá chiều rộng của container */
+  height: auto;
 }

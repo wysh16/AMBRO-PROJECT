@@ -9,4 +9,5 @@ export interface DinhDuong {
   Glucid: number;
   Group: string;
   Anh: string;
+  Chitiet: string;
 }
