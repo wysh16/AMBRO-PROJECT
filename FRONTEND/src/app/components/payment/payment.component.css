@@ -2,6 +2,7 @@
   border-radius: 8px;
   padding: 48px;
   font-family: Inter, sans-serif;
+  width: 70%;
 }
 .section-title {
   color: #0a0d13;
@@ -212,7 +213,7 @@
 }
 .voucher-btn {
   padding: 13px 23px;
-  background-color: #acacac;
+  background-color: #32c770;
   color: #f3f3f3;
   font-size: 16px;
   font-weight: 500;

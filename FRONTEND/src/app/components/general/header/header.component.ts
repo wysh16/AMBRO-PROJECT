@@ -37,13 +37,13 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.loadCategories(); 
     this.loadProducts();
-    // this.authService.loggedIn$.subscribe((status) => {
-    //   this.isLoggedIn = status;
-    // });
+    this.authService.loggedIn$.subscribe((status) => {
+      this.isLoggedIn = status;
+    });
 
-    // this.authService.currentUser$.subscribe((name) => {
-    //   this.userName = name;
-    // });
+    this.authService.currentUser$.subscribe((name) => {
+      this.userName = name;
+    });
   }
 
   logout() {
@@ -118,11 +118,11 @@ export class HeaderComponent implements OnInit {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
-  // menuActive = false;
+  menuActive = false;
 
-  // toggleMenu() {
-  //   this.menuActive = !this.menuActive;
-  // }
+  toggleMenu() {
+    this.menuActive = !this.menuActive;
+  }
 
   navigateToProducts(category: string) {
     this.filterProductsByCategory(category); // Lọc sản phẩm theo danh mục đã chọn

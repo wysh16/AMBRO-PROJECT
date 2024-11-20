@@ -13,12 +13,10 @@ import { CartService } from '../../services/cart.service';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-//   cartItems: {
-//     isSelected: unknown; product: any; quantity: number; selected: boolean 
-// }[] = [];
-cartItems: any[] = []; // Danh sách sản phẩm trong giỏ hàng
-
-  selectedItems: any[] = [];
+  cartItems: { product: any; quantity: number; selected: boolean }[] = [];
+  totalSelectedAmount: number = 0; // Tổng tiền hàng cho các sản phẩm được chọn
+  voucherValue: number = 0; // Giá trị voucher
+  totalAmountAfterVoucher: number = 0; // Tổng tiền sau khi trừ voucher
 
   constructor(
     private cartService: CartService,
@@ -28,72 +26,50 @@ cartItems: any[] = []; // Danh sách sản phẩm trong giỏ hàng
 
   ngOnInit(): void {
     this.loadCartItems();
+    this.updateSelectedTotal();
   }
 
-
-  getSelectedItems() {
-    this.selectedItems = this.cartItems.filter(item => item.isSelected);
+  updateSelectedTotal() {
+    this.totalSelectedAmount = this.cartItems
+      .filter((item) => item.selected)
+      .reduce((total, item) => total + item.product.price * item.quantity, 0);
   }
 
-  // loadCartItems() {
-  //   this.cartService.getCartItems().subscribe(
-  //     (data) => {
-  //       if (data && data.items) {
-  //         this.cartItems = data.items.map((item: any) => {
-  //           return {
-  //             product: item.productId,
-  //             quantity: item.quantity,
-  //             selected: false,
-  //           };
-  //         });
-  //       } else {
-  //         console.error('Dữ liệu giỏ hàng không hợp lệ');
-  //       }
-  //     },
-  //     (error) => {
-  //       console.error('Lỗi khi lấy giỏ hàng:', error);
-  //     }
-  //   );
-  // }
+  applyVoucher(voucherValue: number) {
+    this.voucherValue = voucherValue; // Lưu giá trị voucher
+    this.totalAmountAfterVoucher = this.totalSelectedAmount - voucherValue; // Tính lại tổng tiền sau khi áp dụng voucher
+  }
 
-  loadCartItems(): void {
-    this.cartService.getCartItems().subscribe({
-      next: (data) => {
-        this.cartItems = data.items.map((item: any) => ({
-          ...item,
-          selected: false, // Mặc định chưa được chọn
-        }));
+  loadCartItems() {
+    this.cartService.getCartItems().subscribe(
+      (data) => {
+        if (data && data.items) {
+          this.cartItems = data.items.map((item: any) => {
+            return {
+              product: item.productId,
+              quantity: item.quantity,
+              selected: false,
+            };
+          });
+        } else {
+          console.error('Dữ liệu giỏ hàng không hợp lệ');
+        }
       },
-      error: (err) => console.error(err),
-    });
+      (error) => {
+        console.error('Lỗi khi lấy giỏ hàng:', error);
+      }
+    );
   }
 
-  // toggleSelectAll(event: any) {
-  //   const isChecked = event.target.checked;
-  //   this.cartItems.forEach((item) => (item.selected = isChecked));
-  // }
-
-
-  // Hàm toggle chọn tất cả checkbox
-  toggleSelectAll(event: any): void {
-    this.isAllSelected = event.target.checked; // Lấy trạng thái checkbox "Chọn tất cả"
-    this.cartItems.forEach((item) => {
-      item.selected = this.isAllSelected;
-      this.cartService.updateSelectedStatus(item.productId, item.selected).subscribe({
-        next: () => console.log('Trạng thái selected cập nhật cho sản phẩm:', item.productId),
-        error: (err) => console.error('Lỗi khi cập nhật trạng thái:', err),
-      });
-    });
+  toggleSelectAll(event: any) {
+    const isChecked = event.target.checked;
+    this.cartItems.forEach((item) => (item.selected = isChecked));
+    this.updateSelectedTotal();
   }
 
-  toggleSelected(item: any): void {
-    item.selected = !item.selected; // Thay đổi trạng thái
-    this.cartService.updateSelectedStatus(item.productId, item.selected).subscribe({
-      next: () => console.log('Cập nhật trạng thái selected thành công'),
-      error: (err) => console.error('Lỗi khi cập nhật trạng thái:', err),
-    });
+  onItemSelectChange() {
+    this.updateSelectedTotal(); // Tính lại tổng tiền khi chọn/deselect một sản phẩm
   }
-  
 
   isAllSelected(): boolean {
     return (
@@ -164,8 +140,8 @@ cartItems: any[] = []; // Danh sách sản phẩm trong giỏ hàng
 
   getTotalSelectedAmount(): number {
     return this.cartItems
-      .filter((item) => item.selected) 
-      .reduce((total, item) => total + item.product.price * item.quantity, 0); 
+      .filter((item) => item.selected) // Lọc các sản phẩm được chọn
+      .reduce((total, item) => total + item.product.price * item.quantity, 0); // Tính tổng tiền
   }
 
   continueShopping() {
@@ -173,71 +149,16 @@ cartItems: any[] = []; // Danh sách sản phẩm trong giỏ hàng
     this.router.navigate(['/products']); // Điều hướng đến trang sản phẩm
   }
 
-
-  proceedToPayment(): void {
-    this.cartService.getSelectedItems().subscribe((data: any) => {
-      if (data.items.length > 0) {
-        this.router.navigate(['/thanhtoan'], { state: { selectedItems: data.items } });
-      } else {
-        alert('Bạn chưa chọn sản phẩm nào để thanh toán.');
-      }
+  proceedToPayment() {
+    if (this.totalSelectedAmount === 0) {
+      alert('Chưa chọn sản phẩm nào để thanh toán!');
+      return;
+    }
+  
+    // Điều hướng đến trang thanh toán kèm tổng tiền
+    this.router.navigate(['/thanhtoan'], {
+      queryParams: { totalAmount: this.totalSelectedAmount },
     });
-  }
-  
-
-  // proceedToPayment(): void {
-  //   const selectedItems = this.cartItems.filter(item => item.selected);
-  //   if (selectedItems.length > 0) {
-  //     this.router.navigate(['/thanhtoan'], { state: { selectedItems } });
-  //   } else {
-  //     alert('Vui lòng chọn ít nhất một sản phẩm để thanh toán!');
-  //   }
-  // }
-
-
-  // proceedToPayment() {
-  //   this.getSelectedItems();
-
-  //   if (this.selectedItems.length === 0) {
-  //     alert('Bạn chưa chọn sản phẩm nào để thanh toán.');
-  //     return;
-  //   }
-
-  //   this.router.navigate(['/thanhtoan'], {
-  //     state: { selectedItems: this.selectedItems },
-  //   });
-  // }
-
-
-  // proceedToPayment(): void {
-  //   const selectedItems = this.cartItems.filter(item => item.selected); // Lọc sản phẩm được chọn
-  
-  //   if (selectedItems.length === 0) {
-  //     alert('Bạn chưa chọn sản phẩm nào để thanh toán.');
-  //     return;
-  //   }
-  
-  //   this.router.navigate(['/thanhtoan'], { state: { selectedItems } }); 
-  // }
-
-  // proceedToPayment(): void {
-  //   this.router.navigate(['/thanhtoan'], { state: { selectedItems: this.cartItems } });
-  // }
-
-    // Lưu sản phẩm đã chọn vào `state` khi điều hướng
-    // this.router.navigate(['/thanhtoan'], {
-    //   state: { selectedItems: selectedItems },
-    // });
-
-  //   sessionStorage.setItem('selectedItems', JSON.stringify(selectedItems));
-
-  //   this.router.navigate(['/thanhtoan']);
-  // }
-
-
-  onItemSelectionChange(): void {
-    // Cập nhật danh sách sản phẩm được chọn khi checkbox thay đổi
-    this.selectedItems = this.cartItems.filter(item => item.isSelected);
   }
   
 }
