@@ -15,7 +15,9 @@
 
 nav {
   background-color: #d2f5cd; /* Màu nền */
-  padding: 10px;
+  padding: 20px;
+  margin-bottom: 2rem;
+  margin-left: 10px;
 }
 
 nav ul {

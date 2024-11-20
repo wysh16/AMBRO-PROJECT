@@ -3,9 +3,10 @@
 }
 
 .header {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 20px;
 }
-
 .add-btn {
   font-weight: 600;
 }

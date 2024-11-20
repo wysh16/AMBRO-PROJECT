@@ -1,7 +1,11 @@
 .container {
-  padding: 0 40px;
+  padding: 20px;
 }
-
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
 .header {
   margin-bottom: 20px;
 }
@@ -30,7 +34,6 @@
 .table th,
 .table td {
   text-align: left;
-  padding: 12px 16px;
 }
 
 .action-btn {
@@ -62,6 +65,7 @@
 nav {
   background-color: #d2f5cd; /* Màu nền */
   padding: 10px;
+  margin-bottom: 2rem;
 }
 
 nav ul {
@@ -84,4 +88,39 @@ nav a {
 
 nav a:hover {
   border-bottom: 2px solid #008000; /* Màu xanh lá khi hover */
+}
+
+nav {
+  background-color: #d2f5cd; /* Màu nền */
+  padding: 20px;
+
+  margin-left: 10px;
+}
+
+nav ul {
+  list-style: none;
+  margin-right: 3rem;
+  padding: 0;
+  display: flex;
+}
+
+nav li {
+  margin: 0 10px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  padding: 5px 10px;
+  border-bottom: 2px solid transparent;
+}
+
+/* nav ul li a.active {
+  text-decoration: underline;
+  font-weight: bold;
+  border-bottom: 2px solid #007bff;
+} */
+
+nav a:hover {
+  border-bottom: 2px solid #008000;
 }

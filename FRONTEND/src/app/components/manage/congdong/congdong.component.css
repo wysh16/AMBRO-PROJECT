@@ -2,14 +2,99 @@ table {
   width: 100%;
   border-collapse: collapse;
 }
-
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
 th,
 td {
-  padding: 8px 12px;
+  /* padding: 8px 12px; */
   text-align: left;
   border: 1px solid #ddd;
 }
 
 mat-form-field {
   margin-bottom: 20px;
+}
+
+h3 {
+  margin-top: 2rem;
+}
+
+.filter {
+  width: 100%;
+  margin-bottom: 20px;
+}
+nav {
+  background-color: #d2f5cd; /* Màu nền */
+  padding: 20px;
+  margin-bottom: 2rem;
+  margin-left: 10px;
+}
+
+nav ul {
+  list-style: none;
+  margin-right: 3rem;
+  padding: 0;
+  display: flex;
+}
+
+nav li {
+  margin: 0 10px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  padding: 5px 10px;
+  border-bottom: 2px solid transparent;
+}
+
+/* nav ul li a.active {
+  text-decoration: underline;
+  font-weight: bold;
+  border-bottom: 2px solid #007bff;
+} */
+
+nav a:hover {
+  border-bottom: 2px solid #008000;
+}
+
+.custom-card {
+  background-color: #28a745; /* Màu nền xanh lá */
+  color: white; /* Màu chữ trắng */
+  border-radius: 15px; /* Bo góc */
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+
+.custom-card .number {
+  font-size: 2.5rem; /* Kích thước chữ số */
+  font-weight: bold;
+}
+
+.custom-card .action-btns {
+  margin-top: 15px;
+}
+
+.custom-card .btn {
+  background-color: #18632a; /* Màu nền nút */
+  border: none;
+  border-radius: 50px;
+}
+
+.custom-card .btn:hover {
+  background-color: #145824; /* Màu khi hover */
+}
+
+.custom-card .dots {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.2rem;
+}
+.truycap {
+  margin-left: 4rem;
 }

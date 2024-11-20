@@ -1,11 +1,61 @@
+<nav>
+  <ul>
+    <li><a href="/admin/congthucs" class="congthuc">Quản lý công thức</a></li>
+    <li><a href="/admin/thucdons">Quản lý thực đơn</a></li>
+    <li><a href="/admin/congdong" class="conngdong">Quản lý cộng đồng</a></li>
+  </ul>
+</nav>
+
 <div class="container">
   <div class="header">
     <h2>Quản lý cộng đồng</h2>
   </div>
 
+  <div class="container mt-5">
+    <div class="row g-3">
+      <!-- Card 1 -->
+      <div class="col-md-3">
+        <div class="custom-card">
+          <div class="dots">...</div>
+          <h5>Bài viết</h5>
+          <div class="number">123</div>
+          <div
+            class="action-btns d-flex justify-content-center align-items-center gap-2"
+          >
+            <button class="btn btn-sm text-white">
+              <i class="bi bi-plus"></i>
+            </button>
+            <button class="btn btn-sm text-white">View All</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="col-md-3">
+        <div class="custom-card">
+          <div class="dots">...</div>
+          <h5>Người dùng</h5>
+          <div class="number">40</div>
+          <div class="action-btns d-flex align-items-center gap-2">
+            <button class="btn btn-sm text-white"></button>
+            <button class="btn btn-sm text-white">View All</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="col-md-5">
+        <div class="truycap">
+          <h6>Lượng truy cập theo tháng</h6>
+          <img src="/assets/dashboard/Content.png" />
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Bảng hoạt động -->
   <div class="section">
-    <h3>Danh sách hoạt động</h3>
+    <h3>Bài viết</h3>
     <mat-form-field class="filter">
       <mat-label>Tìm kiếm hoạt động</mat-label>
       <input
@@ -61,7 +111,7 @@
 
   <!-- Bảng người dùng -->
   <div class="section">
-    <h3>Danh sách người dùng</h3>
+    <h3>Người dùng</h3>
     <mat-form-field class="filter">
       <mat-label>Tìm kiếm người dùng</mat-label>
       <input
