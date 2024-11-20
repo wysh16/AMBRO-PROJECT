@@ -100,6 +100,6 @@ export class ThucdonFormComponent {
 
   // Hủy và quay lại danh sách
   cancel() {
-    this.router.navigateByUrl('/admin/thucdon');
+    this.router.navigateByUrl('/admin/thucdons');
   }
 }

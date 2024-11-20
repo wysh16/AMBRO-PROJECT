@@ -94,3 +94,7 @@
     font-size: 14px; /* Giảm kích thước chữ */
   }
 }
+.footer-left {
+  margin-right: 7rem;
+  margin-left: 4rem;
+}

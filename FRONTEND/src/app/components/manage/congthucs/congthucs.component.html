@@ -88,95 +88,69 @@
     <li><a href="/admin/congdong">Quản lý cộng đồng</a></li>
   </ul>
 </nav>
-<div class="container mt-10">
-  <div class="header flex justify-between items-center">
-    <h2 class="text-2xl font-bold">Quản lý công thức</h2>
-    <button
-      mat-raised-button
-      color="primary"
-      class="add-btn"
-      routerLink="/admin/congthucs/add"
-    >
+<div class="container">
+  <div class="header">
+    <h2>Quản lý công thức</h2>
+    <button mat-raised-button color="primary" routerLink="/admin/congthucs/add">
       Thêm công thức
     </button>
   </div>
 
-  <div class="content shadow-lg p-6 rounded bg-white">
-    <!-- Bộ lọc -->
-    <mat-form-field class="filter">
-      <mat-label>Tìm kiếm công thức</mat-label>
-      <input
-        matInput
-        (keyup)="applyFilter($event)"
-        placeholder="Nhập từ khóa..."
-        #input
-      />
-    </mat-form-field>
+  <mat-form-field class="filter">
+    <mat-label>Tìm kiếm</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Nhập từ khóa..."
+    />
+  </mat-form-field>
 
-    <!-- Bảng dữ liệu -->
-    <table mat-table [dataSource]="dataSource" matSort class="table">
-      <!-- Cột ID -->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-        <td mat-cell *matCellDef="let row">{{ row._id }}</td>
-      </ng-container>
+  <table mat-table [dataSource]="dataSource" matSort>
+    <!-- Tên Công Thức -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên công thức</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
 
-      <!-- Cột Tên -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên công thức</th>
-        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
-      </ng-container>
+    <!-- Ngày Đăng -->
+    <ng-container matColumnDef="datePosted">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ngày đăng</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.datePosted }}
+      </td>
+    </ng-container>
 
-      <!-- Cột Ngày Đăng -->
-      <ng-container matColumnDef="datePosted">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ngày đăng</th>
-        <td mat-cell *matCellDef="let row">{{ row.datePosted }}</td>
-      </ng-container>
+    <!-- Thời Gian Ước Lượng -->
+    <ng-container matColumnDef="estimatedTime">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Thời gian</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.estimatedTime }} phút
+      </td>
+    </ng-container>
 
-      <!-- Cột Thời Gian -->
-      <ng-container matColumnDef="estimatedTime">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Thời gian đọc</th>
-        <td mat-cell *matCellDef="let row">{{ row.estimatedTime }}</td>
-      </ng-container>
+    <!-- Hành Động -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Hành động</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          mat-button
+          color="primary"
+          [routerLink]="'/admin/congthucs/' + element._id"
+        >
+          Sửa
+        </button>
+        <button mat-button color="warn" (click)="deleteCongThuc(element._id)">
+          Xóa
+        </button>
+      </td>
+    </ng-container>
 
-      <!-- Cột Hành động -->
-      <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef>Hành động</th>
-        <td mat-cell *matCellDef="let row">
-          <button
-            mat-raised-button
-            color="accent"
-            class="action-btn"
-            [routerLink]="'/admin/congthucs/' + row._id"
-          >
-            Sửa
-          </button>
-          <button
-            mat-raised-button
-            color="warn"
-            class="action-btn"
-            (click)="delete(row._id)"
-          >
-            Xóa
-          </button>
-        </td>
-      </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-
-      <!-- Hàng khi không có dữ liệu -->
-      <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="4">
-          Không có dữ liệu phù hợp với từ khóa "{{ input.value }}"
-        </td>
-      </tr>
-    </table>
-
-    <!-- Phân trang -->
-    <mat-paginator
-      [pageSizeOptions]="[5, 10, 25, 100]"
-      aria-label="Chọn kích thước trang"
-    ></mat-paginator>
-  </div>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25]"
+    showFirstLastButtons
+  ></mat-paginator>
 </div>

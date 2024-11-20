@@ -52,11 +52,111 @@
       </mat-form-field>
     </div>
 
-    <!-- Discount -->
+    <!-- Original Price -->
     <div class="form-group">
       <mat-form-field class="half-width">
-        <mat-label>Giảm giá</mat-label>
-        <input matInput type="number" formControlName="discount" />
+        <mat-label>Giá gốc</mat-label>
+        <input matInput type="number" formControlName="originalPrice" />
+      </mat-form-field>
+    </div>
+
+    <!-- Weight -->
+    <div class="form-group">
+      <mat-form-field class="half-width">
+        <mat-label>Cân nặng</mat-label>
+        <input matInput type="number" formControlName="weight" />
+      </mat-form-field>
+    </div>
+
+    <!-- Rating -->
+    <div class="form-group">
+      <mat-form-field class="half-width">
+        <mat-label>Đánh giá</mat-label>
+        <input matInput type="number" formControlName="rating" />
+      </mat-form-field>
+    </div>
+
+    <!-- Review Count -->
+    <div class="form-group">
+      <mat-form-field class="half-width">
+        <mat-label>Số lượng đánh giá</mat-label>
+        <input matInput type="number" formControlName="reviewCount" />
+      </mat-form-field>
+    </div>
+
+    <!-- Label -->
+    <div class="form-group">
+      <mat-form-field class="half-width">
+        <mat-label>Nhãn</mat-label>
+        <input matInput type="text" formControlName="label" />
+      </mat-form-field>
+    </div>
+
+    <!-- Tech Standard -->
+    <div class="form-group">
+      <mat-form-field class="full-width">
+        <mat-label>Tiêu chuẩn kỹ thuật</mat-label>
+        <textarea matInput rows="5" formControlName="techStandard"></textarea>
+      </mat-form-field>
+    </div>
+
+    <!-- Nutri Composition -->
+    <div class="form-group">
+      <mat-form-field class="full-width">
+        <mat-label>Thành phần dinh dưỡng</mat-label>
+        <textarea
+          matInput
+          rows="5"
+          formControlName="nutriComposition"
+        ></textarea>
+      </mat-form-field>
+    </div>
+
+    <!-- Nutri Index -->
+    <div class="form-group">
+      <mat-form-field class="full-width">
+        <mat-label>Chỉ số dinh dưỡng</mat-label>
+        <textarea matInput rows="5" formControlName="nutriIndex"></textarea>
+      </mat-form-field>
+    </div>
+
+    <!-- Usage -->
+    <div class="form-group">
+      <mat-form-field class="full-width">
+        <mat-label>Công dụng</mat-label>
+        <textarea matInput rows="5" formControlName="usage"></textarea>
+      </mat-form-field>
+    </div>
+
+    <!-- Usage Instruction -->
+    <div class="form-group">
+      <mat-form-field class="full-width">
+        <mat-label>Hướng dẫn sử dụng</mat-label>
+        <textarea
+          matInput
+          rows="5"
+          formControlName="usageInstruction"
+        ></textarea>
+      </mat-form-field>
+    </div>
+
+    <!-- Storage Instruction -->
+    <div class="form-group">
+      <mat-form-field class="full-width">
+        <mat-label>Hướng dẫn bảo quản</mat-label>
+        <textarea
+          matInput
+          rows="5"
+          formControlName="storageInstruction"
+        ></textarea>
+      </mat-form-field>
+    </div>
+
+    <!-- Note -->
+    <div class="form-group">
+      <mat-form-field class="full-width">
+        <mat-label>Lưu ý</mat-label>
+        <textarea matInput rows="5" formControlName="note"></textarea>
       </mat-form-field>
     </div>
 
@@ -65,10 +165,20 @@
       <div class="image-header">
         <h4>Hình ảnh sản phẩm</h4>
         <div>
-          <button mat-raised-button color="primary" (click)="addImage()">
+          <button
+            mat-raised-button
+            color="primary"
+            type="button"
+            (click)="addImage()"
+          >
             Thêm ảnh
           </button>
-          <button mat-raised-button color="warn" (click)="removeImage()">
+          <button
+            mat-raised-button
+            color="warn"
+            type="button"
+            (click)="removeImage()"
+          >
             Xóa ảnh
           </button>
         </div>
@@ -93,6 +203,7 @@
         color="primary"
         [disabled]="productForm.invalid"
         (click)="id ? updateProduct() : addProduct()"
+        type="submit"
       >
         {{ id ? "Cập nhật" : "Thêm sản phẩm" }}
       </button>

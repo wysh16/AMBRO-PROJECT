@@ -22,6 +22,7 @@ export class CongthucService {
   updateCongThuc(id: string, model: CongThuc) {
     return this.http.put(environment.apiUrl + '/congthuc/' + id, model);
   }
+
   deleteCongThuc(id: string) {
     return this.http.delete(environment.apiUrl + '/congthuc/' + id);
   }
