@@ -82,6 +82,10 @@ export const routes: Routes = [
     component: ChinhsachComponent,
   },
   {
+    path: 'admin',
+    component: DashboardComponent,
+  },
+  {
     path: 'admin/congthucs',
     component: CongthucsComponent,
   },
