@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const hoatDongController = require("../controllers/congdong-baiviet");
+const hoatDongController = require("../controllers/congdong-baiviet.controller");
 
 // Lấy tất cả hoạt động
 router.get("/", hoatDongController.getAllHoatDong);

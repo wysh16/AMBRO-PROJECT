@@ -1,7 +1,7 @@
 // routes/thanhToanRoutes.js
 const express = require("express");
 const router = express.Router();
-const thanhToanController = require("../controllers/thanhtoan-controller");
+const thanhToanController = require("../controllers/thanhtoan.controller");
 
 // Route để lấy tất cả thanh toán
 router.get("/", thanhToanController.getAllThanhToan);

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const hotProductController = require("../controllers/hotProduct-controller");
+const hotProductController = require("../controllers/hotProduct.controller");
 // Route lấy danh sách sản phẩm hot
 router.get("/", hotProductController.getHotProducts);
 

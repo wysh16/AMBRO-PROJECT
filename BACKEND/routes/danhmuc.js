@@ -5,7 +5,7 @@ const {
   addDanhMuc,
   updateDanhMuc,
   deleteDanhMuc,
-} = require("../controllers/danhmuc.handler");
+} = require("../controllers/danhmuc.controller");
 
 router.post("", async (req, res) => {
   let model = req.body;

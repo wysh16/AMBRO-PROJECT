@@ -1,5 +1,5 @@
 const mongoose = require("mongoose"); // Import mongoose
-const CongThuc = require("./../models/congthuc");
+const CongThuc = require("../models/congthuc");
 async function addCongThuc(model) {
   let congthuc = new CongThuc({
     ...model,
@@ -20,19 +20,6 @@ async function getAllCongThuc() {
   let congthucs = await CongThuc.find();
   return congthucs.map((x) => x.toObject());
 }
-
-// async function getCongThuc(id) {
-//   let congthuc = await CongThuc.findById(id);
-//   return congthuc.toObject();
-// }
-
-// async function getCongThuc(id) {
-//   let congthuc = await CongThuc.findById(id);
-//   if (!congthuc) {
-//     throw new Error(`Không tìm thấy công thức với ID: ${id}`);
-//   }
-//   return congthuc.toObject();
-// }
 
 async function getCongThuc(id) {
   if (!mongoose.Types.ObjectId.isValid(id)) {

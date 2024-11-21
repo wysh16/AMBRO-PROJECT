@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const userController = require("../controllers/congdong-nguoidung");
+const userController = require("../controllers/congdong-nguoidung.controller");
 
 // Lấy tất cả người dùng
 router.get("/", userController.getAllUsers);

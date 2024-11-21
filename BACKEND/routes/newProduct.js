@@ -5,7 +5,7 @@ const {
   getNewProducts,
   createProduct,
   getProductById,
-} = require("../controllers/newProduct-controller");
+} = require("../controllers/newProduct.controller");
 
 // Route để lấy danh sách các sản phẩm mới
 router.get("/", getNewProducts);
