@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-hoso',
@@ -11,13 +13,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './hoso.component.css',
 })
 export class HosoComponent {
-  // Tab đang được chọn
   activeTab: string = 'profile';
-
-  // Trạng thái đơn hàng
   orderStatus: string = 'ordered';
-
-  // Dữ liệu đơn hàng (mock)
   orders = {
     ordered: [
       {
@@ -57,27 +54,145 @@ export class HosoComponent {
     ],
   };
 
-  // Dữ liệu người dùng (mock dữ liệu để trình bày)
-  user = {
-    name: 'Nguyễn Văn A',
-    email: 'nguyenvana@example.com',
-    addresses: [
-      '123 Đường ABC, Phường 1, Quận 1',
-      '456 Đường XYZ, Phường 2, Quận 3',
-    ],
-    banks: ['Ngân hàng ACB - 123456789', 'Ngân hàng Vietcombank - 987654321'],
+  user: any = {
+    name: '',
+    email: '',
+    fullName: '',
+    phone: '',
+    gender: '',
+    dateOfBirth: '',
+    // avatar: '',
+    address: [],
+    banks: [],
   };
+  
+
+  constructor(private http: HttpClient, private authService: AuthService) { }
+
+
+  ngOnInit() {
+    // Lấy thông tin từ AuthService
+    this.user.name = this.authService.getUserName();
+    const savedUser = localStorage.getItem('user');
+    if (savedUser) {
+      const parsedUser = JSON.parse(savedUser);
+      this.user.email = parsedUser.email || '';
+    }
+    // Tải thêm thông tin từ server nếu cần
+    this.loadUserData();
+  }
+  // ngOnInit() {
+  //   this.loadUserData();
+  // }
+
+  // Tải dữ liệu người dùng từ server
+  // loadUserData() {
+  //   const userId = 'current-user-id'; 
+  //   this.http.get(`/api/users/${userId}`).subscribe(
+  //     (response: any) => {
+  //       this.user = response.user;
+  //     },
+  //     (error) => {
+  //       console.error('Lỗi khi tải dữ liệu người dùng:', error);
+  //     }
+  //   );
+  // }
+
+  // loadUserData() {
+  //   const userId = 'current-user-id'; // Thay bằng cách lấy userId từ auth
+  //   this.http.get(`/api/users/${userId}`).subscribe(
+  //     (response: any) => {
+  //       if (response && response.user) {
+  //         // Gán dữ liệu từ API vào object user
+  //         this.user = { 
+  //           ...this.user,
+  //           name: response.user.name,
+  //           email: response.user.email,
+  //           fullName: response.user.fullName || '',
+  //           phone: response.user.phone || '',
+  //           gender: response.user.gender || '',
+  //           dateOfBirth: response.user.dateOfBirth || '',
+  //           avatar: response.user.avatar || '',
+  //           address: response.user.addresses || [],
+  //           banks: response.user.banks || []
+  //         };
+  //       }
+  //     },
+  //     (error) => {
+  //       console.error('Lỗi khi tải dữ liệu người dùng:', error);
+  //     }
+  //   );
+  // }
+
+  loadUserData() {
+    const userId = 'current-user-id'; // Thay bằng userId từ auth token hoặc context
+    this.http.get(`/api/users/${userId}`).subscribe(
+      (response: any) => {
+        this.user = { ...this.user, ...response.user }; // Cập nhật lại thông tin
+      },
+      (error) => {
+        console.error('Lỗi khi tải dữ liệu người dùng:', error);
+      }
+    );
+  }
+  
 
   // Chuyển đổi tab
   setActiveTab(tab: string) {
     this.activeTab = tab;
   }
 
-  // Lưu hồ sơ
+  // Lưu thông tin hồ sơ
+  // saveProfile() {
+  //   const updatedUser = {
+  //     fullName: this.user.fullName,
+  //     phone: this.user.phone,
+  //     gender: this.user.gender,
+  //     dateOfBirth: this.user.dateOfBirth,
+  //     address: this.user.address,
+  //     banks: this.user.banks,
+  //   };
+
+  //   const userId = 'current-user-id'; 
+  //   this.http.put(`/api/users/${userId}/profile`, updatedUser).subscribe(
+  //     (response: any) => {
+  //       alert('Hồ sơ đã được cập nhật thành công!');
+  //       this.user = { ...this.user, ...response.user };
+  //     },
+  //     (error) => {
+  //       console.error('Lỗi khi cập nhật hồ sơ:', error);
+  //       alert('Cập nhật hồ sơ thất bại. Vui lòng thử lại!');
+  //     }
+  //   );
+  // }
+
+
   saveProfile() {
-    console.log('Hồ sơ đã được lưu:', this.user);
-    alert('Hồ sơ của bạn đã được lưu thành công!');
+    const updatedUser = {
+      fullName: this.user.fullName,
+      phone: this.user.phone,
+      gender: this.user.gender,
+      dateOfBirth: this.user.dateOfBirth,
+      address: this.user.address,
+      banks: this.user.banks,
+    };
+  
+    console.log('Dữ liệu gửi lên API:', updatedUser);
+  
+    const userId = 'current-user-id';
+    this.http.put(`/api/users/${userId}/profile`, updatedUser).subscribe(
+      (response: any) => {
+        alert('Hồ sơ đã được cập nhật thành công!');
+        this.user = { ...this.user, ...response.user }; // Cập nhật lại user
+      },
+      (error) => {
+        console.error('Lỗi khi cập nhật hồ sơ:', error);
+        alert('Cập nhật hồ sơ thất bại. Vui lòng thử lại!');
+      }
+    );
   }
+  
+  
 
   // Thêm địa chỉ mới
   addAddress() {

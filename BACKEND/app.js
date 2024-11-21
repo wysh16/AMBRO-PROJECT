@@ -32,6 +32,8 @@ const productController = require("./controllers/product.controller");
 const cartRoutes = require("./routes/cart");
 const mealRoutes = require("./routes/meal");
 const paymentRoutes = require("./routes/payment");
+const cartRoutes = require("./routes/cart");
+
 
 app.get("/", cors(), (req, res) => res.send("Sever running"));
 app.get("/", (req, res) => {
@@ -42,6 +44,9 @@ app.get("/categories", productController.getCategories);
 app.get("/products", productController.getProducts);
 
 app.get("/products/:id", productController.getProductDetail);
+
+
+
 
 app.use("/cart", cartRoutes);
 app.use("/auth", cors(), authRoutes);
@@ -57,9 +62,21 @@ app.use("/orders", cors(), orderRoutes);
 app.use("/shippings", cors(), shippingRoutes);
 app.use("/meal", mealRoutes);
 app.use("/meal-plan", mealRoutes);
+
+
+
+const usersRoutes = require("./routes/user");
+app.use("/api/users", usersRoutes);
+
+
+const paymentRoutes = require("./routes/payment");
+
 app.use("/payments", paymentRoutes);
 app.use("/baiviets", cors(), hoatDongRoutes);
 app.use("/nguoidungs", cors(), userRoutes);
+
+const customerRoutes = require('./routes/customer.routes');
+app.use('/api/customers', customerRoutes);
 
 async function connectDb() {
   await mongoose.connect("mongodb://localhost:27017/?directConnection=true", {
