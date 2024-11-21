@@ -25,7 +25,7 @@
             [(ngModel)]="paymentMethod"
             value="card"
           />
-          Thẻ
+          Tài khoản ngân hàng
         </label>
         <label>
           <input
@@ -34,7 +34,7 @@
             [(ngModel)]="paymentMethod"
             value="cod"
           />
-          COD
+          Trực tiếp
         </label>
       </div>
     </div>
@@ -44,31 +44,28 @@
       <!-- Nếu chưa nhấn "Tiếp tục" -->
       <div *ngIf="!isCodeVerification">
         <div class="form-group">
-          <label for="cardNumber" class="form-label">Số thẻ</label>
+          <label for="cardNumber" class="form-label">Ngân hàng</label>
           <input
             type="text"
             id="cardNumber"
             class="form-input"
-            placeholder="1234 5678 9101 1121"
+            placeholder="Nhập tên ngân hàng"
           />
         </div>
     
         <div class="form-row">
           <div class="form-group">
-            <label for="expiryDate" class="form-label">Ngày hết hạn</label>
+            <label for="expiryDate" class="form-label">Số tài khoản</label>
             <input
               type="text"
               id="expiryDate"
               class="form-input"
-              placeholder="MM/YY"
+              placeholder="Nhập số tài khoản ngân hàng"
             />
           </div>
-          <div class="form-group">
-            <label for="cvv" class="form-label">CVV</label>
-            <input type="text" id="cvv" class="form-input" placeholder="123" />
-          </div>
+          
         </div>
-        <input type="checkbox" /> Lưu thông tin thẻ
+        
         <button
           type="button"
           class="submit-btn"
