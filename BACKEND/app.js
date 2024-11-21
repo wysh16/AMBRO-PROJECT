@@ -47,17 +47,7 @@ app.get("/products", productController.getProducts);
 
 app.get("/products/:id", productController.getProductDetail);
 
-// app.get("/cart-details", (req, res) => {
-//   const { userId } = req.query;
-//   if (!userId) {
-//     return res.status(400).json({ message: "Missing userId parameter" });
-//   }
 
-// Tiếp tục xử lý nếu userId tồn tại
-// });
-// -----------------------
-
-//-----------------------------
 // Import các route giỏ hàng
 const cartRoutes = require("./routes/cart");
 
@@ -91,13 +81,19 @@ const mealRoutes = require("./routes/meal");
 app.use("/meal", mealRoutes);
 app.use("/meal-plan", mealRoutes);
 
-const paymentRoutes = require("./routes/payment");
 
+const usersRoutes = require("./routes/user");
+app.use("/api/users", usersRoutes);
 // Thêm route payment
+
+const paymentRoutes = require("./routes/payment");
 app.use("/payments", paymentRoutes);
 
 app.use("/baiviets", cors(), hoatDongRoutes);
 app.use("/nguoidungs", cors(), userRoutes);
+
+const customerRoutes = require('./routes/customer.routes');
+app.use('/api/customers', customerRoutes);
 
 async function connectDb() {
   await mongoose.connect("mongodb://localhost:27017/?directConnection=true", {

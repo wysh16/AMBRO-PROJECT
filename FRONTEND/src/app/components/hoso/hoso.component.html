@@ -80,24 +80,16 @@
         <h3>Hồ sơ của tôi</h3>
         <div class="row">
           <div class="col-md-8">
-            <form>
+            <form (submit)="saveProfile(); $event.preventDefault()">
               <div class="mb-3">
                 <label for="username" class="form-label">Tên đăng nhập</label>
                 <input
                   type="text"
                   class="form-control"
                   id="username"
-                  placeholder="Nhập tên đăng nhập"
                   [(ngModel)]="user.name"
-                />
-              </div>
-              <div class="mb-3">
-                <label for="fullname" class="form-label">Họ và tên</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="fullname"
-                  placeholder="Nhập họ và tên"
+                  name="username"
+                  disabled
                 />
               </div>
               <div class="mb-3">
@@ -106,8 +98,19 @@
                   type="email"
                   class="form-control"
                   id="email"
-                  placeholder="Nhập email"
                   [(ngModel)]="user.email"
+                  name="email"
+                  disabled
+                />
+              </div>
+              <div class="mb-3">
+                <label for="fullname" class="form-label">Họ và tên</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="fullname"
+                  [(ngModel)]="user.fullName"
+                  name="fullname"
                 />
               </div>
               <div class="mb-3">
@@ -116,12 +119,18 @@
                   type="tel"
                   class="form-control"
                   id="phone"
-                  placeholder="Nhập số điện thoại"
+                  [(ngModel)]="user.phone"
+                  name="phone"
                 />
               </div>
               <div class="mb-3">
                 <label for="gender" class="form-label">Giới tính</label>
-                <select class="form-select" id="gender">
+                <select
+                  class="form-select"
+                  id="gender"
+                  [(ngModel)]="user.gender"
+                  name="gender"
+                >
                   <option value="male">Nam</option>
                   <option value="female">Nữ</option>
                   <option value="other">Khác</option>
@@ -129,25 +138,30 @@
               </div>
               <div class="mb-3">
                 <label for="birthdate" class="form-label">Ngày sinh</label>
-                <input type="date" class="form-control" id="birthdate" />
+                <input
+                  type="date"
+                  class="form-control"
+                  id="birthdate"
+                  [(ngModel)]="user.dateOfBirth"
+                  name="dateOfBirth"
+                />
               </div>
-              <button
-                type="submit"
-                class="btn btn-success"
-                (click)="saveProfile()"
-              >
-                Lưu thay đổi
-              </button>
+              <button type="submit" class="btn btn-success">Lưu thay đổi</button>
+              <div class="col-md-4 text-center avatar">
+                <div class="avatar-img">
+                  <img
+                  src="https://via.placeholder.com/150"
+                  class="rounded-circle img-thumbnail"
+                  alt="Profile Picture"
+                />
+                </div>
+                <div class="button-primay">
+                  <button class="btn btn-outline-primary mt-3">Chọn ảnh</button>
+                </div>
+              </div>
             </form>
           </div>
-          <div class="col-md-4 text-center">
-            <img
-              src="https://via.placeholder.com/150"
-              class="rounded-circle img-thumbnail"
-              alt="Profile Picture"
-            />
-            <button class="btn btn-outline-primary mt-3">Chọn ảnh</button>
-          </div>
+          
         </div>
       </div>
 
