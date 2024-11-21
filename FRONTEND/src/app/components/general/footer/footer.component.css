@@ -98,3 +98,19 @@
   margin-right: 7rem;
   margin-left: 4rem;
 }
+
+.anh {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+}
+
+.anh img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
