@@ -3,11 +3,11 @@ body {
   background-color: #fefae9;
 }
 .img-fluid {
-  width: 100%;
+  width: 80%;
 }
 .container {
   padding: 50px;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   width: 100%;
   background-color: #fefae9;
 }
@@ -25,7 +25,6 @@ body {
 
 .row {
   display: flex;
-  /* flex-wrap: wrap; */
 }
 
 .column {
@@ -71,4 +70,37 @@ body {
 
 .text {
   color: white;
+} /* Đảm bảo chiều dài và chiều rộng card đồng đều */
+.team-card {
+  width: 100%; /* Card chiếm toàn bộ cột */
+  max-width: 180px; /* Giới hạn chiều rộng tối đa */
+  height: 100%; /* Card sẽ cân đối chiều cao */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.team-card img {
+  width: 100%;
+  height: auto; /* Đảm bảo giữ tỷ lệ hình ảnh */
+  object-fit: cover;
+}
+
+.team-card .card-body {
+  padding: 15px;
+}
+
+.team-card h5 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.team-card p {
+  font-size: 14px;
+  margin-bottom: 5px;
 }
