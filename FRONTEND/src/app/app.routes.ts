@@ -44,7 +44,6 @@ import { SearchComponent } from './components/search/search.component';
 import { HosoComponent } from './components/hoso/hoso.component';
 import { SuccessNotiComponent } from './components/success-noti/success-noti.component';
 
-
 export const routes: Routes = [
   {
     path: '',
@@ -107,10 +106,8 @@ export const routes: Routes = [
     path: 'admin/danhmucs/:id',
     component: DanhmucFormComponent,
   },
-  {
-    path: 'error',
-    component: BaoloiComponent,
-  },
+
+  { path: 'loi', component: BaoloiComponent },
   {
     path: 'popup',
     component: PoppupComponent,
@@ -167,5 +164,4 @@ export const routes: Routes = [
   { path: 'search-result', component: SearchComponent },
   { path: 'hoso', component: HosoComponent },
   { path: 'success-noti', component: SuccessNotiComponent },
- 
 ];

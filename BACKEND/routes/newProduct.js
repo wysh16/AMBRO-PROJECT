@@ -4,7 +4,7 @@ const router = express.Router();
 const {
   getNewProducts,
   createProduct,
-  getProductById,
+  getNewProductById,
 } = require("../controllers/newProduct.controller");
 
 // Route để lấy danh sách các sản phẩm mới
@@ -14,6 +14,6 @@ router.get("/", getNewProducts);
 router.post("/", createProduct);
 
 // Route để lấy một sản phẩm theo ID
-router.get("/:id", getProductById);
+router.get("/:id", getNewProductById);
 
 module.exports = router;

@@ -9,13 +9,15 @@ import { homeProduct } from '../types/homeProduct';
   providedIn: 'root',
 })
 export class HomeService {
-  products: any;
-
-  newProductUrl: string = '/assets/data/newProduct.json';
-  constructor() {}
-  http = inject(HttpClient);
-
-  getNewProdcts(): Observable<homeProduct[]> {
-    return this.http.get<homeProduct[]>(this.newProductUrl);
-  }
+  // products: any;
+  // newProductUrl: string = '/assets/data/newProduct.json';
+  // hotProductUrl: string = '/assets/data/hotProduct.json';
+  // constructor() {}
+  // http = inject(HttpClient);
+  // getNewProducts(): Observable<homeProduct[]> {
+  //   return this.http.get<homeProduct[]>(this.newProductUrl);
+  // }
+  // getHotProducts(): Observable<homeProduct[]> {
+  //   return this.http.get<homeProduct[]>(this.hotProductUrl);
+  // }
 }

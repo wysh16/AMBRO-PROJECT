@@ -34,7 +34,7 @@ const createProduct = async (req, res) => {
 };
 
 // Controller để lấy một sản phẩm theo ID
-const getProductById = async (req, res) => {
+const getNewProductById = async (req, res) => {
   const { id } = req.params;
   try {
     const product = await Product.findById(id);
@@ -48,4 +48,4 @@ const getProductById = async (req, res) => {
   }
 };
 
-module.exports = { getNewProducts, createProduct, getProductById };
+module.exports = { getNewProducts, createProduct, getNewProductById };

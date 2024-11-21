@@ -8,7 +8,12 @@ import {
 import { HotProduct } from '../../types/hotProduct';
 import { NewProduct } from '../../types/newProduct';
 import { ProductService } from '../../services/product.service';
-import { ActivatedRoute, Router, RouterLink, RouterModule } from '@angular/router';
+import {
+  ActivatedRoute,
+  Router,
+  RouterLink,
+  RouterModule,
+} from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -19,7 +24,7 @@ import { Subscription } from 'rxjs';
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-  product: any=[];
+  product: any = [];
   hotProducts: any[] = []; // Lưu danh sách sản phẩm
   newProducts: any[] = []; // Sản phẩm mới
   currentIndex: number = 0;
@@ -28,7 +33,11 @@ export class HomeComponent implements OnInit {
 
   private routeSub: Subscription | undefined;
 
-  constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private productService: ProductService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     // Lấy danh sách sản phẩm hot
@@ -44,12 +53,9 @@ export class HomeComponent implements OnInit {
     this.routeSub = this.route.params.subscribe((params) => {
       const productId = params['id'];
       if (productId) {
-        this.loadProductById(productId); 
+        this.loadProductById(productId);
       }
     });
-
-        
-
 
     // Lấy danh sách sản phẩm mới
     this.productService.getNewProducts().subscribe({
@@ -69,14 +75,18 @@ export class HomeComponent implements OnInit {
       this.currentIndexNew + this.itemsPerPage
     );
   }
-
-
+  get displayedProducts() {
+    return this.hotProducts.slice(
+      this.currentIndex,
+      this.currentIndex + this.itemsPerPage
+    );
+  }
   loadProductById(productId: string) {
     this.productService.getProductById(productId).subscribe((data) => {
       this.product = data;
     });
-  };
-  
+  }
+
   nextProducts() {
     const totalProducts = this.hotProducts.length;
     if (this.currentIndex + 1 < totalProducts) {
@@ -102,13 +112,6 @@ export class HomeComponent implements OnInit {
     if (this.currentIndexNew - this.itemsPerPage >= 0) {
       this.currentIndexNew -= this.itemsPerPage;
     }
-  }
-
-  get displayedProducts() {
-    return this.hotProducts.slice(
-      this.currentIndex,
-      this.currentIndex + this.itemsPerPage
-    );
   }
 
   viewProductDetail(productId: string) {
