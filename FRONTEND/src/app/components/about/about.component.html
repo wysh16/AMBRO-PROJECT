@@ -70,7 +70,7 @@
   </div>
 
   <div class="container" style="background-color: #0a6835; margin-bottom: 30px">
-    <h2 style="color: white; text-decoration-line: underline">
+    <h2 style="color: white;">
       Giá trị cốt lõi
     </h2>
     <div class="column" style="padding-left: 50px; padding-right: 50px">
@@ -125,109 +125,21 @@
       </div>
     </div>
 
-    <div class="container my-5">
-      <h2><strong>CÂU CHUYỆN CỦA AMBRO</strong></h2>
-      <div class="row mt-4">
-        <div class="col-md-6">
-          <img
-            src="/assets/about/thuonghieu.jpeg"
-            alt="Câu chuyện Ambro"
-            class="logo"
-          />
-        </div>
-        <div class="col-md-6">
-          <h3><strong>Sứ mệnh và khởi nguồn</strong></h3>
-          <p>
-            Ambro bắt đầu từ mong muốn mang đến cho mọi người một giải pháp ăn
-            uống lành mạnh, giúp cải thiện sức khỏe và chất lượng cuộc sống. Với
-            sứ mệnh lan tỏa thói quen eat clean, chúng tôi cam kết cung cấp
-            những sản phẩm không chỉ tốt cho sức khỏe mà còn mang lại sự hài
-            lòng, niềm tin và cảm giác gần gũi thiên nhiên. Ambro không chỉ là
-            thương hiệu, mà còn là người bạn đồng hành, cùng khách hàng xây dựng
-            một lối sống tích cực và khỏe mạnh.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="container my-5">
-      <h2 class="text-center"><strong>ĐỘI NGŨ CỦA AMBRO</strong></h2>
-      <div class="row mt-4 justify-content-between">
-        <!-- Card 1: Phương Linh -->
-        <div class="col-lg-2 col-md-3 col-sm-6 d-flex justify-content-center">
-          <div class="card team-card">
-            <img
-              src="/assets/team/phuonglinh.jpg"
-              class="card-img-top"
-              alt="Phương Linh"
-            />
-            <div class="card-body text-center">
-              <h5 class="card-title"><strong>Phương Linh</strong></h5>
-              <p class="card-text">Giám đốc sáng tạo</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 2: Thị Hà -->
-        <div class="col-lg-2 col-md-3 col-sm-6 d-flex justify-content-center">
-          <div class="card team-card">
-            <img
-              src="/assets/team/thiha.jpg"
-              class="card-img-top"
-              alt="Thị Hà"
-            />
-            <div class="card-body text-center">
-              <h5 class="card-title"><strong>Thị Hà</strong></h5>
-              <p class="card-text">Chuyên gia dinh dưỡng</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 3: Anh Đào -->
-        <div class="col-lg-2 col-md-3 col-sm-6 d-flex justify-content-center">
-          <div class="card team-card">
-            <img
-              src="/assets/team/anhdao.jpg"
-              class="card-img-top"
-              alt="Anh Đào"
-            />
-            <div class="card-body text-center">
-              <h5 class="card-title"><strong>Anh Đào</strong></h5>
-              <p class="card-text">Quản lý vận hành</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 4: Thu Hương -->
-        <div class="col-lg-2 col-md-3 col-sm-6 d-flex justify-content-center">
-          <div class="card team-card">
-            <img
-              src="/assets/team/thuhuong.jpg"
-              class="card-img-top"
-              alt="Thu Hương"
-            />
-            <div class="card-body text-center">
-              <h5 class="card-title"><strong>Thu Hương</strong></h5>
-              <p class="card-text">Chuyên viên nghiên cứu</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 5: Phương Nhi -->
-        <div class="col-lg-2 col-md-3 col-sm-6 d-flex justify-content-center">
-          <div class="card team-card">
-            <img
-              src="/assets/team/phuongnhi.jpg"
-              class="card-img-top"
-              alt="Phương Nhi"
-            />
-            <div class="card-body text-center">
-              <h5 class="card-title"><strong>Phương Nhi</strong></h5>
-              <p class="card-text">Chuyên viên marketing</p>
-            </div>
-          </div>
-        </div>
+    
+    
+      
+  </div>
+  <div class="about-container">
+    <h2>Đội Ngũ Nhân Viên</h2>
+    <p>Chúng tôi tự hào với một đội ngũ tài năng và sáng tạo luôn sẵn sàng phục vụ bạn.</p>
+  
+    <div class="team">
+      <div class="team-member" *ngFor="let member of teamMembers; let i = index" [ngClass]="{'center-member': i === 2}">
+        <img [src]="member.photo" alt="{{ member.name }}" class="team-member-photo"/>
+        <h3>{{ member.name }}</h3>
+        <p>{{ member.role }}</p>
       </div>
     </div>
   </div>
+  
 </body>

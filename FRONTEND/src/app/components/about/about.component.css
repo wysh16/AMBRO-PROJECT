@@ -47,7 +47,7 @@ body {
   text-align: center;
   margin-bottom: 0px;
   margin-top: 20px;
-  text-decoration: underline;
+  /* text-decoration: underline; */
   color: green;
   text-decoration-skip: spaces;
 }
@@ -103,4 +103,71 @@ body {
 .team-card p {
   font-size: 14px;
   margin-bottom: 5px;
+}
+
+
+.about-container {
+  text-align: center;
+  padding: 50px;
+}
+
+.about-container h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.about-container p {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.team {
+  display: flex;
+  justify-content: center;
+  gap: 150px; /* Tăng khoảng cách giữa các thành viên */
+  align-items: center;
+}
+
+.team-member {
+  text-align: center;
+  width: 150px; /* Tăng kích thước để ảnh và tên không bị quá chật */
+  transition: transform 0.3s ease;
+}
+
+.team-member:hover {
+  transform: translateY(-10px);
+}
+
+.team-member-photo {
+  width: 100px;  /* Tăng kích thước ảnh */
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.team-member h3 {
+  font-size: 1.2rem; /* Tăng kích thước tên */
+  color: #333;
+  margin: 5px 0;
+}
+
+.team-member p {
+  font-size: 1.1rem; /* Tăng kích thước mô tả */
+  color: #666;
+}
+
+.center-member .team-member-photo {
+  width: 120px; /* Kích thước ảnh của người ở giữa lớn hơn một chút */
+  height: 120px;
+}
+
+.center-member h3 {
+  font-size: 1.4rem; /* Kích thước tên của người ở giữa */
+}
+
+.center-member p {
+  font-size: 1.2rem; /* Kích thước mô tả của người ở giữa */
 }
