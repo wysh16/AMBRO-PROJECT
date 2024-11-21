@@ -11,7 +11,6 @@ import { CongthucsComponent } from './components/manage/congthucs/congthucs.comp
 import { DanhmucsComponent } from './components/manage/danhmucs/danhmucs.component';
 import { DanhmucFormComponent } from './components/manage/danhmuc-form/danhmuc-form.component';
 import { BaoloiComponent } from './components/baoloi/baoloi.component';
-import { PoppupComponent } from './components/poppup/poppup.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { NutritionComponent } from './components/nutrition/nutrition.component';
 import { ChitietcongthucComponent } from './components/chitietcongthuc/chitietcongthuc.component';
@@ -108,10 +107,7 @@ export const routes: Routes = [
   },
 
   { path: 'loi', component: BaoloiComponent },
-  {
-    path: 'popup',
-    component: PoppupComponent,
-  },
+
   {
     path: 'thanhtoan',
     component: PaymentComponent,

@@ -3,7 +3,7 @@ const router = express.Router();
 const khuyenmaiController = require("../controllers/khuyenmai.controller");
 
 // Thêm khuyến mãi
-router.post("/", khuyenmaiController.addKhuyenMai);
+router.post("/add", khuyenmaiController.addKhuyenMai);
 
 // Cập nhật khuyến mãi
 router.put("/:id", khuyenmaiController.updateKhuyenMai);

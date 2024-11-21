@@ -83,32 +83,6 @@ export class CongthucFormComponent {
     }
   }
 
-  // updateCongThuc() {
-  //   if (this.CongThucForm.valid) {
-  //     const value = this.CongThucForm.value;
-
-  //     // Loại bỏ các giá trị không cần thiết hoặc null
-  //     const sanitizedValue = {
-  //       ...value,
-  //       name: value.name?.trim(),
-  //       imageUrl: value.imageUrl?.trim(),
-  //     };
-
-  //     this.congThucService.updateCongThuc(this.id, sanitizedValue).subscribe(
-  //       (response) => {
-  //         alert('Công thức đã được cập nhật!');
-  //         this.router.navigateByUrl('/admin/congthucs');
-  //       },
-  //       (error) => {
-  //         console.error('Lỗi:', error);
-  //         alert('Cập nhật thất bại, vui lòng thử lại.');
-  //       }
-  //     );
-  //   } else {
-  //     alert('Vui lòng kiểm tra lại thông tin.');
-  //   }
-  // }
-
   // Hủy và quay lại danh sách
   cancel() {
     this.router.navigateByUrl('/admin/congthucs');

@@ -17,7 +17,7 @@ export class CongthucService {
     return this.http.get<CongThuc>(environment.apiUrl + '/congthuc/' + id);
   }
   addCongThuc(model: CongThuc) {
-    return this.http.post(environment.apiUrl + '/congthuc', model);
+    return this.http.post(environment.apiUrl + '/congthuc/add', model);
   }
   updateCongThuc(id: string, model: CongThuc) {
     return this.http.put(environment.apiUrl + '/congthuc/' + id, model);

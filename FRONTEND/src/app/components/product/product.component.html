@@ -137,7 +137,11 @@
 
 <div class="overlay" *ngIf="isPopupVisible" (click)="closePopup()"></div>
 
-<div class="popup" *ngIf="isPopupVisible">
+<div
+  class="popup"
+  *ngIf="isPopupVisible"
+  [routerLink]="'/products/' + selectedProduct?._id"
+>
   <!-- Nút đóng -->
   <button class="close-btn" (click)="closePopup()">×</button>
 

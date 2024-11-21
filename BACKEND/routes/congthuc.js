@@ -8,7 +8,7 @@ const {
 } = require("../controllers/congthuc.controller");
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post("/add", async (req, res) => {
   model = req.body;
   let congthuc = await addCongThuc(model);
   res.send(congthuc);
