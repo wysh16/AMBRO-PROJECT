@@ -11,4 +11,5 @@ export interface KhuyenMai {
   banner: string;
   voucher: string;
   time: string;
+  ID_KhuyeMai: string;
 }

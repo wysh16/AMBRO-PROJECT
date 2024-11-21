@@ -13,6 +13,7 @@ const promotionSchema = new mongoose.Schema({
   time: { type: String, required: true },
   voucher: { type: String, required: true },
   banner: { type: String, required: true },
+  ID_KhuyenMai: { type: String },
 });
 
 const Promotion = mongoose.model("khuyenmais", promotionSchema);
