@@ -70,3 +70,27 @@ h3 {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
 }
+.search-bar {
+  position: relative;
+}
+
+ul.list-group {
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+ul.list-group li {
+  cursor: pointer;
+}
+
+ul.list-group li:hover {
+  background-color: #f8f9fa;
+}
+.search-bar {
+  margin-right: 20%;
+}

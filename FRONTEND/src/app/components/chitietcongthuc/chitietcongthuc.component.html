@@ -63,22 +63,22 @@
     "
   >
     <div class="col-md-6" *ngIf="congthuc.nutritionFacts">
-      <h4>Giá tri dinh dưỡng trên 1 khẩu phần</h4>
+      <h4 class="fw-semibold">Giá tri dinh dưỡng trên 1 khẩu phần</h4>
       <p>{{ congthuc.nutritionFacts }}</p>
     </div>
 
     <div class="col-md-6" *ngIf="congthuc.tips">
-      <h4>Mẹo thực hiện</h4>
+      <h4 class="fw-semibold">Mẹo thực hiện</h4>
       <p>{{ congthuc.tips }}</p>
     </div>
 
     <div class="col-md-6 mt-4" *ngIf="congthuc.reasons">
-      <h4>Tại sao bạn nên nấu {{ congthuc.name }}</h4>
+      <h4 class="fw-semibold">Tại sao bạn nên nấu {{ congthuc.name }}</h4>
       <p>{{ congthuc.reasons }}</p>
     </div>
 
     <div class="col-md-6 mt-4" *ngIf="congthuc.advice">
-      <h4>Lời khuyên</h4>
+      <h4 class="fw-semibold">Lời khuyên</h4>
       <p>{{ congthuc.advice }}</p>
     </div>
   </div>
