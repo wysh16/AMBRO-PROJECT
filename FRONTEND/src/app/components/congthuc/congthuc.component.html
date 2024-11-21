@@ -1,28 +1,27 @@
-<!-- <div class="container">
-  <div class="row">
-    @for (congthuc of CongThucList; track $index){
-    <div class="col-md-4">
-      <div class="card mb-4">
-        <img
-          [src]="congthuc.images"
-          class="card-img-top"
-          alt="{{ congthuc.name }}"
-        />
-        <div class="card-body">
-          <h5 class="card-title">{{ congthuc.name }}</h5>
-          <p class="card-text">
-            <span>{{ congthuc.datePosted }}</span>
-            -----
-            <span>{{ congthuc.estimatedTime }}</span>
-          </p>
-        </div>
-      </div>
-    </div>
-    }
-  </div>
-</div> -->
-
 <div class="container">
+  <div class="search-bar my-3">
+    <mat-form-field class="w-100 custom-search">
+      <mat-label>Tìm kiếm công thức</mat-label>
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="searchQuery"
+        (input)="onSearch()"
+        placeholder="Nhập tên công thức..."
+      />
+    </mat-form-field>
+    <!-- Gợi ý công thức -->
+    <ul *ngIf="filteredCongThucList.length > 0" class="list-group mt-2">
+      <li
+        *ngFor="let congthuc of filteredCongThucList"
+        class="list-group-item"
+        (click)="selectCongThuc(congthuc)"
+      >
+        {{ congthuc.name }}
+      </li>
+    </ul>
+  </div>
+
   <div class="row">
     <div *ngFor="let congthuc of CongThucList; let i = index" class="col-md-3">
       <a
@@ -44,18 +43,6 @@
           </div>
         </div>
       </a>
-    </div>
-
-    <div class="">
-      <ul class="list-group sticky-list">
-        <li
-          *ngFor="let congthuc of CongThucList; let i = index"
-          class="list-group-item"
-          [class.active]="congthuc === selectedCongThuc"
-        >
-          {{ congthuc.name }}
-        </li>
-      </ul>
     </div>
   </div>
 </div>

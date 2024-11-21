@@ -8,7 +8,7 @@ const {
   deleteDinhDuong,
   getAllDinhDuong,
   getDinhDuong,
-} = require("../controllers/dinhduong-handler");
+} = require("../controllers/dinhduong.controller");
 
 const router = express.Router();
 

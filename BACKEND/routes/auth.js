@@ -1,5 +1,5 @@
 const express = require("express");
-const { registerUser, loginUser } = require("../controllers/auth-handler");
+const { registerUser, loginUser } = require("../controllers/auth.controller");
 const router = express.Router();
 const { verifyToken, isAdmin } = require("../middleware/auth-middleware");
 
@@ -73,7 +73,5 @@ router.get("/admin", verifyToken, isAdmin, (req, res) => {
     message: "Admin access granted",
   });
 });
-
-
 
 module.exports = router;

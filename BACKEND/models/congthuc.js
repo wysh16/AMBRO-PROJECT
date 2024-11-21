@@ -13,6 +13,7 @@ const congThucSchema = new mongoose.Schema({
   tips: { type: String },
   reasons: { type: String },
   advice: { type: String },
+  ID_CongThuc: { type: String },
 });
 
 const CongThuc = mongoose.model("congthucs", congThucSchema);

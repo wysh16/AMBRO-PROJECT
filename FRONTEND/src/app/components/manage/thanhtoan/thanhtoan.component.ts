@@ -65,9 +65,30 @@ export class ThanhtoanComponent {
     }
   }
 
+  // applyFilter(event: Event) {
+  //   const filterValue = (event.target as HTMLInputElement).value;
+  //   this.dataSource.filter = filterValue.trim().toLowerCase();
+  //   if (this.dataSource.paginator) {
+  //     this.dataSource.paginator.firstPage();
+  //   }
+  // }
+
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    const filterValue = (event.target as HTMLInputElement).value
+      .trim()
+      .toLowerCase();
+
+    this.dataSource.filterPredicate = (data: any, filter: string) => {
+      // Lọc theo tình trạng thanh toán
+      return (
+        data.TinhTrangThanhToan.toLowerCase().includes(filter) ||
+        data.TenKhachHang.toLowerCase().includes(filter) ||
+        data.ID_Donhang.toLowerCase().includes(filter)
+      );
+    };
+
+    this.dataSource.filter = filterValue;
+
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -76,9 +97,9 @@ export class ThanhtoanComponent {
   getStatusClass(status: string) {
     switch (status) {
       case 'Giao dịch thành công':
-        return 'success-status'; // Lớp cho trạng thái thành công
+        return 'success-status';
       case 'Chưa thanh toán':
-        return 'pending-status'; // Lớp cho trạng thái chưa thanh toán
+        return 'pending-status';
       default:
         return '';
     }

@@ -5,7 +5,7 @@ const {
   deleteKhachHang,
   getAllKhachHang,
   getKhachHang,
-} = require("../controllers/khachhang-handler");
+} = require("../controllers/khachhang.controller");
 
 const router = express.Router();
 

@@ -26,7 +26,7 @@ import { KhuyenMai } from '../../../types/khuyenmai';
   styleUrl: './khuyenmais.component.css',
 })
 export class KhuyenmaisComponent {
-  displayedColumns: string[] = ['name', 'title', 'action'];
+  displayedColumns: string[] = ['ID_KhuyenMai', 'name', 'title', 'action'];
   dataSource = new MatTableDataSource<KhuyenMai>([]);
   editingPromotion: KhuyenMai | null = null;
 

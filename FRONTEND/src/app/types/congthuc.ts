@@ -11,4 +11,5 @@ export interface CongThuc {
   tips: string;
   reasons: string;
   advice: string;
+  ID_CongThuc: string;
 }

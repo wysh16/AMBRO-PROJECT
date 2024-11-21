@@ -28,6 +28,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CongthucsComponent {
   displayedColumns: string[] = [
+    'ID_CongThuc',
     'name',
     'datePosted',
     'estimatedTime',

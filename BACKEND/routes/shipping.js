@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const shippingController = require("../controllers/shipping-controller");
+const shippingController = require("../controllers/shipping.controller");
 
 // Lấy danh sách vận chuyển
 router.get("/", shippingController.getAllShippings);
