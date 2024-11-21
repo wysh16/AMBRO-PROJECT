@@ -8,8 +8,8 @@ import {
 import { HotProduct } from '../../types/hotProduct';
 import { NewProduct } from '../../types/newProduct';
 import { ProductService } from '../../services/product.service';
-import { RouterLink, RouterModule } from '@angular/router';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterModule } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -19,13 +19,16 @@ import { Router } from '@angular/router';
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
+  product: any=[];
   hotProducts: any[] = []; // Lưu danh sách sản phẩm
   newProducts: any[] = []; // Sản phẩm mới
   currentIndex: number = 0;
   currentIndexNew: number = 0; // Chỉ số hiện tại cho sản phẩm mới
   itemsPerPage: number = 3;
 
-  constructor(private productService: ProductService, private router: Router) {}
+  private routeSub: Subscription | undefined;
+
+  constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     // Lấy danh sách sản phẩm hot
@@ -37,6 +40,16 @@ export class HomeComponent implements OnInit {
         console.error('Error loading hot products:', err);
       },
     });
+
+    this.routeSub = this.route.params.subscribe((params) => {
+      const productId = params['id'];
+      if (productId) {
+        this.loadProductById(productId); 
+      }
+    });
+
+        
+
 
     // Lấy danh sách sản phẩm mới
     this.productService.getNewProducts().subscribe({
@@ -57,6 +70,13 @@ export class HomeComponent implements OnInit {
     );
   }
 
+
+  loadProductById(productId: string) {
+    this.productService.getProductById(productId).subscribe((data) => {
+      this.product = data;
+    });
+  };
+  
   nextProducts() {
     const totalProducts = this.hotProducts.length;
     if (this.currentIndex + 1 < totalProducts) {

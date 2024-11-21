@@ -228,4 +228,6 @@ export class HosoComponent {
   setOrderStatus(status: string) {
     this.orderStatus = status;
   }
+
+  
 }

@@ -52,6 +52,9 @@ export class ProductService {
   filterNewProducts(products: any[]) {
     return products.filter((p: any) => p.label === 'New');
   }
+  filterHotProducts(products: any[]) {
+    return products.filter((p: any) => p.label === 'Hot');
+  }
 
   private hotProductApiUrl = 'http://localhost:3000/hot-products';
 

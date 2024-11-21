@@ -31,8 +31,8 @@ const userRoutes = require("./routes/congdong-nguoidung");
 const productController = require("./controllers/product.controller");
 const cartRoutes = require("./routes/cart");
 const mealRoutes = require("./routes/meal");
-const paymentRoutes = require("./routes/payment");
-const cartRoutes = require("./routes/cart");
+
+
 
 
 app.get("/", cors(), (req, res) => res.send("Sever running"));
